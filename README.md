@@ -13,11 +13,11 @@
 
 # Silicon Labs Platform Applications #
 
-[![Version Badge](https://img.shields.io/badge/-v2.8.0-green)](https://github.com/SiliconLabs/bluetooth_applications/releases)
+[![Version Badge](https://img.shields.io/badge/-v2.9.0-green)](https://github.com/SiliconLabs/bluetooth_applications/releases)
 [![GSDK Badge](https://img.shields.io/badge/GSDK-v4.4.4-green)](https://github.com/SiliconLabs/gecko_sdk/releases)
 ![License badge](https://img.shields.io/badge/License-Zlib-green)
 
-This repo contains example projects that demonstrate various applicaitons using the peripherals of Silicon Labs EFM32 and EFR32 parts.
+This repo contains example projects that demonstrate various applications using the peripherals of Silicon Labs EFM32 and EFR32 parts.
 
 This repository provides both SLCP projects (as External Repositories) and SLS projects as standalone projects, which are configured for development boards.
 
@@ -93,6 +93,9 @@ This repository provides both SLCP projects (as External Repositories) and SLS p
 | 66 | Platform - IADC Synchronous Triggers with PRS |[Click Here](./platform_iadc_synch_prs)
 | 67 | Platform - EMU Temperature Linearization  |[Click Here](./platform_emu_temp_linearization)
 | 68 | Platform - I2C Fast Plus Mode  |[Click Here](./platform_i2c_fast_plus_mode)
+| 69 | Platform - ACMP Hysteresis Mode  |[Click Here](./platform_acmp_hysteresis_mode)
+| 70 | Platform - Sysrtc Wakeup  |[Click Here](./platform_sysrtc_wakeup)
+| 71 | Platform - Fixed Gate Time Frequency Measurement  |[Click Here](./platform_fixed_gate_time_frequency_measurement/)
 
 ## Requirements ##
 
@@ -104,7 +107,7 @@ This repository provides both SLCP projects (as External Repositories) and SLS p
 
 1. To add an external repository, perform the following steps.
 
-    - From Simpilicity Studio 5, go to **Preferences > Simplicity Studio > External Repos**. Here you can add the repo `https://github.com/SiliconLabs/platform_applications.git`. 
+    - From Simpilicity Studio 5, go to **Preferences > Simplicity Studio > External Repos**. Here you can add the repo `https://github.com/SiliconLabs/platform_applications.git`.
 
     - Cloning and then selecting the branch, tag, or commit to add. The default branch is Master. This repo cloned to `<path_to_the_SimplicityStudio_v5>\developer\repos\`
 

@@ -1,0 +1,82 @@
+# Silicon Labs Project Configuration Tools: slcp, v0, Component selection file.
+project_name: acmp_hysteresis_mode
+label: acmp_hysteresis_mode
+description: |
+  This example project demonstrates how to use the hysteresis mode of the ACMP.
+category: Example|Platform
+filter:
+  - name: Device Type
+    value: [SoC]
+  - name: MCU
+    value: [32-bit MCU]
+  - name: Project Difficulty
+    value: [Beginner]
+package: platform
+quality: experimental
+readme:
+  - {path: ../README.md}
+
+source:
+  - {path: ../src/cli.c}
+  - {path: ../src/app.c}
+  - {path: ../src/main.c}
+
+include:
+  - path: ../inc/brd4186c
+    condition: [brd4186c]
+    file_list:
+      - path: cli.h
+  - path: ../inc/brd4110a
+    condition: [brd4110a]
+    file_list:
+      - path: cli.h
+  - path: ../inc/brd4270b
+    condition: [brd4270b]
+    file_list:
+      - path: cli.h
+  - path: ../inc/brd4271a
+    condition: [brd4271a]
+    file_list:
+      - path: cli.h
+  - path: ../inc/brd4180b
+    condition: [brd4180b]
+    file_list:
+      - path: cli.h
+  - path: ../inc/brd4181c
+    condition: [brd4181c]
+    file_list:
+      - path: cli.h
+  - path: ../inc/brd4400c
+    condition: [brd4400c]
+    file_list:
+      - path: cli.h
+  - path: ../inc/brd2602a
+    condition: [brd2602a]
+    file_list:
+      - path: cli.h
+  - path: ../inc
+    file_list:
+      - path: app.h
+
+toolchain_settings: []
+component:
+  - instance: [inst]
+    id: cli
+  - {id: clock_manager}
+  - {id: device_init}
+  - {id: emlib_acmp}
+  - {id: iostream_recommended_console}
+  - {id: iostream_retarget_stdio}
+  - {id: iostream_stdlib_config}
+  - {id: power_manager}
+  - {id: emlib_prs}
+  - {id: simple_led_recommended_instance}
+  - {id: sl_system}
+define:
+  - {name: DEBUG_EFM}
+configuration:
+  - {name: SL_BOARD_ENABLE_VCOM, value: '1'}
+ui_hints:
+  highlight:
+  - {path: README.md, focus: true}
+

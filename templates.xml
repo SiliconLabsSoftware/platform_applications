@@ -791,7 +791,7 @@
     <properties key="stockConfigCompatibility" value="com.silabs.ss.framework.project.toolchain.core.default"/>
     <properties key="filters" value="Device\ Type|SoC MCU|32-bit\ MCU Project\ Difficulty|Beginner"/>
   </descriptors>
-  <descriptors name="platform_timer_cascade" label="Platform - Timer cascading" description="This project cascades two timers (TIMER0 and TIMER1) to be able to utilize a virtual timer peripheral, that has a bigger precision due to the extended bit size. The cascading is both done via PRS and the default linked conenction interface.">
+  <descriptors name="platform_timer_cascade" label="Platform - Timer cascading" description="This project cascades two timers (TIMER0 and TIMER1) to be able to utilize a virtual timer peripheral, that has a bigger precision due to the extended bit size. The cascading is both done via PRS and the default linked connection interface.">
     <properties key="namespace" value="template.uc"/>
     <properties key="keywords" value="universal\ configurator"/>
     <properties key="solutionReferenceId" value="platform_timer_cascade.SimplicityStudio.platform_timer_cascade.slcp"/>
@@ -986,7 +986,7 @@
     <properties key="stockConfigCompatibility" value="com.silabs.ss.framework.project.toolchain.core.default"/>
     <properties key="filters" value="Device\ Type|SoC MCU|32-bit\ MCU Project\ Difficulty|Beginner"/>
   </descriptors>
-  <descriptors name="platform_emu_temp_linearization" label="Platform - EMU Temperature Linearization" description="This example demonstrates the usage of given polinomials to linearize the EMU temperature sensor's readings.">
+  <descriptors name="platform_emu_temp_linearization" label="Platform - EMU Temperature Linearization" description="This example demonstrates the usage of given polynomials to linearize the EMU temperature sensor's readings.">
     <properties key="namespace" value="template.uc"/>
     <properties key="keywords" value="universal\ configurator"/>
     <properties key="solutionReferenceId" value="platform_emu_temp_linearization.SimplicityStudio.platform_emu_temp_linearization.slcp"/>
@@ -1038,6 +1038,51 @@
     <properties key="projectFilePaths" value="platform_i2c_fast_plus_mode/SimplicityStudio/platform_i2c_fast_plus_mode.slcp"/>
     <properties key="readmeFiles" value="platform_i2c_fast_plus_mode/README.md"/>
     <properties key="boardCompatibility" value="brd2601b brd2703a brd4108a brd4314a com.silabs.board.none"/>
+    <properties key="partCompatibility" value=".*bgm22.* .*bg22.* .*efr32mg24.*"/>
+    <properties key="ideCompatibility" value="generic-template iar-embedded-workbench makefile-ide simplicity-ide visual-studio-code"/>
+    <properties key="toolchainCompatibility" value="gcc iar segger"/>
+    <properties key="category" value="Example|MCU Example"/>
+    <properties key="quality" value="EXPERIMENTAL"/>
+    <properties key="stockConfigCompatibility" value="com.silabs.ss.framework.project.toolchain.core.default"/>
+    <properties key="filters" value="Device\ Type|SoC MCU|32-bit\ MCU Project\ Difficulty|Beginner"/>
+  </descriptors>
+  <descriptors name="platform_sysrtc_wakeup" label="Platform - SYSRTC wakeup" description="This project demonstrates the usage of the SYSRTC peripheral in compare mode utilizing the PRS to toggle an LED.">
+    <properties key="namespace" value="template.uc"/>
+    <properties key="keywords" value="universal\ configurator"/>
+    <properties key="solutionReferenceId" value="platform_sysrtc_wakeup.SimplicityStudio.platform_sysrtc_wakeup.slcp"/>
+    <properties key="projectFilePaths" value="platform_sysrtc_wakeup/SimplicityStudio/platform_sysrtc_wakeup.slcp"/>
+    <properties key="readmeFiles" value="platform_sysrtc_wakeup/README.md"/>
+    <properties key="boardCompatibility" value="brd4270b brd4400c brd4186c brd2506a brd2504a com.silabs.board.none"/>
+    <properties key="partCompatibility" value=".*efr32[fzp]g23.* .*efm32pg23.* .*[fz]gm23.* .*efr32[bm]g24.* .*[bm]gm24.* .*efr32[fz]g25.* .*efr32[bmzx]g28.* .*efm32pg28.*"/>
+    <properties key="ideCompatibility" value="generic-template iar-embedded-workbench makefile-ide simplicity-ide visual-studio-code"/>
+    <properties key="toolchainCompatibility" value="gcc iar segger"/>
+    <properties key="category" value="Example|MCU Example"/>
+    <properties key="quality" value="EXPERIMENTAL"/>
+    <properties key="stockConfigCompatibility" value="com.silabs.ss.framework.project.toolchain.core.default"/>
+    <properties key="filters" value="Device\ Type|SoC MCU|32-bit\ MCU Project\ Difficulty|Beginner"/>
+  </descriptors>
+  <descriptors name="platform_acmp_hysteresis_mode" label="Platform - ACMP Hysteresis Mode" description="This example demonstrates how to use the hysteresis mode of the ACMP.">
+    <properties key="namespace" value="template.uc"/>
+    <properties key="keywords" value="universal\ configurator"/>
+    <properties key="solutionReferenceId" value="platform_acmp_hysteresis_mode.SimplicityStudio.platform_acmp_hysteresis_mode.slcp"/>
+    <properties key="projectFilePaths" value="platform_acmp_hysteresis_mode/SimplicityStudio/acmp_hysteresis_mode.slcp"/>
+    <properties key="readmeFiles" value="platform_acmp_hysteresis_mode/README.md"/>
+    <properties key="boardCompatibility" value="brd4180b brd4181c brd2602a brd4186c brd4270b brd4271a brd4400c com.silabs.board.none"/>
+    <properties key="partCompatibility" value=".*efr32mg21.* .*efr32mg24.* .*efr32fg25.* .*efr32[bm]g27.* .*efr32[bmzx]g28.*"/>
+    <properties key="ideCompatibility" value="generic-template iar-embedded-workbench makefile-ide simplicity-ide visual-studio-code"/>
+    <properties key="toolchainCompatibility" value="gcc iar segger"/>
+    <properties key="category" value="Example|MCU Example"/>
+    <properties key="quality" value="EXPERIMENTAL"/>
+    <properties key="stockConfigCompatibility" value="com.silabs.ss.framework.project.toolchain.core.default"/>
+    <properties key="filters" value="Device\ Type|SoC MCU|32-bit\ MCU Project\ Difficulty|Beginner"/>
+  </descriptors>
+  <descriptors name="platform_fixed_gate_time_frequency_measurement" label="Platform - Fixed Gate Time Frequency Measurement" description="This project demonstrates the use of a timer to implement a fixed gate time frequency measurement.">
+    <properties key="namespace" value="template.uc"/>
+    <properties key="keywords" value="universal\ configurator"/>
+    <properties key="solutionReferenceId" value="platform_fixed_gate_time_frequency_measurement.SimplicityStudio.platform_fixed_gate_time_frequency_measurement.slcp"/>
+    <properties key="projectFilePaths" value="platform_fixed_gate_time_frequency_measurement/SimplicityStudio/platform_fixed_gate_time_frequency_measurement.slcp"/>
+    <properties key="readmeFiles" value="platform_fixed_gate_time_frequency_measurement/README.md"/>
+    <properties key="boardCompatibility" value="brd2601b brd2703a brd4108a brd4314a brd4186c com.silabs.board.none"/>
     <properties key="partCompatibility" value=".*bgm22.* .*bg22.* .*efr32mg24.*"/>
     <properties key="ideCompatibility" value="generic-template iar-embedded-workbench makefile-ide simplicity-ide visual-studio-code"/>
     <properties key="toolchainCompatibility" value="gcc iar segger"/>

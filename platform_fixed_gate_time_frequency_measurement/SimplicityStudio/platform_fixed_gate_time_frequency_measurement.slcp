@@ -1,0 +1,43 @@
+project_name: platform_fixed_gate_time_frequency_measurement
+label: Platform - Fixed Gate Time Frequency Measurement
+description: >
+  This application demonstrates how to use the timer to implement a fixed gate time frequency measurement. The timer is configured to generate an interrupt on overflow, and all signal edges on a GPIO input pin are counted before the overflow occurs.
+  This allows measurement of the number of edges within each fixed gate time interval defined by the timer overflow.
+
+category: Example|Platform
+
+filter:
+- name: Device Type
+  value: [SoC]
+- name: Project Difficulty
+  value: [Beginner]
+
+package: platform
+
+quality: evaluation
+
+readme:
+- path: ../README.md
+
+source:
+- path: ../src/app.c
+
+include:
+  - path: '../inc'
+    file_list:
+    - path: app.h
+    
+component:
+  - id: sl_main
+  - id: emlib_timer
+  - id: emlib_gpio
+  - id: emlib_cmu
+
+other_file:
+  - path: ../image/result.png
+    directory: "image"
+
+ui_hints:
+  highlight:
+    - path: README.md
+      focus: true
