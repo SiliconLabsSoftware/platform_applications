@@ -2,7 +2,7 @@ name: CI-Check
 
 on:
   pull_request_target:
-    types: [opened, reopened, synchronize]
+    types: [opened, reopened, synchronize, edited]
 
 env:
   SL_SLC_PATH: ${{ github.workspace }}/tools/slc_cli/slc
@@ -14,7 +14,7 @@ env:
 
 jobs:
   readme_structure:
-    runs-on: ubuntu-latest
+    runs-on: ${{ github.repository_visibility == 'internal' && 'silabs-internal' || 'ubuntu-latest' }}
     outputs:
       result_readme: ${{ steps.check_readme.outputs.result_readme }}
     steps:
@@ -83,7 +83,7 @@ jobs:
         fi
 
   coding_convention:
-    runs-on: ubuntu-latest
+    runs-on: ${{ github.repository_visibility == 'internal' && 'silabs-internal' || 'ubuntu-latest' }}
     outputs:
       result_coding: ${{ steps.check_coding.outputs.result_coding }}
     steps:
@@ -173,7 +173,7 @@ jobs:
         fi
 
   build_firmware:
-    runs-on: ubuntu-latest
+    runs-on: ${{ github.repository_visibility == 'internal' && 'silabs-internal' || 'ubuntu-latest' }}
     outputs:
       result_build: ${{ steps.check_build.outputs.result_build }}
     steps:
@@ -360,7 +360,7 @@ jobs:
         -D"sonar.projectBaseDir=ws" \
         -D"sonar.sources=." \
         -D"sonar.inclusions=${{ steps.included_src.outputs.sonar_inclusions }}" \
-        -D"sonar.host.url=${{ secrets.SONAR_HOST_URL }}" \
+        -D"sonar.host.url=${{ vars.SONAR_HOST_URL }}" \
         -D"sonar.token=${{ secrets.SONAR_TOKEN }}" \
         -D"sonar.language=c" \
         -D"sonar.cfamily.cache.enabled=false" > sonar_log.txt
@@ -374,14 +374,14 @@ jobs:
 
         if grep -qe "EXECUTION SUCCESS" sonar_log.txt; then
           echo "Result: Success"
-          echo "Check report here: ${{ secrets.SONAR_HOST_URL }}/dashboard?id=${{ env.repo }}&branch=${{ github.event.pull_request.head.ref }}"
+          echo "Check report here: ${{ vars.SONAR_HOST_URL }}/dashboard?id=${{ env.repo }}&branch=${{ github.event.pull_request.head.ref }}"
           echo "result_sonar=success" >> $GITHUB_OUTPUT
         else
           echo "Result: Failure"
           cat sonar_log.txt
           echo ""
           echo "......................"
-          echo "Check report here: ${{ secrets.SONAR_HOST_URL }}/dashboard?id=${{ env.repo }}&branch=${{ github.event.pull_request.head.ref }}"
+          echo "Check report here: ${{ vars.SONAR_HOST_URL }}/dashboard?id=${{ env.repo }}&branch=${{ github.event.pull_request.head.ref }}"
           exit 1
         fi
 

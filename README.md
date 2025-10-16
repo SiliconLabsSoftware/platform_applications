@@ -13,7 +13,7 @@
 
 # Silicon Labs Platform Applications #
 
-[![Version Badge](https://img.shields.io/badge/-v2.9.0-green)](https://github.com/SiliconLabs/bluetooth_applications/releases)
+[![Version Badge](https://img.shields.io/badge/-v2.10.0-green)](https://github.com/SiliconLabs/bluetooth_applications/releases)
 [![GSDK Badge](https://img.shields.io/badge/GSDK-v4.4.4-green)](https://github.com/SiliconLabs/gecko_sdk/releases)
 ![License badge](https://img.shields.io/badge/License-Zlib-green)
 
@@ -96,6 +96,9 @@ This repository provides both SLCP projects (as External Repositories) and SLS p
 | 69 | Platform - ACMP Hysteresis Mode  |[Click Here](./platform_acmp_hysteresis_mode)
 | 70 | Platform - Sysrtc Wakeup  |[Click Here](./platform_sysrtc_wakeup)
 | 71 | Platform - Fixed Gate Time Frequency Measurement  |[Click Here](./platform_fixed_gate_time_frequency_measurement/)
+| 72 | Platform - UART DFU Multislot  |[Click Here](./platform_uart_dfu_multislot/)
+| 73 | Platform - I2S Microphone VDAC  |[Click Here](./platform_i2s_mic_vdac/)
+| 74 | Platform - SPI FreeRTOS  |[Click Here](./platform_spi_freertos/)
 
 ## Requirements ##
 

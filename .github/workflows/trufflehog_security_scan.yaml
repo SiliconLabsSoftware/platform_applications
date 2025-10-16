@@ -1,11 +1,11 @@
 name: TruffleHog-Security-Scan
 on:
   pull_request:
-    types: [opened, reopened, synchronize]
+    types: [opened, reopened, synchronize, edited]
 
 jobs:
   trufflehog_security_scan:
-    runs-on: ubuntu-latest
+    runs-on: ${{ github.repository_visibility == 'internal' && 'silabs-internal' || 'ubuntu-latest' }}
     steps:
     - name: Checkout code
       uses: actions/checkout@v4

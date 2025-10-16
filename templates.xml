@@ -45,6 +45,21 @@
     <properties key="stockConfigCompatibility" value="com.silabs.ss.framework.project.toolchain.core.default"/>
     <properties key="filters" value="Device\ Type|SoC MCU|32-bit\ MCU Project\ Difficulty|Beginner"/>
   </descriptors>
+  <descriptors name="platform_i2s_mic_vdac" label="Platform - I2S Microphone VDAC" description="This example demonstrates the implementation of the I2S protocol for interfacing with an external stereo microphone. The sampled audio signal is routed to an analog pin via the VDAC.">
+    <properties key="namespace" value="template.uc"/>
+    <properties key="keywords" value="universal\ configurator"/>
+    <properties key="solutionReferenceId" value="platform_i2s_mic_vdac.SimplicityStudio.platform_i2s_mic_vdac.slcp"/>
+    <properties key="projectFilePaths" value="platform_i2s_mic_vdac/SimplicityStudio/platform_i2s_mic_vdac.slcp"/>
+    <properties key="readmeFiles" value="platform_i2s_mic_vdac/README.md"/>
+    <properties key="boardCompatibility" value="brd2601b brd2608a com.silabs.board.none"/>
+    <properties key="partCompatibility" value=".*efr32mg24.* .*efr32mg26.*"/>
+    <properties key="ideCompatibility" value="generic-template iar-embedded-workbench makefile-ide simplicity-ide visual-studio-code"/>
+    <properties key="toolchainCompatibility" value="gcc iar segger"/>
+    <properties key="category" value="Example|MCU Example"/>
+    <properties key="quality" value="EXPERIMENTAL"/>
+    <properties key="stockConfigCompatibility" value="com.silabs.ss.framework.project.toolchain.core.default"/>
+    <properties key="filters" value="Device\ Type|SoC MCU|32-bit\ MCU Project\ Difficulty|Beginner"/>
+  </descriptors>
   <descriptors name="platform_segmentLCD_lowpower" label="Platform - SegmentLCD Low Power" description="This project demonstrates the LCD peripheral with low power mode.">
     <properties key="namespace" value="template.uc"/>
     <properties key="keywords" value="universal\ configurator"/>
@@ -1084,6 +1099,36 @@
     <properties key="readmeFiles" value="platform_fixed_gate_time_frequency_measurement/README.md"/>
     <properties key="boardCompatibility" value="brd2601b brd2703a brd4108a brd4314a brd4186c com.silabs.board.none"/>
     <properties key="partCompatibility" value=".*bgm22.* .*bg22.* .*efr32mg24.*"/>
+    <properties key="ideCompatibility" value="generic-template iar-embedded-workbench makefile-ide simplicity-ide visual-studio-code"/>
+    <properties key="toolchainCompatibility" value="gcc iar segger"/>
+    <properties key="category" value="Example|MCU Example"/>
+    <properties key="quality" value="EXPERIMENTAL"/>
+    <properties key="stockConfigCompatibility" value="com.silabs.ss.framework.project.toolchain.core.default"/>
+    <properties key="filters" value="Device\ Type|SoC MCU|32-bit\ MCU Project\ Difficulty|Beginner"/>
+  </descriptors>
+  <descriptors name="platform_uart_dfu_multislot" label="Platform - UART DFU Multislot" description="This project demonstrates device firmware upgrade over UART interface using multislot internal storage bootloader.">
+    <properties key="namespace" value="template.uc"/>
+    <properties key="keywords" value="universal\ configurator"/>
+    <properties key="solutionReferenceId" value="platform_uart_dfu_multislot.SimplicityStudio.platform_uart_dfu_multislot.slcp"/>
+    <properties key="projectFilePaths" value="platform_uart_dfu_multislot/SimplicityStudio/platform_uart_dfu_multislot.slcp"/>
+    <properties key="readmeFiles" value="platform_uart_dfu_multislot/README.md"/>
+    <properties key="boardCompatibility" value="brd4186c brd4187c com.silabs.board.none"/>
+    <properties key="partCompatibility" value=".*efr32mg24.*"/>
+    <properties key="ideCompatibility" value="generic-template iar-embedded-workbench makefile-ide simplicity-ide visual-studio-code"/>
+    <properties key="toolchainCompatibility" value="gcc iar segger"/>
+    <properties key="category" value="Example|MCU Example"/>
+    <properties key="quality" value="EXPERIMENTAL"/>
+    <properties key="stockConfigCompatibility" value="com.silabs.ss.framework.project.toolchain.core.default"/>
+    <properties key="filters" value="Device\ Type|SoC MCU|32-bit\ MCU Project\ Difficulty|Beginner"/>
+</descriptors>
+<descriptors name="platform_spi_freertos" label="Platform - SPI FreeRTOS" description="This project demonstrates how to use SPI peripheral with FreeRTOS kernel on the MG21 part">
+    <properties key="namespace" value="template.uc"/>
+    <properties key="keywords" value="universal\ configurator"/>
+    <properties key="solutionReferenceId" value="platform_spi_freertos.SimplicityStudio.platform_spi_freertos.slcp"/>
+    <properties key="projectFilePaths" value="platform_spi_freertos/SimplicityStudio/platform_spi_freertos.slcp"/>
+    <properties key="readmeFiles" value="platform_spi_freertos/README.md"/>
+    <properties key="boardCompatibility" value="brd4180a com.silabs.board.none"/>
+    <properties key="partCompatibility" value=".*efr32mg21.*"/>
     <properties key="ideCompatibility" value="generic-template iar-embedded-workbench makefile-ide simplicity-ide visual-studio-code"/>
     <properties key="toolchainCompatibility" value="gcc iar segger"/>
     <properties key="category" value="Example|MCU Example"/>
