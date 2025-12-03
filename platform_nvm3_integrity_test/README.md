@@ -1,19 +1,20 @@
 # Platform - NVM3 Integrity Test
 
 ![Type badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_nvm3_integrity_test_common.json&label=Type&query=type&color=green)
-![Technology badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_nvm3_integrity_test_common.json&label=Technology&query=technology&color=green)
-![License badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_nvm3_integrity_test_common.json&label=License&query=license&color=green)
-![SDK badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_nvm3_integrity_test_common.json&label=SDK&query=sdk&color=green)
-![Build badge](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_nvm3_integrity_test_build_status.json)
-![Flash badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_nvm3_integrity_test_common.json&label=Flash&query=flash&color=blue)
-![RAM badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_nvm3_integrity_test_common.json&label=RAM&query=ram&color=blue)
-## Description ##
+![Technology badge](https://img.shields.io/badge/Technology-Platform-green)
+![License badge](https://img.shields.io/badge/License-Zlib-green)
+![SDK badge](https://img.shields.io/badge/SDK-v4.5.0-green)
+![Build badge](https://img.shields.io/badge/Build-passing-green)
+![Flash badge](https://img.shields.io/badge/Flash-20.68%20KB-blue)
+![RAM badge](https://img.shields.io/badge/RAM-8.55%20KB-blue)
+
+## Description
 
 This project performs frequent NVM3 writes and checks that there has been no corruption of the NVM3 data, or changes to the CRC of the program flash space.
 
-## Gecko SDK version
+## SDK version
 
-GSDK v4.4.3
+- [Gecko SDK v4.5.0](https://github.com/SiliconLabs/gecko_sdk/releases/tag/v4.5.0)
 
 ## Hardware Required
 
@@ -39,7 +40,8 @@ To test this application, you can either create a project based on an example pr
 
 1. From the Launcher Home, add BRD2703A to My Products, click on it, and click on the **EXAMPLE PROJECTS & DEMOS** tab. Find the example project with the filter "integrity".
 2. Click the **Create** button on the **Platform - NVM3 Integrity Test** example. Example project creation dialog pops up -> click Create and Finish and Project should be generated.
-![create_project](image/create_project.png)
+
+   ![create_project](image/create_project.png)
 
 3. Build and flash this example to the board.
 
@@ -51,12 +53,12 @@ To test this application, you can either create a project based on an example pr
 
 3. Open the .slcp file. Select the SOFTWARE COMPONENTS tab and install the software components:
 
-- [Services] → [NVM3] → [NVM3 Core]
-- [Services] → [NVM3] → [NVM3 Default Instance]
-- [Services] → [Timers] → [Sleep Timer]
-- [Platform] → [Driver] → [LED] → [Simple LED] → default instances: led0, led1
-- [Platform] → [Driver] → [Button] → [Simple Button] → default instance: btn0
-- [Platform] → [Peripheral] → [GPCRC]
+    - [Services] → [NVM3] → [NVM3 Core]
+    - [Services] → [NVM3] → [NVM3 Default Instance]
+    - [Services] → [Timers] → [Sleep Timer]
+    - [Platform] → [Driver] → [LED] → [Simple LED] → default instances: led0, led1
+    - [Platform] → [Driver] → [Button] → [Simple Button] → default instance: btn0
+    - [Platform] → [Peripheral] → [GPCRC]
 
 4. Build and flash the project to your device.
 

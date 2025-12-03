@@ -1,12 +1,13 @@
 # Platform - Lean Watchdog
 
 ![Type badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_lean_watchdog_common.json&label=Type&query=type&color=green)
-![Technology badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_lean_watchdog_common.json&label=Technology&query=technology&color=green)
-![License badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_lean_watchdog_common.json&label=License&query=license&color=green)
-![SDK badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_lean_watchdog_common.json&label=SDK&query=sdk&color=green)
-![Build badge](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_lean_watchdog_build_status.json)
-![Flash badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_lean_watchdog_common.json&label=Flash&query=flash&color=blue)
-![RAM badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_lean_watchdog_common.json&label=RAM&query=ram&color=blue)
+![Technology badge](https://img.shields.io/badge/Technology-Platform-green)
+![License badge](https://img.shields.io/badge/License-Zlib-green)
+![SDK badge](https://img.shields.io/badge/SDK-v4.5.0-green)
+![Build badge](https://img.shields.io/badge/Build-passing-green)
+![Flash badge](https://img.shields.io/badge/Flash-16.32%20KB-blue)
+![RAM badge](https://img.shields.io/badge/RAM-4.25%20KB-blue)
+
 ## Summary
 
 This project is part of AN1426. A watchdog provides a way to reset the device in case of a system failure. Series 2 EFM32/EFR32 devices have the WDOG peripheral which functions as the dedicated watchdog peripheral. Although the WDOG is capable of running in EM2/3 and consumes very little power, systems with very strict power requirements may benefit from using the "lean watchdog" alternative.
@@ -15,9 +16,9 @@ In EM2/3, peripherals are powered by power domains, and these power domains are 
 
 Peripherals used: WDOG0, BURTC, LFXO, GPIO, SYSRTC
 
-## Gecko SDK version
+## SDK version
 
-- v4.4.3
+- [Gecko SDK v4.5.0](https://github.com/SiliconLabs/gecko_sdk/releases/tag/v4.5.0)
 
 ## Hardware Required
 

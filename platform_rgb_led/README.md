@@ -1,25 +1,26 @@
 # Platform - WS2812 RGB LED Driver #
 
 ![Type badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_rgb_led_common.json&label=Type&query=type&color=green)
-![Technology badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_rgb_led_common.json&label=Technology&query=technology&color=green)
-![License badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_rgb_led_common.json&label=License&query=license&color=green)
-![SDK badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_rgb_led_common.json&label=SDK&query=sdk&color=green)
+![Technology badge](https://img.shields.io/badge/Technology-Platform-green)
+![License badge](https://img.shields.io/badge/License-Zlib-green)
+![SDK badge](https://img.shields.io/badge/SDK-v4.5.0-green)
 [![Required board](https://img.shields.io/badge/Adafruit-the%20NeoPixel%201/4%2060%20Ring-green)](https://www.adafruit.com/product/1768)
 [![Required board](https://img.shields.io/badge/Adafruit-String%20of%20WS2812%20LEDs-green)](https://www.adafruit.com/product/4684)
-![Build badge](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_rgb_led_build_status.json)
-![Flash badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_rgb_led_common.json&label=Flash&query=flash&color=blue)
-![RAM badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_rgb_led_common.json&label=RAM&query=ram&color=blue)
+![Build badge](https://img.shields.io/badge/Build-passing-green)
+![Flash badge](https://img.shields.io/badge/Flash-17.22%20KB-blue)
+![RAM badge](https://img.shields.io/badge/RAM-4.7%20KB-blue)
+
 ## Overview ##
 
 This driver controls WS2812 RGB LEDs. These LEDs use a fast asynchronous single-wire serial protocol and are daisy-chainable.
 
 The protocol runs around 800kHz which is too fast to efficiently bit-bang without a lot of optimization and overhead. Generally, drivers for this device are written in assembly. This driver instead uses the USART peripheral in an unconventional way to accomplish this with minimal overhead. This also allows the peripheral to transmit using the LDMA instead of a blocking mode like other drivers.
 
-This driver can support any number of LEDs, however, if powering the LED string using the DevKit, the number of LEDs will be limited by the current requirements of the LED string. 
+This driver can support any number of LEDs, however, if powering the LED string using the DevKit, the number of LEDs will be limited by the current requirements of the LED string.
 
-## Gecko SDK version ##
+## SDK version ##
 
-GSDK v4.4.3
+- [Gecko SDK v4.5.0](https://github.com/SiliconLabs/gecko_sdk/releases/tag/v4.5.0)
 
 ## Hardware Required ##
 
@@ -50,7 +51,7 @@ To test this application, you can either create a project based on an example pr
 
 3. Click the **Create** button on the **Platform - RGB LED (Adafruit WS2812)** example. Example project creation dialog pops up -> click **Finish** and Project should be generated.
 
-    ![Create_example](image/create_example.png)
+   ![Create_example](image/create_example.png)
 
 4. Build and flash this example to the board.
 

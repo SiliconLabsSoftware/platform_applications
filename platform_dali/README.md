@@ -1,12 +1,12 @@
 # AN1220: DALI Communication #
 
 ![Type badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_dali_common.json&label=Type&query=type&color=green)
-![Technology badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_dali_common.json&label=Technology&query=technology&color=green)
-![License badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_dali_common.json&label=License&query=license&color=green)
-![SDK badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_dali_common.json&label=SDK&query=sdk&color=green)
-![Build badge](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_dali_build_status.json)
-![Flash badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_dali_common.json&label=Flash&query=flash&color=blue)
-![RAM badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_dali_common.json&label=RAM&query=ram&color=blue)
+![Technology badge](https://img.shields.io/badge/Technology-Platform-green)
+![License badge](https://img.shields.io/badge/License-Zlib-green)
+![SDK badge](https://img.shields.io/badge/SDK-v4.5.0-green)
+![Build badge](https://img.shields.io/badge/Build-passing-green)
+![Flash badge](https://img.shields.io/badge/Flash-24.6%20KB-blue)
+![RAM badge](https://img.shields.io/badge/RAM-3.92%20KB-blue)
 
 ## Summary ##
 
@@ -14,18 +14,18 @@ These projects are part of AN1220. DALI is an international standard lighting co
 
 Peripherals used: EUSART, USART, PRS, LDMA, GPIO, TIMER, SYSRTC
 
-## Gecko SDK version ##
+## SDK version ##
 
-v4.4.3
+- [Gecko SDK v4.5.0](https://github.com/SiliconLabs/gecko_sdk/releases/tag/v4.5.0)
 
 ## Hardware Required ##
 
-* Board: Silicon Labs EFM32MG12P Radio Board (BRD4161A) + Wireless Starter Kit Mainboard
-  * Device: EFR32MG12P432F1024GL125
-* Board: Silicon Labs EFR32xG21 Radio Board (BRD4181A) + Wireless Starter Kit Mainboard
-  * Device: EFR32MG21A010F1024IM32
-* Board: Silicon Labs EFR32xG24 Radio Board (BRD4186C) + Wireless Starter Kit Mainboard
-  * Device: EFR32MG24B210F1536IM48
+- Board: Silicon Labs EFM32MG12P Radio Board (BRD4161A) + Wireless Starter Kit Mainboard
+  - Device: EFR32MG12P432F1024GL125
+- Board: Silicon Labs EFR32xG21 Radio Board (BRD4181A) + Wireless Starter Kit Mainboard
+  - Device: EFR32MG21A010F1024IM32
+- Board: Silicon Labs EFR32xG24 Radio Board (BRD4186C) + Wireless Starter Kit Mainboard
+  - Device: EFR32MG24B210F1536IM48
 
 ## Connections Required ##
 

@@ -1,0 +1,37 @@
+project_name: platform_emu_temp
+package: platform
+quality: experimental
+label: Platform - EMU Temperature Sensor
+description: >
+  This project demonstrates the use of the low energy periodic temperature sensor measurement in the EMU block of EFR32xG22 devices.
+category: Example|Platform
+filter:
+  - name: "Device Type"
+    value: ["SoC"]
+  - name: "MCU"
+    value: ["32-bit MCU"]
+  - name: "Project Difficulty"
+    value: ["Beginner"]
+source:
+  - path: ../src/app.c
+  - path: ../src/main.c
+include:
+  - path: ../inc
+    file_list:
+    - path: app.h
+component:
+  - id: sl_system
+  - id: device_init
+  - id: emlib_timer
+  - id: iostream_recommended_stream
+  - id: app_log
+  - id: tempdrv
+define:
+  - name: DEBUG_EFM
+configuration:
+  - name: SL_BOARD_ENABLE_VCOM
+    value : 1
+readme:
+  - path: ../README.md
+ui_hints:
+  highlight: README.md

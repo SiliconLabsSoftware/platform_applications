@@ -1,5 +1,5 @@
 /***************************************************************************//**
- * @file
+ * @file i2c-protocol.c
  * @brief Bootloader I2C communication protocol (master).
  *******************************************************************************
  * # License
@@ -79,13 +79,13 @@ uint16_t crc16s(const uint8_t *buffer,
 }
 
 /***************************************************************************//**
-* @brief writes the I2C bus
-* @param i2c_handle        I2C handle
-* @param address           7-bit slave address
-* @param commandSeq        sending seqence bytes
-* @param commandSeqLength  length of the sequence
-* @return negative on error, 0 on success
-*******************************************************************************/
+ * @brief writes the I2C bus
+ * @param i2c_handle        I2C handle
+ * @param address           7-bit slave address
+ * @param commandSeq        sending seqence bytes
+ * @param commandSeqLength  length of the sequence
+ * @return negative on error, 0 on success
+ *******************************************************************************/
 static int i2c_write(int i2c_handle,
                      uint8_t address,
                      uint8_t *commandSeq,
@@ -112,15 +112,15 @@ static int i2c_write(int i2c_handle,
 }
 
 /***************************************************************************//**
-* @brief reads from I2C bus
-* @param i2c_handle        I2C handle
-* @param address           7-bit slave address
-* @param commandSeq        sending seqence bytes
-* @param commandSeqLength  length of the sequence
-* @param readBuffer        buffer to store the bytes readed
-* @param readBufferLength  Number of reading bytes
-* @return -1 on error, 0 on success
-*******************************************************************************/
+ * @brief reads from I2C bus
+ * @param i2c_handle        I2C handle
+ * @param address           7-bit slave address
+ * @param commandSeq        sending seqence bytes
+ * @param commandSeqLength  length of the sequence
+ * @param readBuffer        buffer to store the bytes readed
+ * @param readBufferLength  Number of reading bytes
+ * @return -1 on error, 0 on success
+ *******************************************************************************/
 static int i2c_read(int i2c_handle,
                     uint8_t address,
                     uint8_t *commandSeq,
@@ -158,10 +158,10 @@ static int i2c_read(int i2c_handle,
 }
 
 /***************************************************************************//**
-* @brief opens the I2C bus device
-* @param bus I2C bus' system id from /dev
-* @return I2C handle or error (negative value)
-*******************************************************************************/
+ * @brief opens the I2C bus device
+ * @param bus I2C bus' system id from /dev
+ * @return I2C handle or error (negative value)
+ *******************************************************************************/
 int open_i2c(int bus)
 {
   char filename[64];
@@ -178,21 +178,21 @@ int open_i2c(int bus)
 }
 
 /***************************************************************************//**
-* @brief closes the I2C bus device
-* @param i2c_handle I2C handle
-* @return 0 if ok or negative value on error
-*******************************************************************************/
+ * @brief closes the I2C bus device
+ * @param i2c_handle I2C handle
+ * @return 0 if ok or negative value on error
+ *******************************************************************************/
 int close_i2c(int i2c_handle)
 {
   return close(i2c_handle);
 }
 
 /***************************************************************************//**
-* @brief gets the last command's status from the slave
-* @param i2c_handle I2C handle
-* @param address 7-bit slave address
-* @return -1 on error, otherwise slave bootloader's status
-*******************************************************************************/
+ * @brief gets the last command's status from the slave
+ * @param i2c_handle I2C handle
+ * @param address 7-bit slave address
+ * @return -1 on error, otherwise slave bootloader's status
+ *******************************************************************************/
 int last_command_status(int i2c_handle, int address)
 {
   uint8_t result;
@@ -210,11 +210,11 @@ int last_command_status(int i2c_handle, int address)
 }
 
 /***************************************************************************//**
-* @brief aborts slave's current operation (effective for DOWNLOAD)
-* @param i2c_handle I2C handle
-* @param address 7-bit slave address
-* @return -1 on error, 0 on success
-*******************************************************************************/
+ * @brief aborts slave's current operation (effective for DOWNLOAD)
+ * @param i2c_handle I2C handle
+ * @param address 7-bit slave address
+ * @return -1 on error, 0 on success
+ *******************************************************************************/
 int abort_last_command(int i2c_handle, int address)
 {
   uint8_t command = BOOT_ABORT_OPERATION;
@@ -225,12 +225,12 @@ int abort_last_command(int i2c_handle, int address)
 }
 
 /***************************************************************************//**
-* @brief gets the bootloader version information from the slave
-* @param i2c_handle   I2C handle
-* @param address      7-bit slave address
-* @param versionInfo  pointer to the versionInfo structure
-* @return -1 on error, 0 on success
-*******************************************************************************/
+ * @brief gets the bootloader version information from the slave
+ * @param i2c_handle   I2C handle
+ * @param address      7-bit slave address
+ * @param versionInfo  pointer to the versionInfo structure
+ * @return -1 on error, 0 on success
+ *******************************************************************************/
 int get_version_info(int i2c_handle, int address,
                      btl_version_info_t *versionInfo)
 {
@@ -243,13 +243,13 @@ int get_version_info(int i2c_handle, int address,
 }
 
 /***************************************************************************//**
-* @brief boots the application on slave from the slot
-* @param i2c_handle       I2C handle
-* @param address          7-bit slave address
-* @param application_slot negative value (for example, -1) when no slot used
-*                         zero or positive number: slot id (not supported yet)
-* @return -1 on error, 0 on success
-*******************************************************************************/
+ * @brief boots the application on slave from the slot
+ * @param i2c_handle       I2C handle
+ * @param address          7-bit slave address
+ * @param application_slot negative value (for example, -1) when no slot used
+ *                         zero or positive number: slot id (not supported yet)
+ * @return -1 on error, 0 on success
+ *******************************************************************************/
 int boot_application(int i2c_handle, int address, int application_slot)
 {
   uint8_t command[2] = { BOOT_BOOT_APP, application_slot & 0xFF };
@@ -260,12 +260,12 @@ int boot_application(int i2c_handle, int address, int application_slot)
 }
 
 /***************************************************************************//**
-* @brief verify the application image on slave
-* @param i2c_handle       I2C handle
-* @param address          7-bit slave address
-* @param verifyResult     bootloader' verify result (pointer to an int8_t)
-* @return negative on error, 0 on success
-*******************************************************************************/
+ * @brief verify the application image on slave
+ * @param i2c_handle       I2C handle
+ * @param address          7-bit slave address
+ * @param verifyResult     bootloader' verify result (pointer to an int8_t)
+ * @return negative on error, 0 on success
+ *******************************************************************************/
 int verify_app(int i2c_handle, int address, uint8_t *verifyResult)
 {
   uint8_t command = BOOT_VERIFY;
@@ -285,14 +285,14 @@ int verify_app(int i2c_handle, int address, uint8_t *verifyResult)
 }
 
 /***************************************************************************//**
-* @brief send a chunk frame to slave
-* @param i2c_handle            I2C handle
-* @param address               7-bit slave address
-* @param frame_sequence_number frame sequence number
-* @param chunkData             chunk data bytes
-* @param chunkSize             amount of data bytes
-* @return negative on error, 0 on success
-*******************************************************************************/
+ * @brief send a chunk frame to slave
+ * @param i2c_handle            I2C handle
+ * @param address               7-bit slave address
+ * @param frame_sequence_number frame sequence number
+ * @param chunkData             chunk data bytes
+ * @param chunkSize             amount of data bytes
+ * @return negative on error, 0 on success
+ *******************************************************************************/
 static int send_chunk_of_stream(int i2c_handle,
                                 int address,
                                 uint32_t frame_sequence_number,
@@ -325,8 +325,8 @@ static int send_chunk_of_stream(int i2c_handle,
 }
 
 /***************************************************************************//**
-* @brief puts a spiner character to stderr (console)
-*******************************************************************************/
+ * @brief puts a spiner character to stderr (console)
+ *******************************************************************************/
 static void progress_spinner()
 {
   static int spinner_index = 0;
@@ -336,12 +336,12 @@ static void progress_spinner()
 }
 
 /***************************************************************************//**
-* @brief send a file stream to slave
-* @param i2c_handle   I2C handle
-* @param address      7-bit slave address
-* @param fhandle      file (stream) handle
-* @return negative value on error, 0 on success
-*******************************************************************************/
+ * @brief send a file stream to slave
+ * @param i2c_handle   I2C handle
+ * @param address      7-bit slave address
+ * @param fhandle      file (stream) handle
+ * @return negative value on error, 0 on success
+ *******************************************************************************/
 static int send_stream_as_file(int i2c_handle, int address, int fhandle)
 {
   uint8_t chunk[BOOT_MAX_DOWNLOAD_FRAME_DATA_LENGTH];
@@ -391,12 +391,12 @@ static int send_stream_as_file(int i2c_handle, int address, int fhandle)
 }
 
 /***************************************************************************//**
-* @brief download the GBL image file to the slave
-* @param i2c_handle   I2C handle
-* @param address      7-bit slave address
-* @param filename     name of the GBL image file
-* @return negative value on error, 0 on success
-*******************************************************************************/
+ * @brief download the GBL image file to the slave
+ * @param i2c_handle   I2C handle
+ * @param address      7-bit slave address
+ * @param filename     name of the GBL image file
+ * @return negative value on error, 0 on success
+ *******************************************************************************/
 int download_gbl_file(int i2c_handle, int address, const char *filename)
 {
   int fhandle = open(filename, O_RDONLY);

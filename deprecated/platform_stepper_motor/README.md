@@ -1,7 +1,9 @@
 ## Deprecation Notice
+
 This code has been deprecated. It has been provided for historical reference only and should not be used. This code will not be maintained. This code is subject to the quality disclaimer at the point in time prior to deprecation and superseded by this deprecation notice.
 
 # Stepper Motor Example #
+
 ![Type badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_stepper_motor_common.json&label=Type&query=type&color=green)
 ![Technology badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_stepper_motor_common.json&label=Technology&query=technology&color=green)
 ![License badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_stepper_motor_common.json&label=License&query=license&color=green)
@@ -16,7 +18,7 @@ This project uses an EFM32GG11 to drive a unipolar 4-phase stepper motor. A TIME
 
 Peripherals used: TIMER, GPIO, EMU
 
-## Gecko SDK version ##
+## SDK version ##
 
 v3.0
 

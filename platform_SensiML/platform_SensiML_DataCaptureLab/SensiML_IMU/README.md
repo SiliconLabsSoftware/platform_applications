@@ -1,20 +1,20 @@
 # Platform - SensiML IMU Data Capture #
 
 ![Type badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/SensiML_IMU_common.json&label=Type&query=type&color=green)
-![Technology badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/SensiML_IMU_common.json&label=Technology&query=technology&color=green)
-![License badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/SensiML_IMU_common.json&label=License&query=license&color=green)
-![SDK badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/SensiML_IMU_common.json&label=SDK&query=sdk&color=green)
-![Build badge](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/SensiML_IMU_build_status.json)
-![Flash badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/SensiML_IMU_common.json&label=Flash&query=flash&color=blue)
-![RAM badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/SensiML_IMU_common.json&label=RAM&query=ram&color=blue)
+![Technology badge](https://img.shields.io/badge/Technology-Platform-green)
+![License badge](https://img.shields.io/badge/License-Zlib-green)
+![SDK badge](https://img.shields.io/badge/SDK-v4.5.0-green)
+![Build badge](https://img.shields.io/badge/Build-passing-green)
+![Flash badge](https://img.shields.io/badge/Flash-29.39%20KB-blue)
+![RAM badge](https://img.shields.io/badge/RAM-5.43%20KB-blue)
 
 ## Overview ##
 
 This project uses the Thunderboard Sense 2 (EFR32MG12) and onboard IMU to measure accelerometer and gyroscope data. After that, the measurement data are transmitted via serial UART for consumption by the SensiML Data Studio application. The example project uses the I/O Stream service along with IMU component drivers running in a bare-metal configuration. Sensor data from the ICM-20648 IMU is transferred over a virtual COM port (VCOM) at a 921600 baud rate. The sensor data output data rate is configured at 102.3Hz.
 
-## Gecko SDK version ##
+## SDK version ##
 
-- v4.4.3
+- [Gecko SDK v4.5.0](https://github.com/SiliconLabs/gecko_sdk/releases/tag/v4.5.0)
 
 ## Software Required ##
 

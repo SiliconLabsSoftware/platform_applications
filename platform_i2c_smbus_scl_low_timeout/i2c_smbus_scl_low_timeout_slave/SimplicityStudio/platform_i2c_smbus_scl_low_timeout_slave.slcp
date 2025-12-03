@@ -1,0 +1,33 @@
+project_name: platform_i2c_smbus_scl_low_timeout_slave
+label: Platform - I2C SMBus SCL Low Timeout
+description: |
+  This project demonstrates the slave configuration of the I2C peripheral with the addition of an implementation of the SCL low timeout required by the SMBus standard.
+category: Example|Platform
+package: platform
+quality: experimental
+filter:
+  - name: Device Type
+    value: [SoC]
+  - name: MCU
+    value: [32-bit MCU]
+  - name: Project Difficulty
+    value: [Beginner]
+source:
+  - path: ../src/app.c
+  - path: ../src/main.c
+include:
+  - path: ../inc
+    file_list:
+    - path: app.h
+component:
+  - id: device_init
+  - id: emlib_i2c
+  - id: emlib_timer
+  - id: sl_system
+  - id: emlib_rtcc
+readme:
+  - path: ../README.md
+define:
+  - name: DEBUG_EFM
+ui_hints:
+  highlight: README.md

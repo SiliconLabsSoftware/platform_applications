@@ -1,0 +1,32 @@
+project_name: platform_adc_rng
+label: Platform - Random Number Generator using ADC
+description: >
+  This project shows how to use the ADC as a random number generator to create a
+  32-bit random number
+category: Example|Platform
+package: platform
+quality: experimental
+filter:
+  - name: "Device Type"
+    value: ["SoC"]
+  - name: "MCU"
+    value: ["32-bit MCU"]
+  - name: "Project Difficulty"
+    value: ["Beginner"]
+source:
+  - path: ../src/app.c
+  - path: ../src/main.c
+include:
+  - path: ../inc
+    file_list:
+    - path: app.h
+component:
+  - id: sl_system
+  - id: device_init
+  - id: emlib_adc
+define:
+  - name: DEBUG_EFM
+readme:
+  - path: ../README.md
+ui_hints:
+  highlight: README.md

@@ -1,0 +1,36 @@
+project_name: platform_iadc_stimulus
+label: Platform - IADC Stimulus
+description: |
+  This example project is to generate stimulus for the EFR32xG21 Timestamped IADC in EM2 example, which expects conversion start pulses on the selected digital input pin and some analog voltage on the selected analog input pin.
+category: Example|Platform
+package: platform
+quality: experimental
+filter:
+  - name: Device Type
+    value: [SoC]
+  - name: MCU
+    value: [32-bit MCU]
+  - name: Project Difficulty
+    value: [Beginner]
+readme:
+  - path: ../README.md
+source:
+  - path: ../src/app.c
+  - path: ../src/systick.c
+  - path: ../src/main.c
+include:
+  - path: ../inc
+    file_list:
+      - path: app.h
+      - path: systick.h
+component:
+  - id: device_init
+  - id: emlib_vdac
+  - instance: [btn0]
+    id: simple_button
+  - id: sl_system
+define:
+  - name: DEBUG_EFM
+ui_hints:
+  highlight: README.md
+

@@ -1,0 +1,48 @@
+project_name: platform_guitar_and_ukulele_tuner
+label: Platform - Guitar and Ukulele Tuner
+description: >
+  This project demonstrates the usage of the Giant Gecko GG11 started kit to implement a sound-based guitar and ukulele tuner
+category: Example|Platform
+package: platform
+quality: experimental
+filter:
+  - name: "Device Type"
+    value: ["SoC"]
+  - name: "MCU"
+    value: ["32-bit MCU"]
+  - name: "Project Difficulty"
+    value: ["Beginner"]
+source:
+  - path: ../src/app.c
+  - path: ../src/main.c
+  - path: ../src/audio_dsp.c
+  - path: ../src/lcd.c
+  - path: ../src/main.c
+  - path: ../src/microphone_driver.c
+  - path: ../src/tuned_algorithm.c
+include:
+  - path: ../inc
+    file_list:
+      - path: app.h
+      - path: audio_dsp.h
+      - path: lcd.h
+      - path: microphone_config.h
+      - path: microphone_driver.h
+      - path: tuned_algorithm.h
+component:
+  - id: sl_system
+  - id: device_init
+  - id: cmsis_dsp
+  - id: dmd_memlcd
+  - id: glib
+  - id: emlib_ldma
+  - id: emlib_prs
+define:
+  - name: DEBUG_EFM
+readme:
+  - path: ../README.md
+other_file:
+  - path: ../image/figure1.png
+    directory: "image"
+ui_hints:
+  highlight: README.md

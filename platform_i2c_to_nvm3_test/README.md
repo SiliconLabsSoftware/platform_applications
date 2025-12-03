@@ -1,20 +1,20 @@
 # Platform - I2C Read to NVM3 Test #
 
 ![Type badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_i2c_to_nvm3_test_common.json&label=Type&query=type&color=green)
-![Technology badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_i2c_to_nvm3_test_common.json&label=Technology&query=technology&color=green)
-![License badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_i2c_to_nvm3_test_common.json&label=License&query=license&color=green)
-![SDK badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_i2c_to_nvm3_test_common.json&label=SDK&query=sdk&color=green)
-![Build badge](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_i2c_to_nvm3_test_build_status.json)
-![Flash badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_i2c_to_nvm3_test_common.json&label=Flash&query=flash&color=blue)
-![RAM badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_i2c_to_nvm3_test_common.json&label=RAM&query=ram&color=blue)
+![Technology badge](https://img.shields.io/badge/Technology-Platform-green)
+![License badge](https://img.shields.io/badge/License-Zlib-green)
+![SDK badge](https://img.shields.io/badge/SDK-v4.5.0-green)
+![Build badge](https://img.shields.io/badge/Build-passing-green)
+![Flash badge](https://img.shields.io/badge/Flash-190.63%20KB-blue)
+![RAM badge](https://img.shields.io/badge/RAM-12.55%20KB-blue)
 
 ## Overview ##
 
 This project tests the total system latency when sampling an SI7210 Hall Effect sensor on the I2C bus and storing the information to flash using NVM3. Notably this project makes use of the Gecko Platform to capture the added platform and wireless stack overhead. On each BTN0 press a sensor sample will be recorded, saved to flash, and printed to the Jlink COM port. On reset or startup, the device will load and print the most recent saved sensor sample to the COM port.
 
-## Gecko SDK Version ##
+## SDK version ##
 
-- v4.4.3
+- [Gecko SDK v4.5.0](https://github.com/SiliconLabs/gecko_sdk/releases/tag/v4.5.0)
 
 ## Hardware Required ##
 

@@ -1,9 +1,9 @@
 /***************************************************************************//**
- * @file
+ * @file app.c
  * @brief Top level application functions
  *******************************************************************************
  * # License
- * <b>Copyright 2023 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2025 Silicon Laboratories Inc. www.silabs.com</b>
  *******************************************************************************
  *
  * SPDX-License-Identifier: Zlib
@@ -373,15 +373,15 @@ void initCMU(void)
 }
 
 /***************************************************************************//**
-* Disable Unused LCD Segments
-*******************************************************************************/
+ * Disable Unused LCD Segments
+ *******************************************************************************/
 void disableUnusedLCDSeg(void)
 {
 /***************************************************************************//**
-* The LCD driver enables all segments, even those that are not mapped to
-* segments on the dev kit board. These are disabled below in order to
-* minimize current consumption.
-*******************************************************************************/
+ * The LCD driver enables all segments, even those that are not mapped to
+ * segments on the dev kit board. These are disabled below in order to
+ * minimize current consumption.
+ *******************************************************************************/
   LCD_SegmentEnable(2, false);
   LCD_SegmentEnable(3, false);
   LCD_SegmentEnable(9, false);

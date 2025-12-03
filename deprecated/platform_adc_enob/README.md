@@ -1,6 +1,6 @@
-## Deprecation Notice
-This code has been deprecated. It has been provided for historical reference only and should not be used. This code will not be maintained. This code is subject to the quality disclaimer at the point in time prior to deprecation and superseded by this deprecation notice.
+# Deprecation Notice
 
+This code has been deprecated. It has been provided for historical reference only and should not be used. This code will not be maintained. This code is subject to the quality disclaimer at the point in time prior to deprecation and superseded by this deprecation notice.
 
 # EFR32BG22 IADC 16-bit ENOB #
 
@@ -26,9 +26,9 @@ The BGM board has precision voltage reference and ADC to evaluate the ADC perfor
 
 **Peripherals used**: IADC, GPIO, I2C, USART, EMU, CMU
 
-## Gecko SDK Suite version ##
+## SDK version ##
 
-- **Gecko SDK Suite** v4.0.1
+- GSDK v4.5.0
 - MCU v6.2.1.0
 - Bluetooth v3.3.1
 

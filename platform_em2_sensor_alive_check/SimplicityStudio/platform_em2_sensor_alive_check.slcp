@@ -1,0 +1,42 @@
+project_name: platform_em2_sensor_alive_check
+package: platform
+quality: experimental
+label: Platform - Sensor Alive Check in Low Power EM2 Mode
+description: >
+  This project configures several peripherals to work together in low power EM2 mode, implement sensor activity auto detect.
+category: Example|Platform
+filter:
+  - name: "Device Type"
+    value: ["SoC"]
+  - name: "MCU"
+    value: ["32-bit MCU"]
+  - name: "Project Difficulty"
+    value: ["Beginner"]
+source:
+  - path: ../src/main.c
+  - path: ../src/app.c
+include:
+  - path: ../inc
+    file_list:
+    - path: app.h
+component:
+  - id: sl_system
+  - id: device_init
+  - id: emlib_letimer
+  - id: emlib_prs
+  - id: emlib_wdog
+define:
+  - name: DEBUG_EFM
+readme:
+  - path: ../README.md
+other_file:
+  - path: ../image/Architecture.png
+    directory: "image"
+  - path: ../image/EM2WorkingTimer.png
+    directory: "image"
+  - path: ../image/TestResult.png
+    directory: "image"
+  - path: ../image/Test.gif
+    directory: "image"
+ui_hints:
+  highlight: README.md

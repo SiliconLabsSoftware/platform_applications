@@ -1,12 +1,12 @@
 # Platform - QI PRx communication protocol #
 
 ![Type badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_qi_rx_base_common.json&label=Type&query=type&color=green)
-![Technology badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_qi_rx_base_common.json&label=Technology&query=technology&color=green)
-![License badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_qi_rx_base_common.json&label=License&query=license&color=green)
-![SDK badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_qi_rx_base_common.json&label=SDK&query=sdk&color=green)
-![Build badge](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_qi_rx_base_build_status.json)
-![Flash badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_qi_rx_base_common.json&label=Flash&query=flash&color=blue)
-![RAM badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_qi_rx_base_common.json&label=RAM&query=ram&color=blue)
+![Technology badge](https://img.shields.io/badge/Technology-Platform-green)
+![License badge](https://img.shields.io/badge/License-Zlib-green)
+![SDK badge](https://img.shields.io/badge/SDK-v4.5.0-green)
+![Build badge](https://img.shields.io/badge/Build-passing-green)
+![Flash badge](https://img.shields.io/badge/Flash-18.3%20KB-blue)
+![RAM badge](https://img.shields.io/badge/RAM-9.15%20KB-blue)
 
 ## Summary ##
 
@@ -19,9 +19,9 @@ A special second project is available for implementation in e.g. a bootloader, w
 
 *Please note this project does not implement FSK decoding to receive PTx messages*
 
-## Gecko SDK version ##
+## SDK version ##
 
-- v4.4.3
+- [Gecko SDK v4.5.0](https://github.com/SiliconLabs/gecko_sdk/releases/tag/v4.5.0)
 
 ## Hardware Required ##
 
@@ -47,7 +47,7 @@ To test this application, you can either create a project based on an example pr
 
 3. Click the **Create** button on the **Platform - QI PRx communication protocol** example. Example project creation dialog pops up -> click **Finish** and Project should be generated.
 
-    ![Create_example](image/create_example_1.png)
+   ![Create_example](image/create_example_1.png)
 
 4. Build and flash this example to the board.
 
@@ -65,7 +65,8 @@ If you need a very fast response (e.g. after POR), like in a bootloader, the `Pl
 3. Open the .slcp file. Select the SOFTWARE COMPONENTS tab and install the software components:
 
     - Uninstall the components:
-          - [Services] → [Device Initialization] → [Automatic Device Initialization]
+        - [Services] → [Device Initialization] → [Automatic Device Initialization]
+
     - Install the components:
         - [Services] → [Device Initialization] → [Peripheral] → [Clocks]
         - [Services] → [Device Initialization] → [Peripheral] → [Digital Phase-Locked Loop (DPLL)]

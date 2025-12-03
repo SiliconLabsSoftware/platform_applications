@@ -1,0 +1,32 @@
+project_name: platform_cryotimer
+label: Platform - Cryotimer
+description: |
+  This project generates a 0.5 Hz square wave on PA11 while in EM3 and wakes on an interrupt at 977 mHz to toggle PA11 which is connected to the EXTCOMIN pin of the display on the GG11 STK.
+category: Example|Platform
+package: platform
+quality: experimental
+filter:
+  - name: Device Type
+    value: [SoC]
+  - name: MCU
+    value: [32-bit MCU]
+  - name: Project Difficulty
+    value: [Beginner]
+readme:
+  - path: ../README.md
+source:
+  - path: ../src/app.c
+  - path: ../src/main.c
+include:
+  - path: ../inc
+    file_list:
+      - path: app.h
+component:
+  - id: device_init
+  - id: emlib_cryotimer
+  - id: sl_system
+define:
+  - name: DEBUG_EFM
+ui_hints:
+  highlight: README.md
+

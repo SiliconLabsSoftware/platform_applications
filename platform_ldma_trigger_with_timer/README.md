@@ -1,19 +1,20 @@
 # Platform - LDMA trigger with TIMER #
+
 ![Type badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_ldma_trigger_with_timer_common.json&label=Type&query=type&color=green)
-![Technology badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_ldma_trigger_with_timer_common.json&label=Technology&query=technology&color=green)
-![License badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_ldma_trigger_with_timer_common.json&label=License&query=license&color=green)
-![SDK badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_ldma_trigger_with_timer_common.json&label=SDK&query=sdk&color=green)
-![Build badge](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_ldma_trigger_with_timer_build_status.json)
-![Flash badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_ldma_trigger_with_timer_common.json&label=Flash&query=flash&color=blue)
-![RAM badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_ldma_trigger_with_timer_common.json&label=RAM&query=ram&color=blue)
+![Technology badge](https://img.shields.io/badge/Technology-Platform-green)
+![License badge](https://img.shields.io/badge/License-Zlib-green)
+![SDK badge](https://img.shields.io/badge/SDK-v4.5.0-green)
+![Build badge](https://img.shields.io/badge/Build-passing-green)
+![Flash badge](https://img.shields.io/badge/Flash-12.79%20KB-blue)
+![RAM badge](https://img.shields.io/badge/RAM-4.08%20KB-blue)
 
 ## Overview ##
 
 This project demonstrates the usage of both the LDMA and VDAC peripherals to generate a fixed frequency sine wave using TIMER0 as a trigger source. For storing the values of the sine wave, the LDMA peripheral is used, which can either be triggered via PRS or directly by the TIMER0_CC0.
 
-## Gecko SDK version ##
+## SDK version ##
 
-- GSDK v4.4.4
+- [Gecko SDK v4.5.0](https://github.com/SiliconLabs/gecko_sdk/releases/tag/v4.5.0)
 
 ## Hardware Required ##
 
@@ -23,7 +24,7 @@ This project demonstrates the usage of both the LDMA and VDAC peripherals to gen
 
 **Note:**
 
-   - Tested boards for working with this example: 
+- Tested boards for working with this example:
 
       | Board ID | Description  |
       | ---------------------- | ------ |
@@ -48,7 +49,7 @@ To test this application, you can either create a project based on an example pr
 
 3. Click the **Create** button on **Platform - LDMA trigger with TIMER** example. Example project creation dialog pops up -> click Create and Finish and the project should be generated.
 
-![create_project](image/create_project.png)
+   ![create_project](image/create_project.png)
 
 4. Build and flash this example to the board.
 
@@ -95,6 +96,7 @@ For an aditional debug option, the application defines the `TIMER_DEBUG` macro, 
 ![generated](image/generated.png)
 
 ### Pin Routing ###
+
 | Output pin | BRD4210a | BRD4186c | BRD4270b | BRD4400C |
 | --- | --- | --- | --- | --- |
 | VDAC0_CH0_MAIN_OUT | PB0 | PB0 | PB0 | PB0 |

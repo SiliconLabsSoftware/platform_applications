@@ -1,4 +1,5 @@
 ## Deprecation Notice
+
 This code has been deprecated. It has been provided for historical reference only and should not be used. This code will not be maintained. This code is subject to the quality disclaimer at the point in time prior to deprecation and superseded by this deprecation notice.
 
 # TensorFlow Micro Speech
@@ -16,7 +17,7 @@ This project is a Simplicity Studio project file for the tensorflow micro_speech
 
 The Simplicity Studio project allows for testing and development of the micro_speech demo within the Studio development environment, as well as allowing for use of the Studio debugger, energy profiler, and flash programming utility.
 
-## Gecko SDK version
+## SDK version
 
 v3.0 or later
 

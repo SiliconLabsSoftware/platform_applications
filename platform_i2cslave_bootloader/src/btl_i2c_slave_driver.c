@@ -1,9 +1,9 @@
 /***************************************************************************//**
- * @file
+ * @file btl_i2c_slave_driver.c
  * @brief I2C slave mode driver
  *******************************************************************************
  * # License
- * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2025 Silicon Laboratories Inc. www.silabs.com</b>
  *******************************************************************************
  *
  * SPDX-License-Identifier: Zlib
@@ -110,7 +110,7 @@ static void initializeCMU()
 static void initializeGPIO()
 {
   /* Output value must be set to 1 to not drive lines low. Set
-  *    SCL first, to ensure it is high before changing SDA. */
+   *    SCL first, to ensure it is high before changing SDA. */
   GPIO_PinModeSet(BTL_DRIVER_SCL_PORT, BTL_DRIVER_SCL_PIN,
                   gpioModeWiredAndPullUp, 1);
   GPIO_PinModeSet(BTL_DRIVER_SDA_PORT, BTL_DRIVER_SDA_PIN,

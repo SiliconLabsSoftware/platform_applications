@@ -1,18 +1,37 @@
 /***************************************************************************//**
- * @file
- * @brief Top level application functions
+ * @file app.c
+ * @brief Core application logic.
  *******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2025 Silicon Laboratories Inc. www.silabs.com</b>
  *******************************************************************************
  *
- * The licensor of this software is Silicon Laboratories Inc. Your use of this
- * software is governed by the terms of Silicon Labs Master Software License
- * Agreement (MSLA) available at
- * www.silabs.com/about-us/legal/master-software-license-agreement. This
- * software is distributed to you in Source Code format and is governed by the
- * sections of the MSLA applicable to Source Code.
+ * SPDX-License-Identifier: Zlib
  *
+ * The licensor of this software is Silicon Laboratories Inc.
+ *
+ * This software is provided 'as-is', without any express or implied
+ * warranty. In no event will the authors be held liable for any damages
+ * arising from the use of this software.
+ *
+ * Permission is granted to anyone to use this software for any purpose,
+ * including commercial applications, and to alter it and redistribute it
+ * freely, subject to the following restrictions:
+ *
+ * 1. The origin of this software must not be misrepresented; you must not
+ *    claim that you wrote the original software. If you use this software
+ *    in a product, an acknowledgment in the product documentation would be
+ *    appreciated but is not required.
+ * 2. Altered source versions must be plainly marked as such, and must not be
+ *    misrepresented as being the original software.
+ * 3. This notice may not be removed or altered from any source distribution.
+ *
+ *******************************************************************************
+ * # Experimental Quality
+ * This code has not been formally tested and is provided as-is. It is not
+ * suitable for production environments. In addition, this code will not be
+ * maintained and there may be no bug maintenance planned for these resources.
+ * Silicon Labs may update projects from time to time.
  ******************************************************************************/
 
 #include <stdio.h>
@@ -51,7 +70,7 @@
   | I2C_IEN_NACK |                                                  \
   I2C_IEN_RXDATAV | I2C_IEN_MSTOP
 
-#define I2C_ERROR_INTERRUPT             I2C_IEN_SDAERR | I2C_IEN_SCLERR\
+#define I2C_ERROR_INTERRUPT             I2C_IEN_SDAERR | I2C_IEN_SCLERR \
   | I2C_IEN_CLERR | I2C_IEN_BUSERR
 
 #define I2C_BUFFER_SIZE                 10
@@ -143,7 +162,7 @@ void I2C0_IRQHandler(void)
 
   if (flags & I2C_IF_NACK) {
     // transmission NACKed, stop transmission
-    I2C0 -> CMD_SET = I2C_CMD_STOP;
+    I2C0->CMD_SET = I2C_CMD_STOP;
     return;
   }
 
@@ -155,10 +174,10 @@ void I2C0_IRQHandler(void)
       if (flags & I2C_IF_START) {
         if ((i2c_transfer == I2C_TRANSFER_READ) & targetAddressSent) {
           // target address sent already, issue a read request
-          I2C0 -> TXDATA = (I2C_FOLLOWER_ADDRESS | I2C_RNOTW_BIT);
+          I2C0->TXDATA = (I2C_FOLLOWER_ADDRESS | I2C_RNOTW_BIT);
         } else {
-            // write target address and write request
-            I2C0 -> TXDATA = I2C_FOLLOWER_ADDRESS;
+          // write target address and write request
+          I2C0->TXDATA = I2C_FOLLOWER_ADDRESS;
         }
         i2c_state = I2C_START_STATE;
       }
@@ -169,20 +188,21 @@ void I2C0_IRQHandler(void)
       if (flags & I2C_IF_ACK) {
         i2c_state = I2C_ACK_TRANSMISSION_STATE;
         // Address recognized, check RXDATAV if read
-        if ((i2c_transfer == I2C_TRANSFER_READ) & (flags & I2C_IF_RXDATAV) & targetAddressSent) {
+        if ((i2c_transfer
+             == I2C_TRANSFER_READ) & (flags & I2C_IF_RXDATAV)
+            & targetAddressSent) {
           // data valid, read from RXDATA
-          receiveBuffer[receiveIndex++] = I2C0 -> RXDATA;
+          receiveBuffer[receiveIndex++] = I2C0->RXDATA;
           I2C_IntClear(I2C0, I2C_IF_RXDATAV);
           if (receiveIndex >= I2C_BUFFER_SIZE) {
-                // end transmission
-                I2C0 -> CMD_SET = I2C_CMD_STOP | I2C_CMD_NACK;
+            // end transmission
+            I2C0->CMD_SET = I2C_CMD_STOP | I2C_CMD_NACK;
           } else {
-                 I2C0 -> CMD_SET = I2C_CMD_ACK;
+            I2C0->CMD_SET = I2C_CMD_ACK;
           }
-        }
-        else if((i2c_transfer == I2C_TRANSFER_WRITE) | !targetAddressSent) {
-            // first send the offset to write to
-            I2C0 -> TXDATA = (uint8_t)I2C_WRITE_TARGET;
+        } else if ((i2c_transfer == I2C_TRANSFER_WRITE) | !targetAddressSent) {
+          // first send the offset to write to
+          I2C0->TXDATA = (uint8_t)I2C_WRITE_TARGET;
         }
       }
       break;
@@ -192,33 +212,33 @@ void I2C0_IRQHandler(void)
       // if write, should expect an ACK
       // Reset targetAddress Sent
       if (i2c_transfer == I2C_TRANSFER_READ) {
-        if(flags & I2C_IF_ACK) {
-            // This is an Ack for setting the target address
-            targetAddressSent = true;
-            // start the read
-            i2c_state = I2C_IDLE_STATE;
-            I2C0 -> CMD_SET = I2C_CMD_START;
+        if (flags & I2C_IF_ACK) {
+          // This is an Ack for setting the target address
+          targetAddressSent = true;
+          // start the read
+          i2c_state = I2C_IDLE_STATE;
+          I2C0->CMD_SET = I2C_CMD_START;
         }
         if (flags & I2C_IF_RXDATAV) {
-            targetAddressSent = false;
-            receiveBuffer[receiveIndex++] = (uint8_t)I2C0 -> RXDATA;
-            if (receiveIndex >= I2C_BUFFER_SIZE) {
-                // stop command issued
-                I2C0 -> CMD_SET = I2C_CMD_STOP | I2C_CMD_NACK;
-            } else {
-                I2C0 -> CMD_SET = I2C_CMD_ACK;
-            }
-            I2C_IntClear(I2C0, I2C_IF_RXDATAV);
+          targetAddressSent = false;
+          receiveBuffer[receiveIndex++] = (uint8_t)I2C0->RXDATA;
+          if (receiveIndex >= I2C_BUFFER_SIZE) {
+            // stop command issued
+            I2C0->CMD_SET = I2C_CMD_STOP | I2C_CMD_NACK;
+          } else {
+            I2C0->CMD_SET = I2C_CMD_ACK;
+          }
+          I2C_IntClear(I2C0, I2C_IF_RXDATAV);
         }
       } else {
         // if write, should expect an ACK from the secondary device
         if (flags & I2C_IF_ACK) {
-            // continue transmission unless stop stage reached
-            I2C0 -> TXDATA = (uint8_t)transmitBuffer[transmitIndex++];
-            // no more data left to send, stop ongoing transfer
-            if (transmitIndex >= I2C_BUFFER_SIZE) {
-                I2C0 -> CMD_SET = I2C_CMD_STOP;
-            }
+          // continue transmission unless stop stage reached
+          I2C0->TXDATA = (uint8_t)transmitBuffer[transmitIndex++];
+          // no more data left to send, stop ongoing transfer
+          if (transmitIndex >= I2C_BUFFER_SIZE) {
+            I2C0->CMD_SET = I2C_CMD_STOP;
+          }
         }
       }
       break;
@@ -260,11 +280,11 @@ void initI2C(void)
 
   // Route I2C pins to GPIO
   GPIO->I2CROUTE[0].SCLROUTE = (I2C_SCL_PORT << _GPIO_I2C_SCLROUTE_PORT_SHIFT
-                             | (I2C_SCL_PIN <<
-                                 _GPIO_I2C_SCLROUTE_PIN_SHIFT));
+                                | (I2C_SCL_PIN <<
+                                   _GPIO_I2C_SCLROUTE_PIN_SHIFT));
   GPIO->I2CROUTE[0].SDAROUTE = (I2C_SDA_PORT << _GPIO_I2C_SDAROUTE_PORT_SHIFT
-                             | (I2C_SDA_PIN  <<
-                                 _GPIO_I2C_SDAROUTE_PIN_SHIFT));
+                                | (I2C_SDA_PIN  <<
+                                   _GPIO_I2C_SDAROUTE_PIN_SHIFT));
   GPIO->I2CROUTE[0].ROUTEEN = GPIO_I2C_ROUTEEN_SCLPEN | GPIO_I2C_ROUTEEN_SDAPEN;
 
   // Initialize the I2C
@@ -272,7 +292,6 @@ void initI2C(void)
 
   // Set the status flags and index
   i2c_startTransfer = false;
-
 }
 
 /***************************************************************************//**
@@ -290,6 +309,7 @@ void i2cTransferReset(uint32_t transferType)
   targetAddressSent = false;
 
   I2C0->CMD_SET = I2C_CMD_ABORT;
+
   /* Ensure buffers are empty. */
   I2C0->CMD = I2C_CMD_CLEARPC | I2C_CMD_CLEARTX;
 
@@ -301,7 +321,7 @@ void i2cTransferReset(uint32_t transferType)
 #if defined(_SILICON_LABS_32B_SERIES_2)
 
   /* SW needs to clear RXDATAV IF on Series 2 devices.
-     Flag is kept high by HW if buffer is not empty. */
+   *    Flag is kept high by HW if buffer is not empty. */
   I2C_IntClear(I2C0, I2C_IF_RXDATAV);
 #endif
 
@@ -312,10 +332,10 @@ void i2cTransferReset(uint32_t transferType)
   NVIC_ClearPendingIRQ(I2C0_IRQn);
   NVIC_EnableIRQ(I2C0_IRQn);
 
-  if(transferType == I2C_TRANSFER_WRITE){
+  if (transferType == I2C_TRANSFER_WRITE) {
     // populate transmit buffer
     for (int i = 0; i < I2C_BUFFER_SIZE; i++) {
-      transmitBuffer[i] = receiveBuffer[i]+1;
+      transmitBuffer[i] = receiveBuffer[i] + 1;
     }
   }
 

@@ -1,20 +1,21 @@
 # Platform - Segment LCD with LC Sensor
 
 ![Type badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_segmentLCD_lcsense_common.json&label=Type&query=type&color=green)
-![Technology badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_segmentLCD_lcsense_common.json&label=Technology&query=technology&color=green)
-![License badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_segmentLCD_lcsense_common.json&label=License&query=license&color=green)
-![SDK badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_segmentLCD_lcsense_common.json&label=SDK&query=sdk&color=green)
-![Build badge](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_segmentLCD_lcsense_build_status.json)
-![Flash badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_segmentLCD_lcsense_common.json&label=Flash&query=flash&color=blue)
-![RAM badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_segmentLCD_lcsense_common.json&label=RAM&query=ram&color=blue)
+![Technology badge](https://img.shields.io/badge/Technology-Platform-green)
+![License badge](https://img.shields.io/badge/License-Zlib-green)
+![SDK badge](https://img.shields.io/badge/SDK-v4.5.0-green)
+![Build badge](https://img.shields.io/badge/Build-passing-green)
+![Flash badge](https://img.shields.io/badge/Flash-19.36%20KB-blue)
+![RAM badge](https://img.shields.io/badge/RAM-4.32%20KB-blue)
+
 ## Summary
 
 This project shows how to use the LESENSE peripheral to detect metal near the LCSENSE tank circuit, then display the detection via the segment LCD.
     ![overview](image/overview.png)
 
-## Gecko SDK version
+## SDK version
 
-- v4.4.3
+- [Gecko SDK v4.5.0](https://github.com/SiliconLabs/gecko_sdk/releases/tag/v4.5.0)
 
 ## Hardware Required
 
@@ -37,7 +38,7 @@ To test this application, you can either create a project based on an example pr
 
 3. Click the **Create** button on the **Platform - Segment LCD with LC Sensor** example. Example project creation dialog pops up -> click **Finish** and Project should be generated.
 
-    ![Create_example](image/create_example.png)
+   ![Create_example](image/create_example.png)
 
 4. Build and flash this example to the board.
 
@@ -74,4 +75,4 @@ To test this application, follow the below steps:
 5. Press the button0, observe the segment LCD display reset to 0
 6. Repeat STEP3 five times and observe the segment LCD increment by 1
 
-![demo](image/metal_detect.gif)
+   ![demo](image/metal_detect.gif)

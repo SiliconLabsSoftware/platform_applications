@@ -8,6 +8,10 @@
 
 The projects provided in this repository contain the hard-coded data collection firmware for IMU (3-axis accelerometer and 3-axis gyroscope) and audio (microphone) data acquisition using Silicon Lab's Thunderboard Sense 2 development kit, targeting SensiML's data collection tool called SensiML Data Studio (SDS). Both project implementations utilize SDS's lightweight, simple, data streaming protocol to stream live data from the device under test to the data acquisition software.
 
+## SDK version ##
+
+- [Gecko SDK v4.5.0](https://github.com/SiliconLabs/gecko_sdk/releases/tag/v4.5.0)
+
 ## Hardware Required ##
 
 - Thunderboard Sense 2 Development Kit - SLTB004A
@@ -28,6 +32,8 @@ The projects provided in this repository contain the hard-coded data collection 
 | 2 | Platform - SensiML IMU Data Capture with BLE | [Click here](./SensiML_IMU_BLE/) |
 | 3 | Platform - SensiML Microphone Data Capture | [Click here](./SensiML_Microphone/) |
 
+## Setup ##
+
 ### SensiML Setup ###
 
 - Create a new project, and in the project explorer view, switch modes to "Capture Live Sensor Data..."
@@ -47,3 +53,7 @@ The projects provided in this repository contain the hard-coded data collection 
 - Use the "Scan" button to locate the appropriate serial port. Once configured, use the Connect/Disconnect button to begin streaming data.
 
 For more detailed information regarding the SensiML DCL tool, please visit SensiML's Toolkit Documentation located here - <https://sensiml.com/documentation/index.php>
+
+## How It Works ##
+
+Check the README files in each subdirectory.

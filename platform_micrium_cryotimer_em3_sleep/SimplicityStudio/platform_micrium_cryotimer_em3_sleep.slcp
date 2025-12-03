@@ -1,0 +1,39 @@
+project_name: platform_micrium_cryotimer_em3_sleep
+label: platform_micrium_cryotimer_em3_sleep
+description: |
+  This project allows an MCU running Micrium to enter EM3 sleep using the cryotimer.
+category: Example|Platform
+package: platform
+quality: experimental
+filter:
+  - name: Device Type
+    value: [SoC]
+  - name: MCU
+    value: [32-bit MCU]
+  - name: Project Difficulty
+    value: [Beginner]
+source:
+  - path: ../src/app.c
+  - path: ../src/main.c
+  - path: ../src/main_task.c
+  - path: ../src/tick_rtcc.c
+include:
+  - path: ../inc
+    file_list:
+    - path: app.h
+    - path: main_task.h
+    - path: tick_rtcc.h
+component:
+  - id: device_init
+  - id: emlib_cryotimer
+  - id: micriumos_kernel
+  - instance: [led0]
+    id: simple_led
+  - id: sl_system
+  - id: sleeptimer
+readme:
+  - path: ../README.md
+define:
+  - name: DEBUG_EFM
+ui_hints:
+  highlight: README.md

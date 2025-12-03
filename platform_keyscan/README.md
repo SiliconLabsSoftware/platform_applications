@@ -1,13 +1,13 @@
-
 # Platform - KeyScan #
+
 ![Type badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_keyscan_common.json&label=Type&query=type&color=green)
-![Technology badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_keyscan_common.json&label=Technology&query=technology&color=green)
-![License badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_keyscan_common.json&label=License&query=license&color=green)
-![SDK badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_keyscan_common.json&label=SDK&query=sdk&color=green)
+![Technology badge](https://img.shields.io/badge/Technology-Platform-green)
+![License badge](https://img.shields.io/badge/License-Zlib-green)
+![SDK badge](https://img.shields.io/badge/SDK-v4.5.0-green)
 [![Required board](https://img.shields.io/badge/Adafruit-3%20%204%20Matrix%20Keypad-green)](https://www.adafruit.com/product/3845)
-![Build badge](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_keyscan_build_status.json)
-![Flash badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_keyscan_common.json&label=Flash&query=flash&color=blue)
-![RAM badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_keyscan_common.json&label=RAM&query=ram&color=blue)
+![Build badge](https://img.shields.io/badge/Build-passing-green)
+![Flash badge](https://img.shields.io/badge/Flash-22.03%20KB-blue)
+![RAM badge](https://img.shields.io/badge/RAM-6.44%20KB-blue)
 
 ## Overview ##
 
@@ -15,16 +15,17 @@ This project demonstrates the use of the KEYSCAN driver. The MCU operates in a l
 
 ## SDK version ##
 
-- GSDK v4.4.4
+- [Gecko SDK v4.5.0](https://github.com/SiliconLabs/gecko_sdk/releases/tag/v4.5.0)
 
 ## Hardware Required ##
+
 - [Si-MB4002A Wireless Pro Kit Mainboard](https://www.silabs.com/development-tools/wireless/wireless-pro-kit-mainboard?tab=overview)
 - [EFR32xG24 Wireless 2.4 GHz +10 dBm Radio Board](https://www.silabs.com/development-tools/wireless/xg24-rb4186c-efr32xg24-wireless-gecko-radio-board?tab=overview)
 - [3 * 4 Matrix Keypad](https://www.adafruit.com/product/3845)
 
 **Note:**
 
-   - Tested boards for working with this example:
+- Tested boards for working with this example:
 
       | Board ID | Description  |
       | ---------------------- | ------ |
@@ -38,7 +39,8 @@ Connect the board via the connector cable to your PC to flash the example.
 
 Connect the keyboard to the board using the Expander header.
 
-### Connection: ###
+### Connection ###
+
 ![connections](image/keyboard_connection.png)
 
 | Pin Name | BRD4210A | BRD4186C| BRD4400C |
@@ -63,7 +65,7 @@ To test the application, you can either create a project based on an example or 
 
 3. Click the **Create** button on **Platform - KeyScan** example. Example project creation dialog pops up -> click Create and Finish and the project should be generated.
 
-![create_project](image/create_app.png)
+   ![create_project](image/create_app.png)
 
 4. Build and flash this example to the board.
 
@@ -90,18 +92,21 @@ To test the application, you can either create a project based on an example or 
     - [Platform] → [Board Drivers] → [Memory LCD] → [Display Driver] → [Monochrome Sharp Memory LCD]
 
     - [Platform] → [Board Drivers] → [Memory LCD] → [Peripheral Driver] → [Memory LCD with usart SPI driver]
-    
+
     - [Services] → [Power Manager] → [Power Manager]
 
     - [Services] → [Power Manager] → [Power Manager: Deepsleep]
 
 4. Configure the Keyscan with the proper pin settings
-- [Platform] → [Driver] → [KeyScan] → [Keyscan]
 
-    ![keyscan](image/keyscan_config.png)
-6. Build and flash the project to your board.
+    - [Platform] → [Driver] → [KeyScan] → [Keyscan]
+
+        ![keyscan](image/keyscan_config.png)
+
+5. Build and flash the project to your board.
 
 ## How It Works ##
+
 The MCU begins by initializing the necessary peripherals and displaying a welcome screen on the Wireless Pro Kit's LCD, signalling that it is ready for use. If no button is pressed, the unit enters EM2 mode to save power. When a key is pressed, the Keyscan driver detects the event and wakes the device from sleep. The driver identifies the key pressed and its value is displayed on the Wireless Pro Kit's LCD screen, providing immediate feedback to the user. After processing the button press and updating the display, the device returns to sleep mode, ready to efficiently process the next button press.
 
 ![working](image/working.gif)

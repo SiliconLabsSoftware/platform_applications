@@ -1,0 +1,47 @@
+project_name: platform_timestamped_adc_em2
+label: Platform - Timestamped ADC in EM2
+description: |
+  This example project shows an empty configuration that can be used as a starting point to add components and functionality.
+category: Example|Platform
+package: platform
+quality: experimental
+filter:
+  - name: Device Type
+    value: [SoC]
+  - name: MCU
+    value: [32-bit MCU]
+  - name: Project Difficulty
+    value: [Beginner]
+readme:
+  - path: ../README.md
+source:
+  - path: ../src/brd4179b/app.c
+    condition: [brd4179b]
+  - path: ../src/brd4180a/app.c
+    condition: [brd4180a]
+  - path: ../src/brd4181a/app.c
+    condition: [brd4181a]
+  - path: ../src/main.c
+include:
+  - path: ../inc
+    file_list:
+      - path: app.h
+      - path: sl_efp_instance_config_brd4179b.h
+        condition: [brd4179b]
+      - path: sl_efpdrv_calc.h
+        condition: [brd4179b]
+component:
+  - id: device_init
+  - id: emlib_iadc
+  - id: emlib_ldma
+  - id: emlib_prs
+  - id: emlib_rtcc
+  - id: sl_system
+  - id: efp_driver
+    condition: [brd4179b]
+    instance: [efp0]
+define:
+  - name: DEBUG_EFM
+ui_hints:
+  highlight: README.md
+

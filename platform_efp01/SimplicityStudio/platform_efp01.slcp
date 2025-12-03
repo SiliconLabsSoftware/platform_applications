@@ -1,0 +1,39 @@
+project_name: platform_efp01_feature_demo
+label: platform_efp01_feature_demo
+description: |
+  This project demonstrates use of the Silicon Labs EFP01 device, a power management IC (PMIC) that can significantly improve the power efficiency of a system when used in conjunction with an EFR32 Wireless MCU.
+category: Example|Platform
+package: platform
+quality: experimental
+filter:
+  - name: Device Type
+    value: [SoC]
+  - name: MCU
+    value: [32-bit MCU]
+  - name: Project Difficulty
+    value: [Beginner]
+source:
+  - path: ../src/app.c
+  - path: ../src/main.c
+include:
+  - path: ../inc
+    file_list:
+    - path: app.h
+    - path: sl_efp_instance_config_brd4179b.h
+    - path: sl_efpdrv_calc.h
+component:
+  - id: device_init
+  - instance: [efp0]
+    id: efp_driver
+  - id: sl_system
+  - id: emlib_i2c
+  - id: emlib_rmu
+define:
+- name: DEBUG_EFM
+readme:
+  - path: ../README.md
+other_file:
+  - path: ../image/BRD4179B_TPs.png
+    directory: image
+ui_hints:
+  highlight: README.md

@@ -1,0 +1,33 @@
+project_name: platform_vdac_calibration
+label: Platform - VDAC Calibration
+description: |
+  This project demonstrates how to use the internal ADC to calibrate the DAC.
+category: Example|Platform
+package: platform
+quality: experimental
+filter:
+  - name: Device Type
+    value: [SoC]
+  - name: MCU
+    value: [32-bit MCU]
+  - name: Project Difficulty
+    value: [Beginner]
+readme:
+  - path: ../README.md
+source:
+  - path: ../src/app.c
+  - path: ../src/main.c
+include:
+  - path: ../inc
+    file_list:
+      - path: app.h
+component:
+  - id: device_init
+  - id: emlib_adc
+  - id: emlib_vdac
+  - id: sl_system
+define:
+  - name: DEBUG_EFM
+ui_hints:
+  highlight: README.md
+

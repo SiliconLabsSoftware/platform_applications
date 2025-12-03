@@ -1,11 +1,12 @@
-# Platform - EFR32xG21 DMA SPI Throughput #
+# Platform - DMA SPI Throughput #
+
 ![Type badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/ldma_common.json&label=Type&query=type&color=green)
-![Technology badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/ldma_common.json&label=Technology&query=technology&color=green)
-![License badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/ldma_common.json&label=License&query=license&color=green)
-![SDK badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/ldma_common.json&label=SDK&query=sdk&color=green)
-![Build badge](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/ldma_build_status.json)
-![Flash badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/ldma_common.json&label=Flash&query=flash&color=blue)
-![RAM badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/ldma_common.json&label=RAM&query=ram&color=blue)
+![Technology badge](https://img.shields.io/badge/Technology-Platform-green)
+![License badge](https://img.shields.io/badge/License-Zlib-green)
+![SDK badge](https://img.shields.io/badge/SDK-v4.5.0-green)
+![Build badge](https://img.shields.io/badge/Build-passing-green)
+![Flash badge](https://img.shields.io/badge/Flash-18.01%20KB-blue)
+![RAM badge](https://img.shields.io/badge/RAM-6.12%20KB-blue)
 
 ## Overview ##
 
@@ -15,9 +16,9 @@ Because this code benchmarks read performance, there is no need to connect an ac
 
 Modules used: CMU, EMU, LDMA, GPIO, Sleep Timer, USART0 (for VCOM), and USART2 (SPI flash).
 
-## Gecko SDK Suite version ##
+## SDK version ##
 
-- GSDK v4.4.3
+- [Gecko SDK v4.5.0](https://github.com/SiliconLabs/gecko_sdk/releases/tag/v4.5.0)
 
 ## Hardware Required ##
 
@@ -38,7 +39,8 @@ To test this application, you can either create a project based on an example pr
 2. From the Launcher Home, add your product name to My Products, click on it, and click on the **EXAMPLE PROJECTS & DEMOS** tab. Find the example project filtering by "ldma" and "throughput".
 
 3. Click the **Create** button on **Platform - EFR32xG21 LDMA SPI Throughput** example. Example project creation dialog pops up -> click Create and Finish and the project should be generated.
-![create_project](image/create_project.png)
+
+   ![create_project](image/create_project.png)
 
 4. Build and flash this example to the board.
 
@@ -57,16 +59,18 @@ To test this application, you can either create a project based on an example pr
     - Install the following components:
 
         - [Services] → [IO Stream] → [IO Stream: USART]: use default instance: vcom
-  
-        - [Application] → Utility] → [Log]
+
+        - [Application] → [Utility] → [Log]
 
         - [Services] → [Timers] → [Sleep Timer]
 
         - [Services] → [Device Initialization] → [Peripherals] → [Digital Phase-Locked Loop (DPLL)]: use default configuration or configure other clock frequencies as following picture
-        ![setup_dpll](image/setup_dpll.png)
+
+          ![setup_dpll](image/setup_dpll.png)
 
         - [Platform] → [Board] → [Board Control]: enable **Enable Virtual COM UART** as below:
-          ![board_control](image/board_control.png)    
+
+          ![board_control](image/board_control.png)
 
 4. Build and flash this example to the board.
 
@@ -99,6 +103,7 @@ The application flow is described as follows:
 
 6. The sleep timer is stopped and the counter is captured.
 
-7. The data transfer rate is calculated and displayed along with the LDMA clock frequency. 
+7. The data transfer rate is calculated and displayed along with the LDMA clock frequency.
    - You can launch Console, which is integrated into Simplicity Studio or you can use a third-party terminal tool like Tera Term to receive the data. Data is coming from the UART COM port. A screenshot of the console output is shown in the figure below.
-   ![console_log](image/console_log.png)
+
+     ![console_log](image/console_log.png)

@@ -1,96 +1,72 @@
-# ADC as a Random Number Generator Example
-![Type badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_adc_rng_common.json&label=Type&query=type&color=green)
-![Technology badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_adc_rng_common.json&label=Technology&query=technology&color=green)
-![License badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_adc_rng_common.json&label=License&query=license&color=green)
-![SDK badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_adc_rng_common.json&label=SDK&query=sdk&color=green)
-![Build badge](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_adc_rng_build_status.json)
-![Flash badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_adc_rng_common.json&label=Flash&query=flash&color=blue)
-![RAM badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_adc_rng_common.json&label=RAM&query=ram&color=blue)
+# Platform - Random Number Generator using ADC
+
+![Type badge](https://img.shields.io/badge/Type-Virtual%20Application-green)
+![Technology badge](https://img.shields.io/badge/Technology-Platform-green)
+![License badge](https://img.shields.io/badge/License-Zlib-green)
+![SDK badge](https://img.shields.io/badge/SDK-v4.5.0-green)
+![Build badge](https://img.shields.io/badge/Build-passing-green)
+![Flash badge](https://img.shields.io/badge/Flash-6.73%20KB-blue)
+![RAM badge](https://img.shields.io/badge/RAM-4.07%20KB-blue)
 
 ## Summary
-This project shows how to use the ADC as a random number generator to create a
-32-bit random number. The ADC in devices that do not have a TRNG module can be 
-used to generate random numbers. When configured correctly (more details in the
-"How the Project Works" section), the last 3 bits (LSB) of each sample will be 
-a random number. This example samples the ADC multiple times and cascades the 
-samples to generate a 32-bit random number. The ADC is used as a source of 
-entropy in this example, but the user can instead choose to employ any other 
-noisy input to increase entropy, if needed. 
 
-## Gecko SDK Version
-v2.7
+This project shows how to use the ADC as a random number generator to create a
+32-bit random number. The ADC in devices that do not have a TRNG module can be
+used to generate random numbers. When configured correctly (more details in the
+"How It Works" section), the last 3 bits (LSB) of each sample will be
+random numbers. This example samples the ADC multiple times and cascades the
+samples to generate a 32-bit random number. The ADC is used as a source of
+entropy in this example, but the user can instead choose to employ any other
+noisy input to increase entropy, if needed.
+
+## SDK version
+
+- [Gecko SDK v4.5.0](https://github.com/SiliconLabs/gecko_sdk/releases/tag/v4.5.0)
 
 ## Hardware Required
 
-* Board:  Silicon Labs EFM32PG1 Starter Kit (SLSTK3401A)
-	* Device: EFM32PG1B200F256GM48
+- Board: Silicon Labs EFM32PG1 Starter Kit (SLSTK3401A)
+  - Device: EFM32PG1B200F256GM48
+
+## Connections Required
+
+- Connect the Kit to the PC through a mini USB cable.
 
 ## Setup
-Clone the repository with this project from GitHub onto your local machine.
 
-From within the Simplicity Studio IDE, select Import -> MCU Project... from the 
-Project menu. Click the Browse button and navigate to the local repository 
-folder, then to the SimplicityStudio folder, select the .slsproj file for the 
-board, click the Next button twice, and then click Finish.
+1. Make sure that this repository is added to [Preferences > Simplicity Studio > External Repos](https://docs.silabs.com/simplicity-studio-5-users-guide/latest/ss-5-users-guide-about-the-launcher/welcome-and-device-tabs).
 
-Observe the variables "random_number" and "sample" in the Expressions window. 
-Set a breakpoint, on line #134. Random number changes value every time the ADC 
-is sampled till the code exits the loop. If no breakpoint is set, pause code 
-execution at while(1) to see the 32-bit random number in the Expressions 
-window.
+2. From the Launcher Home, add your device to My Products, click on it, and click on the **EXAMPLE PROJECTS & DEMOS** tab. Find the example project filtering by **random**.
 
-## How the Project Works
-The ADC must follow certain configuration requirements to function as a random
-number generator. This is explained in some detail below - 
+3. Click the **Create** button on the **Platform - Random Number Generator using ADC** example. The example project creation dialog pops up -> click Create and Finish and the project should be generated.
 
-The ADC must be configured in single channel mode to use differential inputs. 
-The REF bit for the ADC in the SINGLECTRL register must be set to "CONF". This 
-uses SINGLECTRLX register to configure the reference. When a non-standard 
-reference is set while initializing single conversion using the ADC, emlib sets
-the REF bit to CONF in the ADC_InitSingle() function. The ADC must be in 12-bit
-resolution mode. 
+4. Build and flash this example to the board.
 
-Separately, in the SINGLECTRLX register, the ADC reference must be set to 
-VENTROPY. This is done in the initialization section of the code. The VIN 
-attenuator is used to widen the available input range of the ADC beyond the 
-reference source. VINATT determines the VIN attenuation factor and this must be
-set to its maximum value (15) to use the ADC as a Random Number Generator. 
+## How It Works
 
-The positive and negative inputs to the ADC are configured to VSS to generate 
-entropy. This can also be changed to a noisy input if needed. When a single
-channel conversion is triggered and the sample is read, the last three bits 
-(LSB) of the sample will be a random number. If more samples are collected, a
-random number of a desired length can be generated by cascading the ADC results
-and this example shows how a 32-bit random number can be generated. 
+The ADC must follow certain configuration requirements to function as a random number generator. This is explained in some detail below.
 
-The random number is left shifted by 3 bits every time a new sample is obtained. 
-For example, if the first sample is 2, the second sample is 3, the resulting
-random number is 0x1A (011010b). This cascading runs for a total of 11 times
-(11 x 3 bits = 33 bits) to get a 32-bit long random number.
+The ADC must be configured in single channel mode to use differential inputs. The REF bit for the ADC in the SINGLECTRL register must be set to "CONF". This uses the SINGLECTRLX register to configure the reference. When a non-standard reference is set while initializing single conversion using the ADC, emlib sets the REF bit to CONF in the ADC_InitSingle() function. The ADC must be in 12-bit resolution mode.
+
+Separately, in the SINGLECTRLX register, the ADC reference must be set to VENTROPY. This is done in the initialization section of the code. The VIN attenuator is used to widen the available input range of the ADC beyond the reference source. VINATT determines the VIN attenuation factor and this must be set to its maximum value (15) to use the ADC as a Random Number Generator.
+
+The positive and negative inputs to the ADC are configured to VSS to generate entropy. This can also be changed to a noisy input if needed. When a single channel conversion is triggered and the sample is read, the last three bits (LSB) of the sample will be random numbers. If more samples are collected, a random number of a desired length can be generated by cascading the ADC results and this example shows how a 32-bit random number can be generated.
+
+The random number is left shifted by 3 bits every time a new sample is obtained. For example, if the first sample is 2, the second sample is 3, the resulting random number is 0x1A (011010b). This cascading runs for a total of 11 times (11 x 3 bits = 33 bits) to get a 32-bit long random number.
 
 The code flow is as follows:
-1. The ADC is configured to meet the requirements to function as a RNG and 
-   initialized.
-2. VIN attenuation factor is set to its max value and ADC FIFO is cleared 
-3. The ADC is sampled 11 times and only 3 bytes from every sample is taken and
-   the other bits are discarded. 
-4. These bytes are cascaded (left shifted by 3) till a 32-bit random number is 
-   generated.  
 
-## .sls Projects Used
-* pg1_adc_rng.sls
+1. The ADC is configured to meet the requirements to function as an RNG and initialized.
+2. The VIN attenuation factor is set to its max value and the ADC FIFO is cleared.
+3. The ADC is sampled 11 times and only 3 bits from every sample are taken and the other bits are discarded.
+4. These bits are cascaded (left shifted by 3) until a 32-bit random number is generated.
 
-## How to Port to Another Part
-Right click on the project and select "Properties" and navigate to "C/C++ 
-Build" then "Board/Part/SDK". Select the new board or part to target and apply 
-the changes. There may be some dependencies that need to be resolved when 
-changing the target architecture. This project can only be run on other 
-Series 1 devices. 
+## Testing
+
+1. Build the project and download it to the Wireless Starter Kit.
+2. Go into debug mode and click Run.
+3. Pause the debugger, observe the variables "random_number" and "sample" in the Expressions window.
 
 ## Special Notes
-* Use of TRNG instead of ADC to generate random numbers is strongly encouraged 
-on devices where it is available. The TRNG module is a non-deterministic 
-random number generator based on a full hardware solution. It passes the 
-NIST 800-22 and AIS31 test suites. The onus is on the user to determine if the 
-randomness of the numbers generated by the ADC meets the requirements of their 
-application.
+
+Use of TRNG instead of ADC to generate random numbers is strongly encouraged on devices where it is available. The TRNG module is a non-deterministic random number generator based on a full hardware solution. It passes the NIST 800-22 and AIS31 test suites. The onus is on the user to determine if the randomness of the numbers generated by the ADC meets the requirements of their application.

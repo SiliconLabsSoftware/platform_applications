@@ -1,19 +1,20 @@
-# Platform - IADC scan multiple external inputs #
+# Platform - IADC Scan Multiple External Inputs #
+
 ![Type badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_iadc_scan_multiple_external_input_common.json&label=Type&query=type&color=green)
-![Technology badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_iadc_scan_multiple_external_input_common.json&label=Technology&query=technology&color=green)
-![License badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_iadc_scan_multiple_external_input_common.json&label=License&query=license&color=green)
-![SDK badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_iadc_scan_multiple_external_input_common.json&label=SDK&query=sdk&color=green)
-![Build badge](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_iadc_scan_multiple_external_input_build_status.json)
-![Flash badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_iadc_scan_multiple_external_input_common.json&label=Flash&query=flash&color=blue)
-![RAM badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_iadc_scan_multiple_external_input_common.json&label=RAM&query=ram&color=blue)
+![Technology badge](https://img.shields.io/badge/Technology-Platform-green)
+![License badge](https://img.shields.io/badge/License-Zlib-green)
+![SDK badge](https://img.shields.io/badge/SDK-v4.5.0-green)
+![Build badge](https://img.shields.io/badge/Build-passing-green)
+![Flash badge](https://img.shields.io/badge/Flash-25.15%20KB-blue)
+![RAM badge](https://img.shields.io/badge/RAM-5.06%20KB-blue)
 
 ## Overview ##
 
 This project demonstrates how to measure multiple external inputs with interrupt in scan mode using the IADC. The example uses a sleeptimer to schedule the measurement and logs the results. The inputs are considered as single-ended. The results of the measurements are sent via serial communication (EUSART) and can be observed as logs by using a serial terminal.
 
-## Gecko SDK version ##
+## SDK version ##
 
-- GSDK v4.4.3
+- [Gecko SDK v4.5.0](https://github.com/SiliconLabs/gecko_sdk/releases/tag/v4.5.0)
 
 ## Hardware Required ##
 
@@ -23,7 +24,7 @@ This project demonstrates how to measure multiple external inputs with interrupt
 
 **Note:**
 
-   - Tested boards for working with this example: 
+- Tested boards for working with this example:
 
       | Board ID | Description  |
       | ---------------------- | ------ |
@@ -51,7 +52,7 @@ To test this application, you can either create a project based on an example pr
 
 3. Click the **Create** button on **Platform - IADC scan multiple external input** example. Example project creation dialog pops up -> click Create and Finish and the project should be generated.
 
-![create_project](image/create_project.png)
+   ![create_project](image/create_project.png)
 
 4. Build and flash this example to the board.
 
@@ -89,17 +90,16 @@ To test this application, you can either create a project based on an example pr
 
 The example uses the IADC to measure the voltage level of multiple external inputs in scan mode with interrupt. The inputs are considered as single-ended, thus the signals are measured with ground as the negative input. The reference voltage is 3.3V. The implementation contains the measurement of three inputs, and by adding more elements to the scan table this  number can be raised even further.
 
-The board specific pins are defined in the `app.h` file. These pins are connected to the EXP Header pins or to the Breakout Pins of the Wireless Starter Kit (WSTK). 
+The board specific pins are defined in the `app.h` file. These pins are connected to the EXP Header pins or to the Breakout Pins of the Wireless Starter Kit (WSTK).
 
 The example uses a periodic [sleeptimer](https://docs.silabs.com/gecko-platform/5.0.2/platform-service/sleeptimer) service to schedule the measurements of the IADC and the display of the logs. The default measurement period is 5 seconds, which can be changed by modifying the TIMER_TIMEOUT macro in the 'app.c' file.
 
-
-By using a serial terminal (like Tera Term) the measured values can be observed. By default the EUSART peripheral is used for the serial communication. Since there is no EUSART peripheral on the devices of the xG21 family, the USART peripheral is used there. 
+By using a serial terminal (like Tera Term) the measured values can be observed. By default the EUSART peripheral is used for the serial communication. Since there is no EUSART peripheral on the devices of the xG21 family, the USART peripheral is used there.
 
 ![log](image/log.png)
 
-
 ### Pin Routing ###
+
 | Pin Name | BRD4181b | BRD4182a | BRD4210a | BRD4186c | BRD4270b | BRD4194A | BRD4400C |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | IADC ENTRIE0 | EXP_HEADER7 (PB0) | EXP_HEADER7 (PB1) | EXP_HEADER7 (PA5) | WSTK_P19 (PB2) | EXP_HEADER10 (PB4) | EXP_HEADER7 (PB0) | EXP_HEADER11 (PB4) |

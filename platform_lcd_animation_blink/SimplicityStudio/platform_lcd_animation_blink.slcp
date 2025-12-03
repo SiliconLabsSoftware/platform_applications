@@ -1,0 +1,94 @@
+# Silicon Labs Project Configuration Tools: slcp, v0, Component selection file.
+project_name: platform_lcd_animation_blink
+label: Platform - LCD Animation Blink (FG23, PG23, PG26 & PG28)
+description: |
+  Consolidated LCD animation and blink examples for FG23 (BRD2600A), PG23 (BRD2504A), PG26 (BRD2505A), 
+  and PG28 (BRD2506A). Demonstrates how to use the LCD peripheral to perform auto animation and blink 
+  without CPU intervention, displaying specialized patterns on the segment LCD while the microcontroller 
+  remains in Low Energy Mode.
+
+category: Example|Platform
+package: platform
+quality: experimental
+
+filter:
+- name: Device Type
+  value: [SoC]
+- name: MCU
+  value: [32-bit MCU]
+- name: Project Difficulty
+  value: [Beginner]
+
+readme:
+  - path: ../README.md
+
+source:
+- path: ../src/main.c
+- path: ../src/fg23/app.c
+  condition: [brd2600a]
+- path: ../src/pg23/app.c
+  condition: [brd2504a]
+- path: ../src/pg26/app.c
+  condition: [brd2505a]
+- path: ../src/pg28/app.c
+  condition: [brd2506a]
+
+include:
+- path: ../inc/fg23
+  file_list:
+  - path: app.h
+    condition: [brd2600a]
+
+- path: ../inc/pg23
+  file_list:
+  - path: app.h
+    condition: [brd2504a]
+
+- path: ../inc/pg26
+  file_list:
+  - path: app.h
+    condition: [brd2505a]
+
+- path: ../inc/pg28
+  file_list:
+  - path: app.h
+    condition: [brd2506a]
+
+component:
+- id: device_init
+- id: sl_system
+- id: power_manager
+- id: emlib_lcd
+  condition: [brd2504a]
+- id: emlib_lcd
+  condition: [brd2506a]
+- id: emlib_lcd
+  condition: [brd2600a]
+- id: segment_lcd_driver
+  condition: [brd2505a]
+- id: udelay
+  condition: [brd2505a]
+
+define:
+- name: DEBUG_EFM
+
+other_file:
+  - path: ../image/fg23_create_example.png
+    directory: "image"
+  - path: ../image/fg23_lcd_segment_mapping.png
+    directory: "image"
+  - path: ../image/fg23_lcd_animation_demo.gif
+    directory: "image"
+  - path: ../image/pg23_lcd_segment_mapping.png
+    directory: "image"
+  - path: ../image/pg23_lcd_animation_demo.gif
+    directory: "image"
+  - path: ../image/pg26_lcd_segment_mapping.png
+    directory: "image"
+  - path: ../image/pg28_lcd_segment_mapping.png
+    directory: "image"
+
+ui_hints:
+  highlight:
+    - path: README.md
+      focus: true

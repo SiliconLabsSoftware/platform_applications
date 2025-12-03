@@ -1,21 +1,22 @@
 # Platform - IADC Tailgating #
+
 ![Type badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_iadc_tailgating_common.json&label=Type&query=type&color=green)
-![Technology badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_iadc_tailgating_common.json&label=Technology&query=technology&color=green)
-![License badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_iadc_tailgating_common.json&label=License&query=license&color=green)
-![SDK badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_iadc_tailgating_common.json&label=SDK&query=sdk&color=green)
-![Build badge](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_iadc_tailgating_build_status.json)
-![Flash badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_iadc_tailgating_common.json&label=Flash&query=flash&color=blue)
-![RAM badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_iadc_tailgating_common.json&label=RAM&query=ram&color=blue)
+![Technology badge](https://img.shields.io/badge/Technology-Platform-green)
+![License badge](https://img.shields.io/badge/License-Zlib-green)
+![SDK badge](https://img.shields.io/badge/SDK-v4.5.0-green)
+![Build badge](https://img.shields.io/badge/Build-passing-green)
+![Flash badge](https://img.shields.io/badge/Flash-35.07%20KB-blue)
+![RAM badge](https://img.shields.io/badge/RAM-5.9%20KB-blue)
 
 ## Overview ##
 
-This example project demonstrates the usage of the IADC in tailgating mode. This mode gives ultimate priority to the Scan queue. The IADC will only perform single conversions immediately after completing a scan sequence. This allows  the system to use the scan queue for high-priority conversions with tight timing requirements, and the single queue for low-priority, on-demand conversion events. 
+This example project demonstrates the usage of the IADC in tailgating mode. This mode gives ultimate priority to the Scan queue. The IADC will only perform single conversions immediately after completing a scan sequence. This allows  the system to use the scan queue for high-priority conversions with tight timing requirements, and the single queue for low-priority, on-demand conversion events.
 
 Note that this setting should only be used when scan conversions are guaranteed to trigger. If no scan sequence is triggered, any single conversion trigger will remain pending indefinitely. It is also important to note that if there is not enough time between scan conversions to service a single conversion, the next scan sequence will be delayed.
 
-## Gecko SDK version ##
+## SDK version ##
 
-- GSDK v4.4.3
+- [Gecko SDK v4.5.0](https://github.com/SiliconLabs/gecko_sdk/releases/tag/v4.5.0)
 
 ## Hardware Required ##
 
@@ -23,7 +24,7 @@ Note that this setting should only be used when scan conversions are guaranteed 
 
 **Note:**
 
-   - Tested boards for working with this example:
+- Tested boards for working with this example:
 
       | Board ID | Description  |
       | ---------------------- | ------ |
@@ -51,7 +52,7 @@ To test this application, you can either create a project based on an example or
 
 3. Click the **Create** button on **Platform - IADC Tailgating** example. Example project creation dialog pops up -> click Create and Finish and the project should be generated.
 
-![create_project](image/create_project.png)
+   ![create_project](image/create_project.png)
 
 4. Build and flash this example to the board.
 
@@ -70,11 +71,11 @@ To test this application, you can either create a project based on an example or
     3.3. Install the following components:
 
     - [Platform] → [Peripheral] → [IADC]
-    
+
     - [Platform] → [Peripheral] → [PRS]
 
     - [Services] → [IO Stream] → [Driver] → [IO Stream: USART]
-    
+
     - [Services] → [IO Stream] → [IO Stream: Retarget STDIO]
 
     - [Services] → [IO Stream] → [IO Stream: STDLIB Configuration]
@@ -84,7 +85,7 @@ To test this application, you can either create a project based on an example or
     - [Platform] → [Board] → [Board Control] → [Configure] → [Enable Virtual COM UART]
 
 5. Enable floating point print()
-    
+
     - [Floating point print() with GCC](https://community.silabs.com/s/article/floating-point-print-with-gcc?language=en_US)
 
 6. Build and flash the project to your board.
@@ -98,6 +99,7 @@ The example uses conversion tailgating which is shown in the picture below. In t
 The sampled value is printed out over the UART interface. Additionally, a PRS debug signal SCANENTRYDONE and SINGLEDONE is added to the project for test purposes.
 
 ### Pin Routing ###
+
 | Pin Name | BRD2504A | BRD4181b | BRD4182a | BRD4210a | BRD4186c | BRD4270b | BRD4194A | BRD4400C |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | IADC SCAN0 | AN 0, SMA | EXP10 (PC3) | EXP16 (PB3) | EXP16 (PC7) | EXP16 (PC7) | EXP16 (PB3) | EXP16 (PB3) | EXP16 (PC7) |
@@ -105,5 +107,3 @@ The sampled value is printed out over the UART interface. Additionally, a PRS de
 | IADC SINGLE | EXP16 (PA7)| EXP9 (PB1) | EXP9 (PB1) | EXP9 (PD2) | EXP9 (PD2) | EXP10 (PB4) | EXP9 (PB1) | EXP9 (PA14) |
 | SCANENTRYDONE | PC8 | EXP13 (PD3) | EXP13 (PD3) | EXP13 (PA7) | EXP13 (PA7) | EXP13 (PA7) | EXP13 (PA8) | EXP13 (PB5) |
 | SINGLEDONE | EXP13 (PC9) | EXP11 (PD2) | EXP11 (PD2) | EXP11 (PA6) | EXP11 (PA6) | EXP11 (PA6) | EXP10 (PC3) | EXP11 (PB4) |
-
-

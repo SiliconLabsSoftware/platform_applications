@@ -1,21 +1,22 @@
-# Platform - I2C slave bootloader #
+# Platform - I2C Slave Bootloader #
 
 ![Type badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_i2cslave_bootloader_common.json&label=Type&query=type&color=green)
-![Technology badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_i2cslave_bootloader_common.json&label=Technology&query=technology&color=green)
-![License badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_i2cslave_bootloader_common.json&label=License&query=license&color=green)
-![SDK badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_i2cslave_bootloader_common.json&label=SDK&query=sdk&color=green)
+![Technology badge](https://img.shields.io/badge/Technology-Platform-green)
+![License badge](https://img.shields.io/badge/License-Zlib-green)
+![SDK badge](https://img.shields.io/badge/SDK-v4.5.0-green)
 [![Required board](https://img.shields.io/badge/Sparkfun-Thing%20Plus%20Matter-green)](https://www.sparkfun.com/products/20270)
 [![Required board](https://img.shields.io/badge/Raspberrypi-Raspberry%20Pi%203B+-green)](https://www.raspberrypi.com/products/raspberry-pi-3-model-b-plus)
-![Build badge](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_i2cslave_bootloader_build_status.json)
-![Flash badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_i2cslave_bootloader_common.json&label=Flash&query=flash&color=blue)
-![RAM badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_i2cslave_bootloader_common.json&label=RAM&query=ram&color=blue)
+![Build badge](https://img.shields.io/badge/Build-passing-green)
+![Flash badge](https://img.shields.io/badge/Flash-13.68%20KB-blue)
+![RAM badge](https://img.shields.io/badge/RAM-5.2%20KB-blue)
+
 ## Description ##
 
 This example implement I2C slave mode bootloader. The bootloader supports firmware download, checking downloaded application and booting the downloaded software.
 
-## Gecko SDK version ##
+## SDK version ##
 
-- GSDK v4.4.3
+- [Gecko SDK v4.5.0](https://github.com/SiliconLabs/gecko_sdk/releases/tag/v4.5.0)
 
 ## Hardware Required ##
 
@@ -47,7 +48,8 @@ To test this application, you can either create a project based on a example pro
 1. From the Launcher Home, add the your hardware to My Products, click on it, and click on the **EXAMPLE PROJECTS & DEMOS** tab. Find the example project with filter "slave".
 
 2. Click **Create** button on the **Platform - I2C slave bootloader** example. Example project creation dialog pops up -> click Create and Finish and Project should be generated.
-![create_project](image/create_project.png)
+
+   ![create_project](image/create_project.png)
 
 3. Build and flash this example to the board.
 
@@ -61,37 +63,42 @@ To test this application, you can either create a project based on a example pro
 
 4. Open the .slcp file. Select the SOFTWARE COMPONENTS tab and install the software components:
 
-- Install **[Platform] > [Bootloader] > [Bootloader Core]** component.
-- Install **[Platform] > [Bootloader] > [Cyclic Redundancy Check]** component.
-- Install **[Platform] > [Bootloader] > [Image Parser]** component.
-- Install **[Platform] > [Bootloader] > [Utils] > [Debug]** component.
-- Install **[Platform] > [Bootloader] > [GPIO activation]** component.
+    - Install **[Platform] > [Bootloader] > [Bootloader Core]** component.
+    - Install **[Platform] > [Bootloader] > [Cyclic Redundancy Check]** component.
+    - Install **[Platform] > [Bootloader] > [Image Parser]** component.
+    - Install **[Platform] > [Bootloader] > [Utils] > [Debug]** component.
+    - Install **[Platform] > [Bootloader] > [GPIO activation]** component.
 
 5. In project build setting add 2 define options as image is shown bellow:
 
-- BOOTLOADER_SUPPORT_COMMUNICATION=1
-- BTL_PLUGIN_I2C_ACTIVATION=1
+    - BOOTLOADER_SUPPORT_COMMUNICATION=1
+    - BTL_PLUGIN_I2C_ACTIVATION=1
 
-  ![build_option](image/build_option.png)
+      ![build_option](image/build_option.png)
 
 ## How It Works ##
 
 1. Using i2ctester
-  ![i2ctester](image/i2ctester.png) 
 
-    i2ctester has some command line arguments. At least bus number and target’s I2C address and a command letter should be given. If the passed arguments are wrong, i2ctester shows it usage.
+   ![i2ctester](image/i2ctester.png)
+
+   i2ctester has some command line arguments. At least bus number and target’s I2C address and a command letter should be given. If the passed arguments are wrong, i2ctester shows it usage.
 
 2. Print bootloader version information
-  ![boot_version](image/boot_version.png) 
+
+   ![boot_version](image/boot_version.png)
 
 3. Download application image (GBL format)
-  ![download_gbl](image/download_gbl.png) 
+
+   ![download_gbl](image/download_gbl.png)
 
 4. Verify application
-  ![verify_application](image/verify_application.png) 
+
+   ![verify_application](image/verify_application.png)
 
 5. Boot application
-  ![booting](image/booting.png) 
+
+   ![booting](image/booting.png)
 
 ## How to Port to Another Part ##
 

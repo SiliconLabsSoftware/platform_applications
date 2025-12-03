@@ -1,20 +1,20 @@
 # Platform - UART Circular Buffer with LDMA #
 
 ![Type badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_uart_ldma_circular_buffer_common.json&label=Type&query=type&color=green)
-![Technology badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_uart_ldma_circular_buffer_common.json&label=Technology&query=technology&color=green)
-![License badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_uart_ldma_circular_buffer_common.json&label=License&query=license&color=green)
-![SDK badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_uart_ldma_circular_buffer_common.json&label=SDK&query=sdk&color=green)
-![Build badge](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_uart_ldma_circular_buffer_build_status.json)
-![Flash badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_uart_ldma_circular_buffer_common.json&label=Flash&query=flash&color=blue)
-![RAM badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_uart_ldma_circular_buffer_common.json&label=RAM&query=ram&color=blue)
+![Technology badge](https://img.shields.io/badge/Technology-Platform-green)
+![License badge](https://img.shields.io/badge/License-Zlib-green)
+![SDK badge](https://img.shields.io/badge/SDK-v4.5.0-green)
+![Build badge](https://img.shields.io/badge/Build-passing-green)
+![Flash badge](https://img.shields.io/badge/Flash-8.3%20KB-blue)
+![RAM badge](https://img.shields.io/badge/RAM-4.13%20KB-blue)
 
 ## Overview ##
 
 This project uses an EFM32GG11 to receive UART frames into a circular buffer using LDMA.
 
-## Gecko SDK version ##
+## SDK version ##
 
-- GSDK v4.4.3
+- [Gecko SDK v4.5.0](https://github.com/SiliconLabs/gecko_sdk/releases/tag/v4.5.0)
 
 ## Hardware Required ##
 
@@ -38,7 +38,7 @@ To test this application, you can either create a project based on an example pr
 
 3. Click the **Create** button on the **Platform - UART Circular Buffer with LDMA** example. Example project creation dialog pops up -> click **Finish** and Project should be generated.
 
-    ![Create_example](image/create_project.png)
+   ![Create_example](image/create_project.png)
 
 4. Build and flash this example to the board.
 

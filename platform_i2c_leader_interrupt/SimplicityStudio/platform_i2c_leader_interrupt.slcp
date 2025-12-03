@@ -1,0 +1,46 @@
+# Silicon Labs Project Configuration Tools: slcp, v0, Component selection file.
+project_name: platform_i2c_leader_interrupt
+label: platform_i2c_leader_interrupt
+description: |
+  This project shows how to configure the I2C periphreal in leader mode, and use interrupt based routine to perform I2C transfers with a secondary device
+category: Example|Platform
+
+filter:
+- name: Device Type
+  value: [SoC]
+- name: MCU
+  value: [32-bit MCU]
+- name: Project Difficulty
+  value: [Beginner]
+
+package: platform
+
+quality: experimental
+
+readme:
+- path: ../README.md
+
+include:
+  - path: ../inc
+    file_list:
+      - path: app.h
+
+source:
+  - path: ../src/main.c
+  - path: ../src/app.c
+
+component:
+- id: device_init
+- id: emlib_i2c
+- id: iostream_usart_core
+- id: power_manager
+- id: power_manager_no_deepsleep
+- id: sl_system
+
+define:
+- name: DEBUG_EFM
+
+ui_hints:
+  highlight:
+    - path: README.md
+      focus: true
