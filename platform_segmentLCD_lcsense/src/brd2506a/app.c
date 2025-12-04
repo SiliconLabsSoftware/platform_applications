@@ -47,6 +47,9 @@
 #include "sl_power_manager.h"
 #include "sl_segmentlcd.h"
 
+#include "sl_gpio.h"
+#include "sl_hal_gpio.h"
+
 #include "app.h"
 
 #define  LCSENSE_PORT     gpioPortB
@@ -85,16 +88,14 @@ void LESENSE_IRQHandler(void)
   LESENSE_ScanStart();
 }
 
-/***************************************************************************//**
- * GPIO_ODD interrupt handler
+/****************************************************************************//**
+ * GPIO interrupt callback (replaces direct IRQ handler)
  ******************************************************************************/
-void GPIO_ODD_IRQHandler()
+static void gpio_interrupt_callback(uint8_t interrupt_number, void *context)
 {
-  uint32_t flag = GPIO_IntGet();
-  GPIO_IntClear(flag);
-
-  // update operation mode
-  update_mode = 1;
+  (void)interrupt_number;
+  (void)context;
+  update_mode = 1; // set flag to update operation mode
 }
 
 /***************************************************************************//**
@@ -173,10 +174,23 @@ void initGPIO(void)
   // uses port B and its input should not be disabled.
   GPIO->P_SET[LCSENSE_PORT].CTRL = GPIO_P_CTRL_DINDISALT;
 
-  // PB1 - push button 1 configured as input mode with filter enabled
-  // Enable interrupt on PB1
-  GPIO_PinModeSet(gpioPortB, 1, gpioModeInput, 1);
-  GPIO_ExtIntConfig(gpioPortB, 1, 1, false, true, true);
+  // Configure PB1 (push button) using sl_gpio abstraction with falling edge interrupt
+  sl_gpio_t gpio_pin = {
+    .port = gpioPortB,
+    .pin = 1
+  };
+
+  // Set PB1 as input with filter enabled (initial high due to pull-up on board)
+  sl_hal_gpio_set_pin_mode(&gpio_pin, SL_GPIO_MODE_INPUT, 1);
+
+  int32_t int_no = SL_GPIO_INTERRUPT_UNAVAILABLE; // Let library choose
+  sl_gpio_configure_external_interrupt(
+    &gpio_pin,
+    &int_no,
+    SL_GPIO_INTERRUPT_FALLING_EDGE,
+    gpio_interrupt_callback,
+    NULL);
+
   NVIC_ClearPendingIRQ(GPIO_ODD_IRQn);
   NVIC_EnableIRQ(GPIO_ODD_IRQn);
 }
@@ -373,15 +387,15 @@ void initCMU(void)
 }
 
 /***************************************************************************//**
-* Disable Unused LCD Segments
-*******************************************************************************/
+ * Disable Unused LCD Segments
+ *******************************************************************************/
 void disableUnusedLCDSeg(void)
 {
 /***************************************************************************//**
-* The LCD driver enables all segments, even those that are not mapped to
-* segments on the dev kit board. These are disabled below in order to
-* minimize current consumption.
-*******************************************************************************/
+ * The LCD driver enables all segments, even those that are not mapped to
+ * segments on the dev kit board. These are disabled below in order to
+ * minimize current consumption.
+ *******************************************************************************/
   LCD_SegmentEnable(SL_SEGMENT_LCD_SEG_S00, false);
   LCD_SegmentEnable(SL_SEGMENT_LCD_SEG_S01, false);
   LCD_SegmentEnable(SL_SEGMENT_LCD_SEG_S02, false);

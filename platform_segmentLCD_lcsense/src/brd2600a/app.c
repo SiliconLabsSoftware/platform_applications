@@ -46,7 +46,8 @@
 
 #include "sl_power_manager.h"
 #include "sl_segmentlcd.h"
-
+#include "sl_gpio.h"
+#include "sl_hal_gpio.h"
 #include "app.h"
 
 #define  LCSENSE_PORT     gpioPortB
@@ -57,9 +58,10 @@ uint32_t no_metal[16];             // store calibration value for no metal
 uint32_t pcnt_top[2] = { 0, 4 };   // PCNT top value for two modes
 volatile uint32_t update_mode = 0;          // flag for operation mode update
 volatile uint32_t update_counter = 0;       // flag for metal detection counter
-                                            //   update
+//   update
 uint32_t mode = 0;  // Mode 0 updates segment LCD on every metal detection
-                    // Mode 1 updates segment LCD on every 5 metal detection
+// Mode 1 updates segment LCD on every 5 metal detection
+void gpio_interrupt_callback(uint8_t interrupt_number, void *context);
 
 /***************************************************************************//**
  * LESENSE interrupt handler
@@ -88,11 +90,12 @@ void LESENSE_IRQHandler(void)
 /***************************************************************************//**
  * GPIO_ODD interrupt handler
  ******************************************************************************/
-void GPIO_ODD_IRQHandler()
+// Callback function for the interrupt
+void gpio_interrupt_callback(uint8_t interrupt_number, void *context)
 {
-  uint32_t flag = GPIO_IntGet();
-  GPIO_IntClear(flag);
-
+  (void)interrupt_number;
+  (void)context;
+  // Your interrupt handling code here
   // update operation mode
   update_mode = 1;
 }
@@ -132,7 +135,7 @@ void initACMP(void)
   // Configure ACMP
   ACMP_Init_TypeDef initACMP = ACMP_INIT_DEFAULT;
   initACMP.vrefDiv = 43;  // set reference input divider
-                          // VREFOUT = 2.5 * (43/63) ~= 1.7V
+  // VREFOUT = 2.5 * (43/63) ~= 1.7V
   initACMP.accuracy = acmpAccuracyHigh;
   initACMP.biasProg = 0x7;
   initACMP.hysteresisLevel = acmpHysteresis30Sym;
@@ -173,10 +176,25 @@ void initGPIO(void)
   // uses port B and its input should not be disabled.
   GPIO->P_SET[LCSENSE_PORT].CTRL = GPIO_P_CTRL_DINDISALT;
 
+  sl_gpio_t gpio_pin = {
+    .port = gpioPortB,
+    .pin = 1
+  };
+
   // PB1 - push button 1 configured as input mode with filter enabled
   // Enable interrupt on PB1
-  GPIO_PinModeSet(gpioPortB, 1, gpioModeInput, 1);
-  GPIO_ExtIntConfig(gpioPortB, 1, 1, false, true, true);
+  sl_hal_gpio_set_pin_mode(&gpio_pin, SL_GPIO_MODE_INPUT, 1);
+
+  int32_t int_no = SL_GPIO_INTERRUPT_UNAVAILABLE;  // Let the function assign an interrupt number
+
+  sl_gpio_configure_external_interrupt(
+    &gpio_pin,                                // GPIO structure with port and pin
+    &int_no,                                  // Pointer to interrupt number (input/output)
+    SL_GPIO_INTERRUPT_FALLING_EDGE,            // Trigger on falling edge
+    gpio_interrupt_callback,                  // Callback function
+    NULL                                      // Context (optional)
+    );
+
   NVIC_ClearPendingIRQ(GPIO_ODD_IRQn);
   NVIC_EnableIRQ(GPIO_ODD_IRQn);
 }
@@ -295,7 +313,7 @@ void initLesense(void)
     /* Wait for disabling to finish */
   }
   LESENSE->TIMCTRL_SET = (LESENSE_TIMCTRL_PCPRESC_DIV32
-                          | (32 << _LESENSE_TIMCTRL_PCTOP_SHIFT));  // about 8HZ
+                          | (32 << _LESENSE_TIMCTRL_PCTOP_SHIFT)); // about 8HZ
 
   // LESENSE offset 3 = ACMP PB + 3 = ACMP input PB3
   LESENSE->CH_SET[0].INTERACT =
@@ -373,15 +391,15 @@ void initCMU(void)
 }
 
 /***************************************************************************//**
-* Disable Unused LCD Segments
-*******************************************************************************/
+ * Disable Unused LCD Segments
+ *******************************************************************************/
 void disableUnusedLCDSeg(void)
 {
-/***************************************************************************//**
-* The LCD driver enables all segments, even those that are not mapped to
-* segments on the dev kit board. These are disabled below in order to
-* minimize current consumption.
-*******************************************************************************/
+  /***************************************************************************//**
+   * The LCD driver enables all segments, even those that are not mapped to
+   * segments on the dev kit board. These are disabled below in order to
+   * minimize current consumption.
+   *******************************************************************************/
   LCD_SegmentEnable(2, false);
   LCD_SegmentEnable(3, false);
   LCD_SegmentEnable(9, false);
@@ -435,16 +453,16 @@ void app_process_action(void)
 {
   // If mode update flag set
   if (update_mode) {
-    counter = 0;                        // clear counter
-    mode = (mode + 1) % 2;              // update mode
-    update_mode = 0;                    // clear mode update flag
-    sl_segment_lcd_number(counter);     // update segment LCD
-    PCNT_CounterReset(PCNT0);           // reset PCNT counter
-    PCNT_TopSet(PCNT0, pcnt_top[mode]); // update PCNT top value
+    counter = 0;                          // clear counter
+    mode = (mode + 1) % 2;                // update mode
+    update_mode = 0;                      // clear mode update flag
+    sl_segment_lcd_number(counter);       // update segment LCD
+    PCNT_CounterReset(PCNT0);             // reset PCNT counter
+    PCNT_TopSet(PCNT0, pcnt_top[mode]);   // update PCNT top value
   }
   // If update counter flag set
   if (update_counter) {
-    update_counter = 0;                 // clear flag
-    sl_segment_lcd_number(++counter);   // update counter
+    update_counter = 0;                   // clear flag
+    sl_segment_lcd_number(++counter);     // update counter
   }
 }

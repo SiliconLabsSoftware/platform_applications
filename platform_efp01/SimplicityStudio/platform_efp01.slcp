@@ -1,0 +1,44 @@
+project_name: platform_efp01
+label: Platform - EFP01 Feature Demo
+description: >
+  This project demonstrates the Silicon Labs EFP01 power management IC (PMIC) functionality when paired with an EFR32xG21 wireless MCU on BRD4179B. The EFP0104 device supplies DVDD and AVDD rails and can optionally power the EFR32 DECOUPLE pin (internal regulator rail) for improved system efficiency.
+category: Example|Platform
+package: Platform
+quality: experimental
+
+filter:
+  - name: Device Type
+    value: [SoC]
+  - name: MCU
+    value: [32-bit MCU]
+  - name: Project Difficulty
+    value: [Advanced]
+
+readme:
+  - path: ../README.md
+
+include:
+- path: ../inc
+  file_list:
+  - path: app.h 
+  - path: sl_efpdrv_calc.h
+
+source:
+  - path: ../src/app.c
+
+component:
+- {id: clock_manager}
+- {id: device_init}
+- instance: [efp0]
+  id: efp_driver
+- {id: sl_main}
+- {id: emlib_rmu}
+
+other_file:
+  - path: ../images/BRD4179B_TPs.png
+    directory: "image"
+
+ui_hints:
+  highlight:
+    - path: README.md
+      focus: true

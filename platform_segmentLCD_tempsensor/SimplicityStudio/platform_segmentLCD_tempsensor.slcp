@@ -12,7 +12,7 @@ filter:
   value: [Beginner]
 package: platform
 readme:
-- path: ../README.md
+  - path: ../README.md
 define:
 - {name: DEBUG_EFM}
 component:

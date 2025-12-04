@@ -1,0 +1,42 @@
+project_name: platform_xg21_i2c_smbus_scl_low_timeout_slave
+package: platform
+label: Platform - I2C smbus scl low timeout slave
+description: |
+  This project implements an SMBus-compliant I2C slave with SCL low timeout detection on an EFR32xG21 device.
+
+quality: experimental
+filter:
+  - name: Device Type
+    value: [SoC]
+  - name: MCU
+    value: [32-bit MCU]
+  - name: Project Difficulty
+    value: [Beginner]
+
+readme:
+- path: ../README.md
+
+source:
+  - path: ../src/app.c
+
+include:
+  - path: ../inc
+    file_list:
+        - path: app.h
+
+component:
+- {id: clock_manager}
+- {id: device_init}
+- {id: emlib_i2c}
+- {id: emlib_timer}
+- {id: sl_main}
+- {id: emlib_rtcc}
+
+define:
+- name: DEBUG_EFM
+
+ui_hints:
+  highlight:
+    - path: README.md
+      focus: true
+

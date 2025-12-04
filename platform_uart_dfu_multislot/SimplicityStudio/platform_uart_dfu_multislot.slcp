@@ -20,7 +20,7 @@ component:
 - id: sl_system
 
 readme:
-- path: ../README.md
+  - path: ../README.md
 
 include:
 - path: ../inc

@@ -28,11 +28,11 @@
  ******************************************************************************/
 
 #ifndef BUTTON_INSTANCE_0
-#define BUTTON_INSTANCE_0   sl_button_btn0
+#define BUTTON_INSTANCE_0       sl_button_btn0
 #endif
 
 #ifndef LED_INSTANCE_0
-#define LED_INSTANCE_0      sl_led_led0
+#define LED_INSTANCE_0          sl_led_led0
 #endif
 
 // Necessary define for SiSDK v2024.12.0 and earlier

@@ -1,0 +1,76 @@
+# Silicon Labs Project Configuration Tools: slcp, v0, Component selection file.
+project_name: platform_iadc_high_speed
+label: Platform - IADC High-Speed Mode (PG23 & PG28)
+description: |
+  Consolidated high-speed IADC examples for PG23 and PG28. Demonstrates continuous 1.95 Msps sampling
+  at 12-bit resolution using IADC high-speed mode (20 MHz ADC clock) with LDMA buffering. Both variants
+  sample SMA input and pulse GPIO after each 1024-sample buffer fill (~525 µs period).
+
+category: Example|Platform
+package: platform
+quality: experimental
+
+filter:
+- name: Device Type
+  value: [SoC]
+- name: MCU
+  value: [32-bit MCU]
+- name: Project Difficulty
+  value: [Beginner]
+
+readme:
+- path: ../README.md
+
+source:
+- path: ../src/main.c
+- path: ../src/pg23/app.c
+  condition: [brd2504a]
+- path: ../src/pg23/iadc_single.c
+  condition: [brd2504a]
+- path: ../src/pg28/app.c
+  condition: [brd2506a]
+- path: ../src/pg28/iadc_single.c
+  condition: [brd2506a]
+
+include:
+- path: ../inc/pg23
+  file_list:
+  - path: app.h
+  - path: iadc_single.h
+  condition: [brd2504a]
+
+- path: ../inc/pg28
+  file_list:
+  - path: app.h
+  - path: iadc_single.h
+  condition: [brd2506a]
+
+component:
+- id: device_init
+- id: emlib_iadc
+- id: emlib_ldma
+- id: sl_system
+
+define:
+- name: DEBUG_EFM
+
+other_file:
+  - path: ../image/pg23_board.png
+    directory: "image"
+  - path: ../image/pg23_buffer_debugger.png
+    directory: "image"
+  - path: ../image/pg23_create_project.png
+    directory: "image"
+  - path: ../image/pg23_output_pulse.png
+    directory: "image"
+  - path: ../image/pg28_board.png
+    directory: "image"
+  - path: ../image/pg28_buffer_debugger.png
+    directory: "image"
+  - path: ../image/pg28_output_pulse.png
+    directory: "image"
+
+ui_hints:
+  highlight:
+    - path: README.md
+      focus: true

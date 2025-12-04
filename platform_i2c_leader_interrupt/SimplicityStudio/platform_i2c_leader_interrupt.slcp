@@ -1,0 +1,43 @@
+project_name: platform_i2c_leader_interrupt
+package: platform
+label: Platform - I2C Leader Interrupt
+description: |
+  This project shows how to configure the I2C peripheral in leader mode, and use interrupt-based routine to perform I2C transfers with a follower device.
+
+quality: experimental
+filter:
+  - name: Device Type
+    value: [SoC]
+  - name: MCU
+    value: [32-bit MCU]
+  - name: Project Difficulty
+    value: [Beginner]
+
+readme:
+- path: ../README.md
+
+source:
+  - path: ../src/main.c
+  - path: ../src/app.c
+
+include:
+  - path: ../inc
+    file_list:
+        - path: app.h
+
+component:
+- {id: device_init}
+- {id: emlib_i2c}
+- {id: iostream_usart_core}
+- {id: power_manager}
+- {id: power_manager_no_deepsleep}
+- {id: sl_system}
+
+define:
+- name: DEBUG_EFM
+
+ui_hints:
+  highlight:
+    - path: README.md
+      focus: true
+

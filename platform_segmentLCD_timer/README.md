@@ -3,9 +3,9 @@
 ![Type badge](https://img.shields.io/badge/Type-Virtual%20Application-green)
 ![Technology badge](https://img.shields.io/badge/Technology-Platform-green)
 ![License badge](https://img.shields.io/badge/License-Zlib-green)
-![SDK badge](https://img.shields.io/badge/SDK-v2024.12.2-green)
+![SDK badge](https://img.shields.io/badge/SDK-v2025.6.2-green)
 ![Build badge](https://img.shields.io/badge/Build-passing-green)
-![Flash badge](https://img.shields.io/badge/Flash-10.97%20KB-blue)
+![Flash badge](https://img.shields.io/badge/Flash-11.06%20KB-blue)
 ![RAM badge](https://img.shields.io/badge/RAM-4.46%20KB-blue)
 ## Overview ##
 
@@ -13,7 +13,7 @@ This project shows how to use the segment LCD peripheral on two different xG23 b
 
 ## SDK version ##
 
-- SiSDK v2024.12.2
+- [Simplicity SDK v2025.6.2](https://github.com/SiliconLabs/simplicity_sdk/releases/tag/v2025.6.2)
 
 ## Hardware Required ##
 
@@ -30,7 +30,7 @@ This project shows how to use the segment LCD peripheral on two different xG23 b
 
 To test this application, you can either create a project based on an example project or start with an empty example project.
 
-### Create a project based on an example project ### 
+### Create a project based on an example project ###
 
 1. Make sure that this repository is added to [Preferences > Simplicity Studio > External Repos](https://docs.silabs.com/simplicity-studio-5-users-guide/latest/ss-5-users-guide-about-the-launcher/welcome-and-device-tabs).
 

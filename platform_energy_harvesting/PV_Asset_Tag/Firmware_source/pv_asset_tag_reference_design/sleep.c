@@ -76,6 +76,7 @@ void clear_wakeup(void)
 
 #if defined(_SILICON_LABS_GECKO_INTERNAL_SDID_205)
 SL_RAMFUNC_DECLARATOR static void __attribute__ ((noinline)) ramWFE(void);
+
 SL_RAMFUNC_DEFINITION_BEGIN
 static void __attribute__ ((noinline)) ramWFE(void)
 {
@@ -85,6 +86,7 @@ static void __attribute__ ((noinline)) ramWFE(void)
     }                           // Dummy wait loop ...
   }
 }
+
 SL_RAMFUNC_DEFINITION_END
 #endif
 

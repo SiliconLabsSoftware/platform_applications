@@ -42,72 +42,72 @@ extern "C" {
 #endif
 
 /***************************************************************************//**
-* @brief opens the I2C bus device
-* @param bus I2C bus' system id from /dev
-* @return I2C handle or error (negative value)
-*******************************************************************************/
+ * @brief opens the I2C bus device
+ * @param bus I2C bus' system id from /dev
+ * @return I2C handle or error (negative value)
+ *******************************************************************************/
 int open_i2c(int bus);
 
 /***************************************************************************//**
-* @brief closes the I2C bus device
-* @param i2c_handle I2C handle
-* @return 0 if ok or negative value on error
-*******************************************************************************/
+ * @brief closes the I2C bus device
+ * @param i2c_handle I2C handle
+ * @return 0 if ok or negative value on error
+ *******************************************************************************/
 int close_i2c(int i2c_handle);
 
 /***************************************************************************//**
-* @brief gets the last command's status from the slave
-* @param i2c_handle I2C handle
-* @param address 7-bit slave address
-* @return -1 on error, otherwise slave bootloader's status
-*******************************************************************************/
+ * @brief gets the last command's status from the slave
+ * @param i2c_handle I2C handle
+ * @param address 7-bit slave address
+ * @return -1 on error, otherwise slave bootloader's status
+ *******************************************************************************/
 int last_command_status(int i2c_handle, int address);
 
 /***************************************************************************//**
-* @brief aborts slave's current operation (effective for DOWNLOAD)
-* @param i2c_handle I2C handle
-* @param address 7-bit slave address
-* @return -1 on error, 0 on success
-*******************************************************************************/
+ * @brief aborts slave's current operation (effective for DOWNLOAD)
+ * @param i2c_handle I2C handle
+ * @param address 7-bit slave address
+ * @return -1 on error, 0 on success
+ *******************************************************************************/
 int abort_last_command(int i2c_handle, int address);
 
 /***************************************************************************//**
-* @brief gets the bootloader version information from the slave
-* @param i2c_handle   I2C handle
-* @param address      7-bit slave address
-* @param versionInfo  pointer to the versionInfo structure
-* @return -1 on error, 0 on success
-*******************************************************************************/
+ * @brief gets the bootloader version information from the slave
+ * @param i2c_handle   I2C handle
+ * @param address      7-bit slave address
+ * @param versionInfo  pointer to the versionInfo structure
+ * @return -1 on error, 0 on success
+ *******************************************************************************/
 int get_version_info(int i2c_handle,
                      int address,
                      btl_version_info_t *versionInfo);
 
 /***************************************************************************//**
-* @brief boots the application on slave from the slot
-* @param i2c_handle       I2C handle
-* @param address          7-bit slave address
-* @param application_slot negative value (for example, -1) when no slot used
-*                         zero or positive number: slot id (not supported yet)
-* @return -1 on error, 0 on success
-*******************************************************************************/
+ * @brief boots the application on slave from the slot
+ * @param i2c_handle       I2C handle
+ * @param address          7-bit slave address
+ * @param application_slot negative value (for example, -1) when no slot used
+ *                         zero or positive number: slot id (not supported yet)
+ * @return -1 on error, 0 on success
+ *******************************************************************************/
 int boot_application(int i2c_handle, int address, int application_slot);
 
 /***************************************************************************//**
-* @brief verify the application image on slave
-* @param i2c_handle       I2C handle
-* @param address          7-bit slave address
-* @param verifyResult     bootloader' verify result (pointer to an int8_t)
-* @return negative on error, 0 on success
-*******************************************************************************/
+ * @brief verify the application image on slave
+ * @param i2c_handle       I2C handle
+ * @param address          7-bit slave address
+ * @param verifyResult     bootloader' verify result (pointer to an int8_t)
+ * @return negative on error, 0 on success
+ *******************************************************************************/
 int verify_app(int i2c_handle, int address, uint8_t *verifyResult);
 
 /***************************************************************************//**
-* @brief download the GBL image file to the slave
-* @param i2c_handle   I2C handle
-* @param address      7-bit slave address
-* @param filename     name of the GBL image file
-* @return negative value on error, 0 on success
-*******************************************************************************/
+ * @brief download the GBL image file to the slave
+ * @param i2c_handle   I2C handle
+ * @param address      7-bit slave address
+ * @param filename     name of the GBL image file
+ * @return negative value on error, 0 on success
+ *******************************************************************************/
 int download_gbl_file(int i2c_handle, int address, const char *filename);
 
 #ifdef __cplusplus

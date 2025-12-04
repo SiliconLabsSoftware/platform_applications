@@ -66,12 +66,10 @@
 #if (NVM3_DEFAULT_CACHE_SIZE != 0)
 static nvm3_CacheEntry_t nvm3_cache[NVM3_DEFAULT_CACHE_SIZE];
 #endif
-
-// Get main flash space info from linker symbol
-extern char linker_nvm_begin;
-extern char linker_vectors_begin;
-#define MAIN_FLASH_BASE (&linker_vectors_begin)
-#define MAIN_FLASH_END  (&linker_nvm_begin)
+extern const uint32_t linker_nvm_begin[];      // Start of NVM (end boundary of CRC range)
+extern const uint32_t linker_vectors_begin[];  // Start of vector table / beginning of CRC range
+#define MAIN_FLASH_BASE ((uint32_t)linker_vectors_begin)
+#define MAIN_FLASH_END  ((uint32_t)linker_nvm_begin)
 #define NVM3_BASE       MAIN_FLASH_END
 nvm3_Init_t nvm3_init_data =
 {
@@ -235,13 +233,13 @@ void initGpcrc(void)
  ******************************************************************************/
 void app_init(void)
 {
-  uint32_t *p_start = (uint32_t *)MAIN_FLASH_BASE;
-  uint32_t *p_end = (uint32_t *)MAIN_FLASH_END;
+  const uint32_t *p_start = (const uint32_t *)MAIN_FLASH_BASE;
+  const uint32_t *p_end = (const uint32_t *)MAIN_FLASH_END;
   uint32_t crc;
 
   initGpcrc();
 
-  for (uint32_t *i = p_start; i < p_end; i++)
+  for (const uint32_t *i = p_start; i < p_end; i++)
   {
     GPCRC_InputU32(GPCRC, *i);
   }
@@ -255,10 +253,10 @@ void app_init(void)
 void app_process_action(void)
 {
   uint32_t crc;
-  uint32_t *p_start = (uint32_t *)MAIN_FLASH_BASE;
-  uint32_t *p_end = (uint32_t *)MAIN_FLASH_END;
+  const uint32_t *p_start = (const uint32_t *)MAIN_FLASH_BASE;
+  const uint32_t *p_end = (const uint32_t *)MAIN_FLASH_END;
 
-  for (uint32_t *i = p_start; i < p_end; i++)
+  for (const uint32_t *i = p_start; i < p_end; i++)
   {
     GPCRC_InputU32(GPCRC, *i);
   }

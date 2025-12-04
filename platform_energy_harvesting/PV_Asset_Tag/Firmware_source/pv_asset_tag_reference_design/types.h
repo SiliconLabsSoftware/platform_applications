@@ -29,18 +29,18 @@ typedef enum {
 } sl_beacon_power_level_t;
 typedef struct
 {
-    int storage_voltage_millivolts;
-    int delta_storage_voltage_millivolts;
-    int source_voltage_millivolts;
+  int storage_voltage_millivolts;
+  int delta_storage_voltage_millivolts;
+  int source_voltage_millivolts;
 } sl_harvester_voltages_t;
 typedef struct
 {
-    int channel;
-    unsigned int wakeup_counter;
-    bool skip_next;
-    bool short_payload;
-    unsigned int period_time;
-    unsigned int beacon_count;
-    unsigned int beacon_interval;
+  int channel;
+  unsigned int wakeup_counter;
+  bool skip_next;
+  bool short_payload;
+  unsigned int period_time;
+  unsigned int beacon_count;
+  unsigned int beacon_interval;
 } sl_beacon_settings_t;
 #endif

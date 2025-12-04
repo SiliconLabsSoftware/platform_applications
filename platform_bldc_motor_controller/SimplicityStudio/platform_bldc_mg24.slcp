@@ -25,6 +25,7 @@ component:
   - id: emlib_prs
   - id: emlib_timer
   - id: sl_system
+  - id: emlib_usart
 
 readme:
 - path: ../README.md

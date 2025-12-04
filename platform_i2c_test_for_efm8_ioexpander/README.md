@@ -1,19 +1,19 @@
 # Platform - I2C Test for EFM8 IOExpander #
 
 ![Type badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_i2c_test_for_efm8_ioexpander_common.json&label=Type&query=type&color=green)
-![Technology badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_i2c_test_for_efm8_ioexpander_common.json&label=Technology&query=technology&color=green)
-![License badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_i2c_test_for_efm8_ioexpander_common.json&label=License&query=license&color=green)
-![SDK badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_i2c_test_for_efm8_ioexpander_common.json&label=SDK&query=sdk&color=green)
-![Build badge](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_i2c_test_for_efm8_ioexpander_build_status.json)
-![Flash badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_i2c_test_for_efm8_ioexpander_common.json&label=Flash&query=flash&color=blue)
-![RAM badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_i2c_test_for_efm8_ioexpander_common.json&label=RAM&query=ram&color=blue)
+![Technology badge](https://img.shields.io/badge/Technology-Platform-green)
+![License badge](https://img.shields.io/badge/License-Zlib-green)
+![SDK badge](https://img.shields.io/badge/SDK-v2025.6.2-green)
+![Build badge](https://img.shields.io/badge/Build-passing-green)
+![Flash badge](https://img.shields.io/badge/Flash-63.9%20KB-blue)
+![RAM badge](https://img.shields.io/badge/RAM-7.65%20KB-blue)
 ## Overview ##
 
 This project provides a test tool for EFM8 IOExpander. The example uses the I2C module for communication, a GPIO pin and a built-in LED to detect and signal the interrupts of EFM8 IOExpander. The command line interface also contains simple command interpreters to read and write registers of EFM8 IOExpander. Furthermore, some additional commands are added to make the example as a basic automated test tool. See [AN1304: GPIO Expander Based on EFM8MCU Product Family](https://www.silabs.com/documents/public/application-notes/an1304-ioexp.pdf) for more information.
 
-## Gecko SDK version ##
+## SDK version ##
 
-- GSDK v4.4.3
+- [Simplicity SDK v2025.6.2](https://github.com/SiliconLabs/simplicity_sdk/releases/tag/v2025.6.2)
 
 ## Hardware Required ##
 

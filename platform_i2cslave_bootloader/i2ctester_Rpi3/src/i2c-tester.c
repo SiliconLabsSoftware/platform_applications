@@ -109,8 +109,8 @@ static unsigned long bus;
 static int address;
 
 /***************************************************************************//**
-* @brief prints the usage
-*******************************************************************************/
+ * @brief prints the usage
+ *******************************************************************************/
 void print_usage()
 {
   fprintf(stderr,
@@ -130,10 +130,10 @@ void print_usage()
 }
 
 /***************************************************************************//**
-* @brief prints the version info from the slave
-* @param address slave address
-* @return 0 on success
-*******************************************************************************/
+ * @brief prints the version info from the slave
+ * @param address slave address
+ * @return 0 on success
+ *******************************************************************************/
 int print_bootloader_version_info(int address)
 {
   btl_version_info_t version_info;
@@ -151,9 +151,9 @@ int print_bootloader_version_info(int address)
 }
 
 /***************************************************************************//**
-* @brief lookup and call the command based on command line. Exits when error
-*        detected.
-*******************************************************************************/
+ * @brief lookup and call the command based on command line. Exits when error
+ *        detected.
+ *******************************************************************************/
 void call_command(int argc, char *argv[])
 {
   command_table_item_t *table_item = main_command_table;
@@ -188,9 +188,9 @@ void call_command(int argc, char *argv[])
 }
 
 /***************************************************************************//**
-* @brief main function
-* @return 0 on success
-*******************************************************************************/
+ * @brief main function
+ * @return 0 on success
+ *******************************************************************************/
 int main(int argc, char *argv[])
 {
   const char *value;
@@ -221,8 +221,8 @@ int main(int argc, char *argv[])
 }
 
 /***************************************************************************//**
-* @brief prints the boot version
-*******************************************************************************/
+ * @brief prints the boot version
+ *******************************************************************************/
 void cmd_print_boot_version(int argc, char *argv[])
 {
   int result;
@@ -237,8 +237,8 @@ void cmd_print_boot_version(int argc, char *argv[])
 }
 
 /***************************************************************************//**
-* @brief download the GBL file to the slave
-*******************************************************************************/
+ * @brief download the GBL file to the slave
+ *******************************************************************************/
 void cmd_download_file(int argc, char *argv[])
 {
   int result = 0;
@@ -263,8 +263,8 @@ void cmd_download_file(int argc, char *argv[])
 }
 
 /***************************************************************************//**
-* @brief boots the application on slave
-*******************************************************************************/
+ * @brief boots the application on slave
+ *******************************************************************************/
 void cmd_boot_application(int argc, char *argv[])
 {
   int result = 0;
@@ -283,8 +283,8 @@ void cmd_boot_application(int argc, char *argv[])
 }
 
 /***************************************************************************//**
-* @brief verify application on slave
-*******************************************************************************/
+ * @brief verify application on slave
+ *******************************************************************************/
 void cmd_verify_application(int argc, char *argv[])
 {
   i2c_handle = open_i2c(bus);
@@ -309,8 +309,8 @@ void cmd_verify_application(int argc, char *argv[])
 }
 
 /***************************************************************************//**
-* @brief prints the usage
-*******************************************************************************/
+ * @brief prints the usage
+ *******************************************************************************/
 void cmd_print_help(int argc, char *argv[])
 {
   print_usage();

@@ -1,134 +1,93 @@
-# I2C SMBus SCL Low Timeout Slave Example #
+# Platform - I2C SMBus SCL Low Timeout Slave #
 
-![Type badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/i2c_smbus_scl_low_timeout_slave_common.json&label=Type&query=type&color=green)
-![License badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/i2c_smbus_scl_low_timeout_slave_common.json&label=License&query=license&color=green)
-![Technology badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/i2c_smbus_scl_low_timeout_slave_common.json&label=Technology&query=technology&color=green)
+![Type badge](https://img.shields.io/badge/Type-Virtual%20Application-green)
+![Technology badge](https://img.shields.io/badge/Technology-Platform-green)
+![License badge](https://img.shields.io/badge/License-Zlib-green)
+![SDK badge](https://img.shields.io/badge/SDK-v2025.6.2-green)
+![Build badge](https://img.shields.io/badge/Build-passing-green)
+![Flash badge](https://img.shields.io/badge/Flash-9.63%20KB-blue)
+![RAM badge](https://img.shields.io/badge/RAM-4.43%20KB-blue)
 
-## Summary ##
+## Overview ##
 
-The Silicon Labs EFR32 devices contain I2C modules for serial communication that
-enable these devices to be interfaced with SMBus devices.  The SMBus protocol is
-similar to the I2C protocol but has additional specifications and requirements.
-One of these requirements is that any SMBus master can signal an error condition
-by holding SCL low for 25 ms, which constitiutes an SCL low timeout period.
-Accordingly, any device participating in SMBus communication must detect this
-timeout condition and reset its SMBus communication module to recover from the
-error condition.   This project demonstrates the slave configuration of the
-EFx32xG21 I2C peripheral (based on the [i2c_slave peripheral example](https://github.com/SiliconLabs/peripheral_examples/tree/master/series2/i2c/i2c_slave))
-with the addition of an implementation of the SCL low timeout required by the
-SMBus standard.
+This project implements an SMBus-compliant I2C slave with SCL low timeout detection on an EFR32xG21 device. The SMBus specification requires that devices detect when SCL is held low for a defined timeout (typically 25 ms) and reset their communication interface to recover. This example extends the basic slave behavior (based on the peripheral example) with a TIMER-based timeout mechanism that triggers a software reset of the I2C peripheral when SCL remains low beyond the configured window.
 
-Modules used: CMU, EMU, GPIO, I2C, TIMER0.
+Peripherals used: I2C, TIMER0, GPIO, EMU, CMU.
 
-## Gecko SDK version ##
+## SDK version ##
 
-v2.7.x
+- [Simplicity SDK v2025.6.2](https://github.com/SiliconLabs/simplicity_sdk/releases/tag/v2025.6.2)
 
 ## Hardware Required ##
 
-* Wireless Starter Kit (WSTK) Mainboard (SLWMB4001A, formerly BRD4001A)
-* EFR32xG21 2.4 GHz 10 dBm Radio Board (BRD4181A)
+* Wireless Starter Kit Mainboard (SLWMB4001A / BRD4001A)
+* EFR32xG21 Radio Board (BRD4181A)
+* Second board (same type) running I2C master example
+* Optional: Logic analyzer / Energy Profiler
+
+| Board ID | Description |
+|----------|-------------|
+| BRD4181A | EFR32xG21 2.4 GHz 10 dBm Radio Board |
+| BRD4001A | Wireless Starter Kit Mainboard |
+
+## Connections Required ##
+
+| Signal | Pin (Slave) | EXP Header |
+|--------|-------------|------------|
+| LED0   | PB00        | Pin 11 |
+| LED1   | PB01        | Pin 13 |
+| I2C_SDA | PA05       | Pin 12 |
+| I2C_SCL | PA06       | Pin 14 |
+
+Connect SDA, SCL and GND between master and slave boards. Add 4.7 kΩ pull‑ups from SDA and SCL to VMCU if not already present.
 
 ## Setup ##
 
-Clone the repository with this project from GitHub onto your local machine.
+To test this application, you can either create a project based on an example project or start with an empty example project.
 
-From within the Simplicity Studio IDE, select Import -> MCU Project... from the 
-Project menu. Click the Browse button
-and navigate to the local repository folder, then to the SimplicityStudio 
-folder, select the .sls file for the board,
-click the Next button twice, and then click Finish.
+### Create a project based on an example project ###
+1. Add this repository to External Repos in Simplicity Studio.
+2. Import the slave example (`platform_xg21_i2c_smbus_scl_low_timeout_slave.sls`).
+3. Import the standard I2C master example on the second board.
+4. Build and flash both projects to their respective boards.
 
-## How the Project Works ##
+### Start with an empty example project ###
+1. Create an **Empty C Project** for BRD4181A.
+2. Add source from `main_xg21_i2c_smbus_scl_low_timeout_slave.c` and required headers.
+3. Install software components:
+	- [Platform] → [Peripheral] → [I2C]
+	- [Platform] → [Peripheral] → [TIMER]
+4. Build and flash to the board.
 
-Two EFx32xG21 modules are connected together, one
-running the [i2c_master peripheral example project](https://github.com/SiliconLabs/peripheral_examples/tree/master/series2/i2c/i2c_master), the other running this
-slave project. The master reads the slave's current buffer values, increments
-each value, and writesthe new values back to the slave device. The master then
-reads back the slave values again and verifies the new values match what was
-previously written. This program runs in a continuous loop, entering and exiting
-EM1 to handle I2C transmissions. Slave toggles LED0 on during I2C transaction
-and off when complete. Slave will set LED1 if an I2C transmission error is 
-encountered.
+## How It Works ##
 
-The following are the correct connections and pin assignments for the WSTK with
-BRD4181A:
+The master continuously performs: read current slave buffer → increment data → write back → re-read to verify. The slave manages transactions, toggling LED0 while active and LED1 on error.
 
-Board:  Silicon Labs EFR32xG21 Radio Board (BRD4181A) + 
-        Wireless Starter Kit Mainboard (SLWMB4001A, formerly BRD4001A)  
-Device: EFR32MG21A010F1024IM32  
-PB00 - LED0, Expansion Header Pin 11, WSTK Pin 8  
-PB01 - LED1, Expansion Header Pin 13, WSTK Pin 10  
-PA05 - I2C_SDA, Expansion Header Pin 12, WSTK Pin 9  
-PA06 - I2C_SCL, Expansion Header Pin 14, WSTK Pin 11  
+### SCL Low Timeout Mechanism ###
+* `SCL_TIMEOUT_MS` defines timeout length.
+* Falling edge on SCL starts one‑shot TIMER0 (TOP computed from timeout and clock).
+* Rising edge on SCL stops & resets TIMER0 (normal activity).
+* TIMER overflow ISR indicates timeout → I2C peripheral reset sequence executes → status LEDs blink.
 
-The code and configuration parameters are contained in the source file 
-main_xg21_i2c_smbus_scl_low_timeout_slave.c.  The first section of this file 
-(from lines 49-89) contain #includes, #defines, and global variables.
+### Main Loop Behavior ###
+1. Monitor transfer in progress flag.
+2. Clear LED0 when idle.
+3. Check timeout/reset request flag; perform I2C reinit if set (blink LED0/LED1 twice).
+4. Enter EM1 between events for reduced power.
 
- The #define SCL_TIMEOUT_MS is used to configure the timeout period for SCL low 
- timeout detection.  This timeout period is used to calculate the TOP value for 
- a one shot timer that is started on the falling edge of the SCL pin (PA06). If 
- the TOP value is reached, a TIMER overflow interrupt is generated, indicating 
- that an SCL low timeout has occurred.  The TIMER ISR is used to initiate a 
- reset the I2C peripheral.
- 
- A rising edge on the SCL pin (as would occur in normal communications) will 
- stop and reset the timer.
+## Testing ##
 
-The code flow is as follows:
+1. Connect boards and pull‑ups.
+2. Flash master and slave projects.
+3. Press PB0 on master to trigger transactions; observe LED0 activity on slave.
+4. Use logic analyzer to confirm ACK / data sequence.
+5. Force SCL low (jumper SCL to GND) > timeout period → observe LED0 & LED1 blink twice and I2C recovery.
+6. Resume normal operation: remove jumper and continue PB0 presses.
+7. Profile energy: slave should remain mostly in EM1.
 
-1. Initialize the chip with errata-specific initializations, if appropriate.
+## Additional Notes ##
 
-2. Initialize the Systick timer, which is used to help generate delays used as a
-part of an LED status indicator when the I2C is reset.
-
-3. Initialize the I2C and GPIO.
-
-4. Initialize TIMER0 as a one-shot timer for detecting SCL low timeout.
-
-5. The main loop will check if an I2C/SMBus transfer is in progress, and if not, 
-will turn off LED0, which is set at the beginning of a tranfer.  Additionally,
-it will check to see if an I2C reset is requred, and if so, initialte the I2C
-reset.  Otherwise, the main loop will put the device into EM1.  Note that if an 
-I2C reset occur, both LED0 and LED1 will flash on and off twice.
-
-How To Test:
-1. Connect the SDA, SCL and GND lines between two kits via the EXP header
-2. Jumper 4.7kOhm pull-up resistors from VMCU to the SDA and SCL lines (only one 
-pull-up needed for each line).
-3. Open Simplicity Studio and update each kit's firmware from the Simplicity 
-Launcher (if necessary)
-4. Build both the master and slave projects and download to two Starter Kits
-5.  For slave kit, in the drop-down menu, select "Profile As Simplicity Energy 
-Profiler Target"
-6. The project will compile, load and start-up, proceeding to the main loop 
-which sits in EM1
-7. Observe the current consumption in Energy Profiler of the kit in EM2 
-8. Toggle push button PB0 on the master kit
-9. Observe the current spike as the slave kit wakes to EM0/1 to handle the I2C 
-transaction and then returns to EM1 consumption with each button press of PB0 on 
-the master kit.
-10. Connect the SCL pin to GND to simulate n SCL low event and observe that the
-slave device initiates an I2C reset, indicated by the flashing of LED0 and LED1 
-twice.
-11. Following I2C reset, communications can resume
-
-## .sls Projects Used ##
-
-platform_xg21_i2c_smbus_scl_low_timeout_slave.sls
-
-## Porting to Another EFR32 Device ##
-
-This code is designed to run on the BRD4181A.
-
-The code can also run on EFR32xG22 and other EFR32 devices, although this has 
-not been tested. In the case of these other devices, however, all peripheral or 
-module clocks would need to be specifically enabled because other EFR32 families 
-do not have the on-demand module clock enable
-functionality that is present on xG21.
-
-To change the target board, navigate to Project -> Properties -> C/C++ Build -> 
-Board/Part/SDK. Start typing in the Boards
-search box and locate the desired radio board, then click Apply to change the 
-project settings, and go from there.
+* For different SMBus timeout values adjust `SCL_TIMEOUT_MS` and recompute TIMER TOP (handled in code macros).
+* Ensure only one pair of pull‑ups present on bus to avoid excessive current.
+* Extend error handling to log occurrences or increment diagnostic counters.
+* Porting to other Series 2 devices requires enabling peripheral clocks if on‑demand gating differs.

@@ -25,7 +25,7 @@ Peripherals used: USART in UART mode.
 
 ## SDK version ##
 
-- SiSDK v2025.6.1
+- [Simplicity SDK v2025.6.2](https://github.com/SiliconLabs/simplicity_sdk/releases/tag/v2025.6.2)
 
 ## Hardware Required ##
 

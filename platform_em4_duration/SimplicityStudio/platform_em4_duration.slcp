@@ -7,7 +7,7 @@ package: Platform
 quality: experimental
 
 readme:
-- path: ../readme.md
+- path: ../README.md
 
 source:
 - path: ../src/app.c
@@ -28,7 +28,6 @@ other_file:
 - path: ../image/em4grpaclk_source.png
   directory: "image"
 
-sdk: {id: simplicity_sdk, version: 2024.12.2}
 toolchain_settings: []
 
 component:
@@ -57,4 +56,4 @@ define:
 
 ui_hints:
   highlight:
-  - {path: readme.md, focus: true}
+  - {path: README.md, focus: true}

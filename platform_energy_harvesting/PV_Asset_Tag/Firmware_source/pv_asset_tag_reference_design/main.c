@@ -39,7 +39,8 @@
 #define ADV_CRC32
 //
 #define ASSET_TAG_APPID         (0x53424C53)
-#define DEVICE_ID               { 0x05, 0x18, 0x7a, 0x65, 0x25, 0x68, 0x6b, 0xfe }  //
+#define DEVICE_ID               { 0x05, 0x18, 0x7a, 0x65, 0x25, 0x68, 0x6b, \
+                                  0xfe }                                            //
 //
 #include "sl_component_catalog.h"
 
@@ -50,7 +51,7 @@
 #include <em_gpio.h>
 #include <em_rmu.h>
 
-//#include "hal.h"
+#include "hal.h"
 #include "radio.h"
 #include "adv.h"
 #include "adc.h"
@@ -58,17 +59,26 @@
 #include "power.h"
 #include "sleep.h"
 #include "system.h"
-
+#include "string.h"
 #include "pin_config.h"
 
 #define NO_SHIELD                               0   // set to 1 if there is no shield present on the EFR32xG22E devkit. No energy awarenesa.
 
-
-#define EM4WU_ST_STO_RDY                        (1U << (3 + _GPIO_EM4WUEN_EM4WUEN_SHIFT))
-#define EM4WU_ST_LOAD                           (1U << (4 + _GPIO_EM4WUEN_EM4WUEN_SHIFT))
-#define EM4WU_ST_STO_OVDIS                      (1U << (9 + _GPIO_EM4WUEN_EM4WUEN_SHIFT))
-#define EM4WU_WAKE_UP                           (1U << (6 + _GPIO_EM4WUEN_EM4WUEN_SHIFT))
-#define EM4WU_BUTTON0                           (1U << (8 + _GPIO_EM4WUEN_EM4WUEN_SHIFT))
+#define EM4WU_ST_STO_RDY                        (1U << \
+                                                 (3    \
+                                                  + _GPIO_EM4WUEN_EM4WUEN_SHIFT))
+#define EM4WU_ST_LOAD                           (1U << \
+                                                 (4    \
+                                                  + _GPIO_EM4WUEN_EM4WUEN_SHIFT))
+#define EM4WU_ST_STO_OVDIS                      (1U << \
+                                                 (9    \
+                                                  + _GPIO_EM4WUEN_EM4WUEN_SHIFT))
+#define EM4WU_WAKE_UP                           (1U << \
+                                                 (6    \
+                                                  + _GPIO_EM4WUEN_EM4WUEN_SHIFT))
+#define EM4WU_BUTTON0                           (1U << \
+                                                 (8    \
+                                                  + _GPIO_EM4WUEN_EM4WUEN_SHIFT))
 
 #define DEVICE_NAME                             "Harvester"
 
@@ -92,8 +102,8 @@ PACKSTRUCT(struct harvesterPayload {
 #if !defined(ADV_NEXT_INTERVAL)
   uint8_t nextInterval_ms[3];
 #endif
-  uint8_t advState : 4;
-  uint8_t DIPSwitch : 4;
+  uint8_t advState: 4;
+  uint8_t DIPSwitch: 4;
 #if defined(ADV_PAYLOAD_COUNTER)
   uint8_t counter[3];
 #endif
@@ -115,7 +125,7 @@ PACKSTRUCT(struct harvesterShortPayload {
 
 #endif
 
-extern void * __ram_end__;
+extern void *__ram_end__;
 
 BtConfig_t btConfig = {
   .txPower = 0,
@@ -124,9 +134,9 @@ BtConfig_t btConfig = {
 static const uint8_t adv_flags = BLE_GAP_ADV_FLAGS_LE_ONLY_GENERAL_DISC_MODE;
 
 #if defined(ADV_LE_FEATURES)
-static const uint16_t adv_le_features = BT_FEATURE_LE_2M_PHY |
-                                        BT_FEATURE_LE_CODED_PHY |
-                                        BT_FEATURE_LE_EXTENDED_ADVERTISING;
+static const uint16_t adv_le_features = BT_FEATURE_LE_2M_PHY
+                                        | BT_FEATURE_LE_CODED_PHY
+                                        | BT_FEATURE_LE_EXTENDED_ADVERTISING;
 #endif
 
 #if defined(ADV_APPEARANCE)
@@ -153,26 +163,29 @@ struct harvesterShortPayload harvester_short_payload = {
 
 static void initGPCRC(void)
 {
-   CMU_ClockEnable(cmuClock_GPCRC, true);
-   GPCRC->CTRL = GPCRC_CTRL_AUTOINIT | GPCRC_CTRL_POLYSEL_CRC32 ;
-   GPCRC->INIT = 0;
-   GPCRC->EN = GPCRC_EN_EN;
-   GPCRC->CMD = GPCRC_CMD_INIT;
+  CMU_ClockEnable(cmuClock_GPCRC, true);
+  GPCRC->CTRL = GPCRC_CTRL_AUTOINIT | GPCRC_CTRL_POLYSEL_CRC32;
+  GPCRC->INIT = 0;
+  GPCRC->EN = GPCRC_EN_EN;
+  GPCRC->CMD = GPCRC_CMD_INIT;
 }
+
 static void deinitGPCRC(void)
 {
-   GPCRC->EN = 0;
-   CMU_ClockEnable(cmuClock_GPCRC, false);
+  GPCRC->EN = 0;
+  CMU_ClockEnable(cmuClock_GPCRC, false);
 }
+
 static uint32_t crc32Calculate(uint8_t *payload, uint32_t length)
 {
-    GPCRC->INPUTDATA = ASSET_TAG_APPID;
-    for (uint32_t i = 0; i < length; i++)
-    {
-        GPCRC->INPUTDATABYTE = payload[i];
-    }
-    return GPCRC->DATA;
+  GPCRC->INPUTDATA = ASSET_TAG_APPID;
+  for (uint32_t i = 0; i < length; i++)
+  {
+    GPCRC->INPUTDATABYTE = payload[i];
+  }
+  return GPCRC->DATA;
 }
+
 int main(void)
 {
   sl_harvester_voltages_t harvester_voltages;
@@ -202,13 +215,13 @@ int main(void)
   // (active-low, button pressed)
   // trigger on a falling edge of BUTTON0
   // (active low, button pressed)
-  GPIO_EM4EnablePinWakeup(EM4WU_BUTTON0,  0);
+  GPIO_EM4EnablePinWakeup(EM4WU_BUTTON0, 0);
 #else
   GPIO_PinModeSet(MODE_SELECT_PORT, MODE_SELECT_PIN, gpioModePushPull, 1);
   GPIO_PinModeSet(MODE_SWITCH0_PORT, MODE_SWITCH0_PIN, gpioModeInput, 0);
   GPIO_PinModeSet(MODE_SWITCH1_PORT, MODE_SWITCH1_PIN, gpioModeInput, 0);
-  mode_select = (GPIO_PinInGet(MODE_SWITCH1_PORT, MODE_SWITCH1_PIN) << 1) |
-                (GPIO_PinInGet(MODE_SWITCH0_PORT, MODE_SWITCH0_PIN) << 0);
+  mode_select = (GPIO_PinInGet(MODE_SWITCH1_PORT, MODE_SWITCH1_PIN) << 1)
+                | (GPIO_PinInGet(MODE_SWITCH0_PORT, MODE_SWITCH0_PIN) << 0);
   GPIO_PinModeSet(MODE_SELECT_PORT, MODE_SELECT_PIN, gpioModeDisabled, 0);
   GPIO_PinModeSet(MODE_SWITCH0_PORT, MODE_SWITCH0_PIN, gpioModeDisabled, 0);
   GPIO_PinModeSet(MODE_SWITCH1_PORT, MODE_SWITCH1_PIN, gpioModeDisabled, 0);
@@ -216,7 +229,6 @@ int main(void)
   GPIO_PinModeSet(ST_STO_RDY_PORT, ST_STO_RDY_PIN, gpioModeInput, 1);
   GPIO_PinModeSet(WAKE_UP_PORT, WAKE_UP_PIN, gpioModeInput, 1);
   GPIO_PinModeSet(BUTTON0_PORT, BUTTON0_PIN, gpioModeInput, 1);
-
 
   // trigger on a falling edge of WAKE_UP
   // (active-low, button pressed)
@@ -229,28 +241,31 @@ int main(void)
 #endif
   temperature = measure_temperature();
   measure_voltages(&harvester_voltages);
-  sl_beacon_power_level_t power_level = decide_power_settings_and_update_buram(&harvester_voltages, &beacon_settings);
-  btConfig.txPower = apply_power_settings(mode_select, power_level, &beacon_settings);
+  sl_beacon_power_level_t power_level = decide_power_settings_and_update_buram(
+    &harvester_voltages,
+    &beacon_settings);
+  btConfig.txPower = (int16_t)apply_power_settings(mode_select,
+                                                   power_level,
+                                                   &beacon_settings);
 
-  if (!GPIO_PinInGet(WAKE_UP_PORT, WAKE_UP_PIN))
-  {
+  if (!GPIO_PinInGet(WAKE_UP_PORT, WAKE_UP_PIN)) {
     beacon_settings.skip_next = false;
     beacon_settings.short_payload = false;
   }
-  if (beacon_settings.skip_next == false)
-  {
+  if (beacon_settings.skip_next == false) {
     unsigned int data_start;
 
     // going to send packets, have to select HFXO
     prepare_hfxo();
 
 #if defined(ADV_PAYLOAD_HARVESTER)
-    if (beacon_settings.short_payload == false)
-    {
+    if (beacon_settings.short_payload == false) {
       harvester_payload.temperature = temperature;
       harvester_payload.Vcap_mV = harvester_voltages.storage_voltage_millivolts;
-      harvester_payload.deltaVcap_mV = harvester_voltages.delta_storage_voltage_millivolts;
-      harvester_payload.lightIntensity = harvester_voltages.source_voltage_millivolts * 255 / 4000;
+      harvester_payload.deltaVcap_mV =
+        (int16_t)harvester_voltages.delta_storage_voltage_millivolts;
+      harvester_payload.lightIntensity =
+        (uint8_t)(harvester_voltages.source_voltage_millivolts * 255 / 4000);
       harvester_payload.advState = power_level;
       harvester_payload.DIPSwitch = mode_select;
 
@@ -280,22 +295,26 @@ int main(void)
     // For demonstration with more than one tag, we sum to the last 6 device ID the
     // address bytes
     const BtAddress_t *address = radio_getAddress();
-    for (int i = 0; i < 6; i++)
-        harvester_payload.deviceId[i + 2] += address->address[i];
+    for (int i = 0; i < 6; i++) {
+      harvester_payload.deviceId[i + 2] += address->address[i];
+    }
     //
     // calculate Crc32 so that the reader will only use the devices running the correct firmware
 #if defined(ADV_PAYLOAD_HARVESTER) && defined(ADV_CRC32)
     initGPCRC();
-    if (beacon_settings.short_payload == false)
-    {
-        uint32_t crc32 = crc32Calculate((uint8_t *) &harvester_payload, sizeof(harvester_payload) - sizeof(harvester_payload.crc32));
-        harvester_payload.crc32 = crc32;
-    }
-    else
-    {
-        memcpy (&harvester_short_payload,  &harvester_payload, sizeof(harvester_short_payload));
-        uint32_t crc32 = crc32Calculate((uint8_t *) &harvester_short_payload, sizeof(harvester_short_payload) - sizeof(harvester_payload.crc32));
-        harvester_short_payload.crc32 = crc32;
+    if (beacon_settings.short_payload == false) {
+      uint32_t crc32 =
+        crc32Calculate((uint8_t *) &harvester_payload,
+                       sizeof(harvester_payload)
+                       - sizeof(harvester_payload.crc32));
+      harvester_payload.crc32 = crc32;
+    } else {
+      memcpy(&harvester_short_payload, &harvester_payload,
+             sizeof(harvester_short_payload));
+      uint32_t crc32 = crc32Calculate((uint8_t *) &harvester_short_payload,
+                                      sizeof(harvester_short_payload)
+                                      - sizeof(harvester_payload.crc32));
+      harvester_short_payload.crc32 = crc32;
     }
     deinitGPCRC();
 
@@ -307,30 +326,27 @@ int main(void)
     //
 
 #if defined(ADV_PAYLOAD_HARVESTER)
-    if (beacon_settings.short_payload == false)
-    {
-        data_start = adv_push(BLE_GAP_AD_TYPE_MANUFACTURER_SPECIFIC_DATA,
-                              &harvester_payload,
-                              sizeof(harvester_payload)
-                               );
-    }
-    else
-    {
-        data_start = adv_push(BLE_GAP_AD_TYPE_MANUFACTURER_SPECIFIC_DATA,
-                              &harvester_short_payload,
-                              sizeof(harvester_short_payload)
-                                );
+    if (beacon_settings.short_payload == false) {
+      data_start = adv_push(BLE_GAP_AD_TYPE_MANUFACTURER_SPECIFIC_DATA,
+                            &harvester_payload,
+                            sizeof(harvester_payload)
+                            );
+    } else {
+      data_start = adv_push(BLE_GAP_AD_TYPE_MANUFACTURER_SPECIFIC_DATA,
+                            &harvester_short_payload,
+                            sizeof(harvester_short_payload)
+                            );
     }
 #endif
 
-    if (beacon_settings.short_payload == false)
-    {
+    if (beacon_settings.short_payload == false) {
 #if defined(ADV_POWER_LEVEL)
-      int8_t adv_tx_power = (btConfig.txPower < 0) ?
-        (btConfig.txPower - 5) / 10 :
-        (btConfig.txPower + 5) / 10;
+      int8_t adv_tx_power = (btConfig.txPower < 0)
+                            ?(btConfig.txPower - 5) / 10
+                            :(btConfig.txPower + 5) / 10;
 
-      adv_push(BLE_GAP_AD_TYPE_TX_POWER_LEVEL, &adv_tx_power, sizeof(adv_tx_power));
+      adv_push(BLE_GAP_AD_TYPE_TX_POWER_LEVEL, &adv_tx_power,
+               sizeof(adv_tx_power));
 #endif
 
 #if defined(ADV_NEXT_INTERVAL)
@@ -343,15 +359,18 @@ int main(void)
 #endif
 
 #if defined(ADV_APPEARANCE)
-      adv_push(BLE_GAP_AD_TYPE_APPEARANCE, &adv_appearance, sizeof(adv_appearance));
+      adv_push(BLE_GAP_AD_TYPE_APPEARANCE, &adv_appearance,
+               sizeof(adv_appearance));
 #endif
 
 #if defined(ADV_LE_FEATURES)
-      adv_push(BLE_GAP_AD_TYPE_LE_SUPPORTED_FEATURES, &adv_le_features, sizeof(adv_le_features));
+      adv_push(BLE_GAP_AD_TYPE_LE_SUPPORTED_FEATURES, &adv_le_features,
+               sizeof(adv_le_features));
 #endif
 
 #if defined(ADV_LOCAL_NAME)
-      adv_push(BLE_GAP_AD_TYPE_COMPLETE_LOCAL_NAME, DEVICE_NAME, strlen(DEVICE_NAME));
+      adv_push(BLE_GAP_AD_TYPE_COMPLETE_LOCAL_NAME, DEVICE_NAME,
+               strlen(DEVICE_NAME));
 #endif
     }
 
@@ -362,8 +381,7 @@ int main(void)
     beacon_settings.beacon_count--;
 
     // if a "first" one is still there
-    if (beacon_settings.beacon_count)
-    {
+    if (beacon_settings.beacon_count) {
       // send it
       adv_send(beacon_settings.channel);
       beacon_settings.beacon_count--;
@@ -383,26 +401,28 @@ int main(void)
     // update the interval in the packet
 #if defined(ADV_PAYLOAD_HARVESTER)
 #if !defined(ADV_NEXT_INTERVAL)
-    if (beacon_settings.short_payload == false)
-    {
-        adv_patch(data_start,
+    if (beacon_settings.short_payload == false) {
+      adv_patch(data_start,
                 __builtin_offsetof(struct harvesterPayload, nextInterval_ms),
                 &beacon_settings.period_time,
                 sizeof(harvester_payload.nextInterval_ms));
-        // update CRC32 as well
-        // a) copy the new interval
-        // Little Endian ordering is assumed here...
-        memcpy(&harvester_payload.nextInterval_ms,
-               &beacon_settings.period_time,
-               sizeof(harvester_payload.nextInterval_ms));
+      // update CRC32 as well
+      // a) copy the new interval
+      // Little Endian ordering is assumed here...
+      memcpy(&harvester_payload.nextInterval_ms,
+             &beacon_settings.period_time,
+             sizeof(harvester_payload.nextInterval_ms));
 
-        initGPCRC();
+      initGPCRC();
 
-        uint32_t crc32 = crc32Calculate((uint8_t *)&harvester_payload, sizeof(harvester_payload) - sizeof(harvester_payload.crc32));
-        harvester_payload.crc32 = crc32;
-        deinitGPCRC();
-        //
-        adv_patch(data_start,
+      uint32_t crc32 =
+        crc32Calculate((uint8_t *)&harvester_payload,
+                       sizeof(harvester_payload)
+                       - sizeof(harvester_payload.crc32));
+      harvester_payload.crc32 = crc32;
+      deinitGPCRC();
+      //
+      adv_patch(data_start,
                 __builtin_offsetof(struct harvesterPayload, crc32),
                 &crc32,
                 sizeof(harvester_payload.crc32));
@@ -414,5 +434,5 @@ int main(void)
     adv_send(beacon_settings.channel);
   }
   EMU_EnterEM4();
-  while (1) __COMPILER_BARRIER();
+  while (1) { __COMPILER_BARRIER(); }
 }

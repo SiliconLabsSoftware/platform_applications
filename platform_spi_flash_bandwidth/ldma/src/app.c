@@ -27,7 +27,7 @@
 #include "em_emu.h"
 #include "app_log.h"
 
-#define SPIPORT gpioPortC
+#define SPIPORT   gpioPortC
 #define MOSIPIN   0
 #define MISOPIN   1
 #define SCLKPIN   2
@@ -64,21 +64,20 @@ static LDMA_TransferCfg_t ldmaTXcfg;
 static LDMA_Descriptor_t ldmaRXdesc;
 static LDMA_TransferCfg_t ldmaRXcfg;
 
-
-static void app_timer_callback(sl_sleeptimer_timer_handle_t *timer, void* data);
+static void app_timer_callback(sl_sleeptimer_timer_handle_t *timer, void *data);
 static bool dma_rx_callback(unsigned int channel,
-                              unsigned int sequenceNo,
-                              void *userParam);
+                            unsigned int sequenceNo,
+                            void *userParam);
 static bool dma_tx_callback(unsigned int channel,
-                              unsigned int sequenceNo,
-                              void *userParam);
+                            unsigned int sequenceNo,
+                            void *userParam);
 
 /***************************************************************************//**
  * DMA RX complete function.
  ******************************************************************************/
 bool dma_rx_callback(unsigned int channel,
-                              unsigned int sequenceNo,
-                              void *userParam)
+                     unsigned int sequenceNo,
+                     void *userParam)
 {
   (void)channel;
   (void)sequenceNo;
@@ -93,8 +92,8 @@ bool dma_rx_callback(unsigned int channel,
  * DMA TX complete callback function.
  ******************************************************************************/
 bool dma_tx_callback(unsigned int channel,
-                              unsigned int sequenceNo,
-                              void *userParam)
+                     unsigned int sequenceNo,
+                     void *userParam)
 {
   (void)channel;
   (void)sequenceNo;
@@ -108,13 +107,12 @@ bool dma_tx_callback(unsigned int channel,
 /***************************************************************************//**
  * App timer callback function.
  ******************************************************************************/
-static void app_timer_callback(sl_sleeptimer_timer_handle_t *timer, void* data)
+static void app_timer_callback(sl_sleeptimer_timer_handle_t *timer, void *data)
 {
   (void)timer;
   (void)data;
 
   msTicks++;  // Increment milliseconds tick counter
-
 }
 
 /***************************************************************************//**
@@ -124,8 +122,8 @@ void app_time_sync(void)
 {
   msTicks_end = msTicks;
 
-  while(msTicks_end == msTicks);    //msTicks Sync
-
+  while (msTicks_end == msTicks) {  // msTicks Sync
+  }
   msTicks_start = msTicks;
 }
 
@@ -139,9 +137,10 @@ void app_dma_init(void)
   ecode = DMADRV_Init();
   if ((ecode != ECODE_OK)
       && (ecode != ECODE_EMDRV_DMADRV_ALREADY_INITIALIZED)) {
-      app_log("DMA initalized failed!\n");
+    app_log("DMA initalized failed!\n");
     return;
   }
+
   /*
    * If transmitting an actual block, dummyOut would be replaced with
    * an array with actual transmit data.  Further, there would be no
@@ -160,9 +159,13 @@ void app_dma_init(void)
    * linked to the descriptor that generates the dummy transfers as a
    * means of using LDMA for the entire READ operation.
    */
-  ldmaTXdesc = (LDMA_Descriptor_t)LDMA_DESCRIPTOR_SINGLE_M2P_BYTE(dummyOut, &(USART2->TXDATA), BYTECOUNT);
+  ldmaTXdesc =
+    (LDMA_Descriptor_t)LDMA_DESCRIPTOR_SINGLE_M2P_BYTE(dummyOut,
+                                                       &(USART2->TXDATA),
+                                                       BYTECOUNT);
   ldmaTXdesc.xfer.srcInc = ldmaCtrlSrcIncNone;
-  ldmaTXcfg = (LDMA_TransferCfg_t)LDMA_TRANSFER_CFG_PERIPHERAL(ldmaPeripheralSignal_USART2_TXBL);
+  ldmaTXcfg = (LDMA_TransferCfg_t)LDMA_TRANSFER_CFG_PERIPHERAL(
+    ldmaPeripheralSignal_USART2_TXBL);
 
   /*
    * This descriptor setup is the reverse of what was used above.
@@ -172,9 +175,13 @@ void app_dma_init(void)
    * LDMA_DESCRIPTOR_SINGLE_P2M_BYTE() defaults to increment by one for
    * peripheral to memory byte transfers.
    */
-  ldmaRXdesc = (LDMA_Descriptor_t)LDMA_DESCRIPTOR_SINGLE_P2M_BYTE(&(USART2->RXDATA), dummyIn, BYTECOUNT);
+  ldmaRXdesc =
+    (LDMA_Descriptor_t)LDMA_DESCRIPTOR_SINGLE_P2M_BYTE(&(USART2->RXDATA),
+                                                       dummyIn,
+                                                       BYTECOUNT);
   ldmaRXdesc.xfer.dstInc = ldmaCtrlDstIncNone;
-  ldmaRXcfg = (LDMA_TransferCfg_t)LDMA_TRANSFER_CFG_PERIPHERAL(ldmaPeripheralSignal_USART2_RXDATAV);
+  ldmaRXcfg = (LDMA_TransferCfg_t)LDMA_TRANSFER_CFG_PERIPHERAL(
+    ldmaPeripheralSignal_USART2_RXDATAV);
 
   // Allocate DMA channel for TX
   ecode = DMADRV_AllocateChannel(&spiTxChan, NULL);
@@ -215,23 +222,23 @@ void app_spi_init(void)
   GPIO_SlewrateSet(SPIPORT, 7, 4);
 
   // Configure pins for SPI master mode
-  GPIO_PinModeSet (SPIPORT, MOSIPIN, gpioModePushPull, 0);   // MOSI/TX: PC0, EXP header pin 4
-  GPIO_PinModeSet (SPIPORT, MISOPIN, gpioModeInput, 0);      // MISO/RX: PC1, EXP header pin 6
-  GPIO_PinModeSet (SPIPORT, SCLKPIN, gpioModePushPull, 0);   // CLK: PC2, EXP header pin 8
-  GPIO_PinModeSet (CSPORT, CSPIN, gpioModePushPull, 1);       // CS: PC3, EXP header pin 10
+  GPIO_PinModeSet(SPIPORT, MOSIPIN, gpioModePushPull, 0);    // MOSI/TX: PC0, EXP header pin 4
+  GPIO_PinModeSet(SPIPORT, MISOPIN, gpioModeInput, 0);       // MISO/RX: PC1, EXP header pin 6
+  GPIO_PinModeSet(SPIPORT, SCLKPIN, gpioModePushPull, 0);    // CLK: PC2, EXP header pin 8
+  GPIO_PinModeSet(CSPORT, CSPIN, gpioModePushPull, 1);        // CS: PC3, EXP header pin 10
 
   // Route MOSI, MISO, and CLK signals to port C pins; CS remains a discrete
   GPIO->USARTROUTE[2].TXROUTE = (SPIPORT << _GPIO_USART_TXROUTE_PORT_SHIFT)
-      | (MOSIPIN << _GPIO_USART_TXROUTE_PIN_SHIFT);
+                                | (MOSIPIN << _GPIO_USART_TXROUTE_PIN_SHIFT);
   GPIO->USARTROUTE[2].RXROUTE = (SPIPORT << _GPIO_USART_RXROUTE_PORT_SHIFT)
-      | (MISOPIN << _GPIO_USART_RXROUTE_PIN_SHIFT);
+                                | (MISOPIN << _GPIO_USART_RXROUTE_PIN_SHIFT);
   GPIO->USARTROUTE[2].CLKROUTE = (SPIPORT << _GPIO_USART_CLKROUTE_PORT_SHIFT)
-      | (SCLKPIN << _GPIO_USART_CLKROUTE_PIN_SHIFT);
+                                 | (SCLKPIN << _GPIO_USART_CLKROUTE_PIN_SHIFT);
 
   // Enable USART2 signals at the pins
-  GPIO->USARTROUTE[2].ROUTEEN = GPIO_USART_ROUTEEN_TXPEN |    // MOSI
-                                GPIO_USART_ROUTEEN_RXPEN |    // MISO
-                                GPIO_USART_ROUTEEN_CLKPEN;
+  GPIO->USARTROUTE[2].ROUTEEN = GPIO_USART_ROUTEEN_TXPEN      // MOSI
+                                | GPIO_USART_ROUTEEN_RXPEN    // MISO
+                                | GPIO_USART_ROUTEEN_CLKPEN;
 }
 
 /***************************************************************************//**
@@ -250,6 +257,7 @@ void app_main_task(void)
                                         0);
   app_time_sync();
   USART_Tx(USART2, M25X_READ);
+
   /*
    * Send bytes 1, 2, and 3 of 32-bit address.  Byte 0 should always
    * be 0 unless the device in question has a 32-bit address space, in
@@ -266,12 +274,20 @@ void app_main_task(void)
     txDone = false;
 
     // Start both channels
-    DMADRV_LdmaStartTransfer(spiTxChan, &ldmaTXcfg, &ldmaTXdesc, dma_tx_callback, NULL);
-    DMADRV_LdmaStartTransfer(spiRxChan, &ldmaRXcfg, &ldmaRXdesc, dma_rx_callback, NULL);
+    DMADRV_LdmaStartTransfer(spiTxChan,
+                             &ldmaTXcfg,
+                             &ldmaTXdesc,
+                             dma_tx_callback,
+                             NULL);
+    DMADRV_LdmaStartTransfer(spiRxChan,
+                             &ldmaRXcfg,
+                             &ldmaRXdesc,
+                             dma_rx_callback,
+                             NULL);
 
     // Wait in EM1 until all data is received
     while (!rxDone && !txDone) {
-            EMU_EnterEM1();
+      EMU_EnterEM1();
     }
   }
 
@@ -282,9 +298,12 @@ void app_main_task(void)
   // Display transfer rate
   rate = ((LOOPCOUNT * BYTECOUNT) / (msTicks_end - msTicks_start));
 
-  app_log("Done: %u bytes in %u ms = %u KB/sec\n", (LOOPCOUNT * BYTECOUNT), (unsigned int)(msTicks_end - msTicks_start), rate);
-  app_log("USART2 clock = %u MHz\n", (unsigned int)(CMU_ClockFreqGet(cmuClock_USART2) / 1000000));
-  app_log("LDMA clock = %u MHz\n", (unsigned int)(CMU_ClockFreqGet(cmuClock_LDMA) / 1000000));
+  app_log("Done: %u bytes in %u ms = %u KB/sec\n", (LOOPCOUNT * BYTECOUNT),
+          (unsigned int)(msTicks_end - msTicks_start), rate);
+  app_log("USART2 clock = %u MHz\n",
+          (unsigned int)(CMU_ClockFreqGet(cmuClock_USART2) / 1000000));
+  app_log("LDMA clock = %u MHz\n",
+          (unsigned int)(CMU_ClockFreqGet(cmuClock_LDMA) / 1000000));
 
   __BKPT(0);
 }

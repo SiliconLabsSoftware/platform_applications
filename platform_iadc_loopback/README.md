@@ -2,10 +2,10 @@
 ![Type badge](https://img.shields.io/badge/Type-Virtual%20Application-green)
 ![Technology badge](https://img.shields.io/badge/Technology-Platform-green)
 ![License badge](https://img.shields.io/badge/License-Zlib-green)
-![SDK badge](https://img.shields.io/badge/SDK-v2024.12.1-green)
+![SDK badge](https://img.shields.io/badge/SDK-v2025.6.2-green)
 ![Build badge](https://img.shields.io/badge/Build-passing-green)
-![Flash badge](https://img.shields.io/badge/Flash-33.68%20KB-blue)
-![RAM badge](https://img.shields.io/badge/RAM-5.77%20KB-blue)
+![Flash badge](https://img.shields.io/badge/Flash-34.57%20KB-blue)
+![RAM badge](https://img.shields.io/badge/RAM-5.86%20KB-blue)
 
 ## Overview ##
 
@@ -13,7 +13,7 @@ This project demonstrates how the VDAC generated signal can be measured back wit
 
 ## SDK version ##
 
-- SiSDK v2024.12.1-0
+- [Simplicity SDK v2025.6.2](https://github.com/SiliconLabs/simplicity_sdk/releases/tag/v2025.6.2)
 
 ## Hardware Required ##
 
@@ -86,12 +86,12 @@ Please check the **"Pin Routing"** section below, to see the complete list of wh
 
 The IADC IRQ will toggle a flag when the measurement is done. The logging will be done in the **"app_proccess_action()"**. In order to measure the generated output signal, please follow the instructions below:
 
-### VDAC's Sine Wave
+### VDAC's Sine Wave ###
 Connect the Logic analyzer with the **""VDAC0_CH0_MAIN_OUT""** of your device.
 You will see the sine wave.
 ![VDAC_Measurement](image/VDAC_0_Logic_Analyzer.png)
 
-### IADC - VDAC loopback 
+### IADC - VDAC loopback ###
 Connect the VDAC0 and the IADC0 pins physically  with a wire. 
 The application will log in to Terminal 1.
 If the logging doesn't start, please press an **Enter** in Terminal 1.

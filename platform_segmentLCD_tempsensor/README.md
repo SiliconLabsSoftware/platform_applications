@@ -1,10 +1,10 @@
-# Platform - Segment LCD and Temperature Sensor ##
+# Platform - Segment LCD and Temperature Sensor #
 ![Type badge](https://img.shields.io/badge/Type-Virtual%20Application-green)
 ![Technology badge](https://img.shields.io/badge/Technology-Platform-green)
 ![License badge](https://img.shields.io/badge/License-Zlib-green)
-![SDK badge](https://img.shields.io/badge/SDK-v2024.12.2-green)
+![SDK badge](https://img.shields.io/badge/SDK-v2025.6.2-green)
 ![Build badge](https://img.shields.io/badge/Build-passing-green)
-![Flash badge](https://img.shields.io/badge/Flash-21.14%20KB-blue)
+![Flash badge](https://img.shields.io/badge/Flash-20.92%20KB-blue)
 ![RAM badge](https://img.shields.io/badge/RAM-4.66%20KB-blue)
 
 ## Summary ##
@@ -12,7 +12,7 @@ This project demonstrates how to use the Si70xx (BRD2600A, BRD2504A, and BRD2506
 
 ## SDK version ##
 
-- SiSDK v2024.12.2
+- [Simplicity SDK v2025.6.2](https://github.com/SiliconLabs/simplicity_sdk/releases/tag/v2025.6.2)
 
 ## Hardware Required ##
 
@@ -27,7 +27,7 @@ Connect the board via a micro-USB or USB-C cable to your PC to flash the example
 ## Setup ##
 You can either create a project based on an example project or start with an empty example project.
 
-### Create a project based on an example project ##
+### Create a project based on an example project ###
 
 1. From the Launcher Home, add the BRD2600A, BRD2504A, BRD2505A, or BRD2506A to My Products, click on it, and click on the **EXAMPLE PROJECTS & DEMOS** tab. Find the example project with the filter "temperature".
 
@@ -37,7 +37,7 @@ You can either create a project based on an example project or start with an emp
 
 3. Build and flash this example to the board.
 
-### Start with an "Empty C Project" project ##
+### Start with an "Empty C Project" project ###
 
 1. Create an **Empty C Project** project for your hardware using Simplicity Studio 5.
 

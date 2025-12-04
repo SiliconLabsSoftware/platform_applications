@@ -23,7 +23,7 @@ component:
     id: simple_button
 
 readme:
-- path: ../README.md
+  - path: ../README.md
 
 include:
 - path: ../src

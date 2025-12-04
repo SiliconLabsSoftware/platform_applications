@@ -1,0 +1,50 @@
+# Silicon Labs Project Configuration Tools: slcp, v0, Component selection file.
+project_name: platform_dac_dds
+label: Platform - VDAC Direct Digital Synthesis.
+description: |
+  This project shows an example using VDAC and DDS to generate desired frequency waveform.
+category: Example|Platform
+package: platform
+quality: experimental
+
+filter:
+- name: Device Type
+  value: [SoC]
+- name: MCU
+  value: [32-bit MCU]
+- name: Project Difficulty
+  value: [Beginner]
+
+readme:
+  - path: ../README.md
+
+source:
+- path: ../src/main.c
+- path: ../src/app.c
+
+include:
+- path: ../inc
+  file_list:
+  - path: app.h
+
+component:
+- id: sl_main
+- id: device_init
+- id: clock_manager
+- id: emlib_vdac
+- id: simple_button
+  instance: [btn0, btn1]
+
+other_file:
+  - path: ../images/dds.png
+    directory: "images"
+  - path: ../images/create_example.png
+    directory: "images"
+
+define:
+- name: DEBUG_EFM
+
+ui_hints:
+  highlight:
+    - path: README.md
+      focus: true

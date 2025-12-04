@@ -19,7 +19,6 @@
 
 #include <tempdrv.h>
 
-
 int measure_temperature(void)
 {
   int temperature;

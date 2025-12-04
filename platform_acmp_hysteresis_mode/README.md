@@ -3,10 +3,10 @@
 ![Type badge](https://img.shields.io/badge/Type-Virtual%20Application-green)
 ![Technology badge](https://img.shields.io/badge/Technology-Platform-green)
 ![License badge](https://img.shields.io/badge/License-Zlib-green)
-![SDK badge](https://img.shields.io/badge/SDK-v2024.12.2-green)
+![SDK badge](https://img.shields.io/badge/SDK-v2025.6.2-green)
 ![Build badge](https://img.shields.io/badge/Build-passing-green)
-![Flash badge](https://img.shields.io/badge/Flash-34.41%20KB-blue)
-![RAM badge](https://img.shields.io/badge/RAM-6.35%20KB-blue)
+![Flash badge](https://img.shields.io/badge/Flash-35.28%20KB-blue)
+![RAM badge](https://img.shields.io/badge/RAM-6.43%20KB-blue)
 
 
 ## Overview ##
@@ -19,7 +19,7 @@ Peripherals used: ACMP, GPIO and PRS.
 
 ## SDK version ##
 
-- SiSDK v2024.12.2
+- [Simplicity SDK v2025.6.2](https://github.com/SiliconLabs/simplicity_sdk/releases/tag/v2025.6.2)
 
 ## Hardware Required ##
 

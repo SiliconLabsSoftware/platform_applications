@@ -3,9 +3,9 @@
 ![Type badge](https://img.shields.io/badge/Type-Virtual%20Application-green)
 ![Technology badge](https://img.shields.io/badge/Technology-Platform-green)
 ![License badge](https://img.shields.io/badge/License-Zlib-green)
-![SDK badge](https://img.shields.io/badge/SDK-v2024.12.2-green)
+![SDK badge](https://img.shields.io/badge/SDK-v2025.6.2-green)
 ![Build badge](https://img.shields.io/badge/Build-passing-green)
-![Flash badge](https://img.shields.io/badge/Flash-8.43%20KB-blue)
+![Flash badge](https://img.shields.io/badge/Flash-8.53%20KB-blue)
 ![RAM badge](https://img.shields.io/badge/RAM-5.4%20KB-blue)
 ## Overview ##
 
@@ -13,7 +13,7 @@ This project shows how to use the LCD peripheral with the LDMA on the EFR32FG23 
 
 ## SDK version ##
 
-- SiSDK v2024.12.2
+- [Simplicity SDK v2025.6.2](https://github.com/SiliconLabs/simplicity_sdk/releases/tag/v2025.6.2)
 
 ## Hardware Required ##
 

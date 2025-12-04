@@ -1,19 +1,19 @@
 # Platform - Flash blank checking using the GPCRC #
 ![Type badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_gpcrc_blank_check_common.json&label=Type&query=type&color=green)
-![Technology badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_gpcrc_blank_check_common.json&label=Technology&query=technology&color=green)
-![License badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_gpcrc_blank_check_common.json&label=License&query=license&color=green)
-![SDK badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_gpcrc_blank_check_common.json&label=SDK&query=sdk&color=green)
-![Build badge](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_gpcrc_blank_check_build_status.json)
-![Flash badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_gpcrc_blank_check_common.json&label=Flash&query=flash&color=blue)
-![RAM badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_gpcrc_blank_check_common.json&label=RAM&query=ram&color=blue)
+![Technology badge](https://img.shields.io/badge/Technology-Platform-green)
+![License badge](https://img.shields.io/badge/License-Zlib-green)
+![SDK badge](https://img.shields.io/badge/SDK-v2025.6.2-green)
+![Build badge](https://img.shields.io/badge/Build-passing-green)
+![Flash badge](https://img.shields.io/badge/Flash-21.32%20KB-blue)
+![RAM badge](https://img.shields.io/badge/RAM-5.54%20KB-blue)
 
 ## Overview ##
 
 This project benchmarks the performance of blank checking a page of the flash using the General Purpose Cyclic Redundancy Check (GPCRC) fed by the Linked Direct Memory Access (LDMA) and brute forcing blank checking with the CPU.
 
-## Gecko SDK version ##
+## SDK version ##
 
-- GSDK v4.4.3
+- [Simplicity SDK v2025.6.2](https://github.com/SiliconLabs/simplicity_sdk/releases/tag/v2025.6.2)
 
 ## Hardware Required ##
 
@@ -106,7 +106,7 @@ The program flow is as follows:
 
 8.  Steps 6 and 7 are again repeated. This time with a hybrid routine wherein the CPU feeds the flash page contents to the GPCRC. The algorithm is potentially useful. Because it can be used to accelerate flash programming by performing blank checking of the next page in parallel.
 
-## Theory
+## Theory ##
 
 The simplest way to blank-check a page of the flash is to see if each byte/half-word/word is erased.
 

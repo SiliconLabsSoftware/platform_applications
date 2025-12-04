@@ -23,6 +23,8 @@
 #include "em_wdog.h"
 #include "sl_power_manager.h"
 #include "sl_sleeptimer.h"
+#include "sl_gpio.h"
+#include "sl_hal_gpio.h"
 
 #define GPIO_LED0_PORT  gpioPortB
 #define GPIO_LED0_PIN   2
@@ -35,6 +37,29 @@
 
 volatile bool inEM2;
 sl_sleeptimer_timer_handle_t watchdog_feed_timer;
+
+void gpio_interrupt_callback(uint8_t interrupt_number, void *context)
+{
+  (void)interrupt_number;
+  (void)context;
+
+  // Toggle between EM1 and EM2 on PB0 button press
+  // Lowest energy mode to enter is EM1, stop BURTC and start WDOG0
+  if (inEM2) {
+    inEM2 = false;
+    sl_power_manager_add_em_requirement(SL_POWER_MANAGER_EM1);
+    BURTC_Stop();
+    WDOGn_Enable(WDOG0, true);
+  }
+  // Device can enter EM2, stop WDOG0 and start BURTC
+  else {
+    inEM2 = true;
+    sl_power_manager_remove_em_requirement(SL_POWER_MANAGER_EM1);
+    WDOGn_Enable(WDOG0, false);
+    BURTC_CounterReset();
+    BURTC_Start();
+  }
+}
 
 void checkResetReason(void)
 {
@@ -68,10 +93,25 @@ void initGPIO(void)
   // Configure PB1
   GPIO_PinModeSet(GPIO_PB1_PORT, GPIO_PB1_PIN, gpioModeInputPull, 1);
 
-  // Configure PB0 and enable GPIO falling edge interrupts
-  GPIO_PinModeSet(GPIO_PB0_PORT, GPIO_PB0_PIN, gpioModeInputPull, 1);
-  GPIO_ExtIntConfig(GPIO_PB0_PORT, GPIO_PB0_PIN, GPIO_PB0_PIN, false, true,
-                    true);
+  sl_gpio_t gpio_pin = {
+    .port = GPIO_PB0_PORT,
+    .pin = GPIO_PB0_PIN
+  };
+
+  // PB1 - push button 1 configured as input mode with filter enabled
+  // Enable interrupt on PB1
+  sl_hal_gpio_set_pin_mode(&gpio_pin, gpioModeInputPull, 1);
+
+  int32_t int_no = SL_GPIO_INTERRUPT_UNAVAILABLE;  // Let the function assign an interrupt number
+
+  sl_gpio_configure_external_interrupt(
+    &gpio_pin,                                // GPIO structure with port and pin
+    &int_no,                                  // Pointer to interrupt number (input/output)
+    SL_GPIO_INTERRUPT_FALLING_EDGE,            // Trigger on falling edge
+    gpio_interrupt_callback,                  // Callback function
+    NULL                                      // Context (optional)
+    );
+
   NVIC_ClearPendingIRQ(GPIO_ODD_IRQn);
   NVIC_EnableIRQ(GPIO_ODD_IRQn);
 }
@@ -122,31 +162,6 @@ void initBURTC(void)
   BURTC_IntEnable(BURTC_IEN_COMP);
   NVIC_ClearPendingIRQ(BURTC_IRQn);
   NVIC_EnableIRQ(BURTC_IRQn);
-}
-
-void GPIO_ODD_IRQHandler(void)
-{
-  uint32_t flags = GPIO_IntGet();
-  GPIO_IntClear(flags);
-
-  // Toggle between EM1 and EM2 on PB0 button press
-  if (flags & (1 << GPIO_PB0_PIN)) {
-    // Lowest energy mode to enter is EM1, stop BURTC and start WDOG0
-    if (inEM2) {
-      inEM2 = false;
-      sl_power_manager_add_em_requirement(SL_POWER_MANAGER_EM1);
-      BURTC_Stop();
-      WDOGn_Enable(WDOG0, true);
-    }
-    // Device can enter EM2, stop WDOG0 and start BURTC
-    else {
-      inEM2 = true;
-      sl_power_manager_remove_em_requirement(SL_POWER_MANAGER_EM1);
-      WDOGn_Enable(WDOG0, false);
-      BURTC_CounterReset();
-      BURTC_Start();
-    }
-  }
 }
 
 void BURTC_IRQHandler(void)

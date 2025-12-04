@@ -1,11 +1,12 @@
-# Platform - EFR32xG21 DMA SPI Throughput #
+# Platform - EFR32xG21 LDMA SPI Throughput #
+
 ![Type badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/ldma_common.json&label=Type&query=type&color=green)
-![Technology badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/ldma_common.json&label=Technology&query=technology&color=green)
-![License badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/ldma_common.json&label=License&query=license&color=green)
-![SDK badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/ldma_common.json&label=SDK&query=sdk&color=green)
-![Build badge](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/ldma_build_status.json)
-![Flash badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/ldma_common.json&label=Flash&query=flash&color=blue)
-![RAM badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/ldma_common.json&label=RAM&query=ram&color=blue)
+![Technology badge](https://img.shields.io/badge/Technology-Platform-green)
+![License badge](https://img.shields.io/badge/License-Zlib-green)
+![SDK badge](https://img.shields.io/badge/SDK-v2025.6.2-green)
+![Build badge](https://img.shields.io/badge/Build-passing-green)
+![Flash badge](https://img.shields.io/badge/Flash-20.17%20KB-blue)
+![RAM badge](https://img.shields.io/badge/RAM-6.62%20KB-blue)
 
 ## Overview ##
 
@@ -15,9 +16,9 @@ Because this code benchmarks read performance, there is no need to connect an ac
 
 Modules used: CMU, EMU, LDMA, GPIO, Sleep Timer, USART0 (for VCOM), and USART2 (SPI flash).
 
-## Gecko SDK Suite version ##
+## SDK version ##
 
-- GSDK v4.4.3
+- [Simplicity SDK v2025.6.2](https://github.com/SiliconLabs/simplicity_sdk/releases/tag/v2025.6.2)
 
 ## Hardware Required ##
 
@@ -58,7 +59,7 @@ To test this application, you can either create a project based on an example pr
 
         - [Services] → [IO Stream] → [IO Stream: USART]: use default instance: vcom
   
-        - [Application] → Utility] → [Log]
+        - [Application] → [Utility] → [Log]
 
         - [Services] → [Timers] → [Sleep Timer]
 

@@ -26,7 +26,7 @@ component:
   - id: sleeptimer
 
 readme:
-- path: ../README.md
+  - path: ../README.md
 
 include:
 - path: ../inc

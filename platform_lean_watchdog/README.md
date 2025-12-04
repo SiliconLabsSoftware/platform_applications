@@ -1,13 +1,13 @@
-# Platform - Lean Watchdog
+# Platform - Lean Watchdog #
 
 ![Type badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_lean_watchdog_common.json&label=Type&query=type&color=green)
-![Technology badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_lean_watchdog_common.json&label=Technology&query=technology&color=green)
-![License badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_lean_watchdog_common.json&label=License&query=license&color=green)
-![SDK badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_lean_watchdog_common.json&label=SDK&query=sdk&color=green)
-![Build badge](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_lean_watchdog_build_status.json)
-![Flash badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_lean_watchdog_common.json&label=Flash&query=flash&color=blue)
-![RAM badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_lean_watchdog_common.json&label=RAM&query=ram&color=blue)
-## Summary
+![Technology badge](https://img.shields.io/badge/Technology-Platform-green)
+![License badge](https://img.shields.io/badge/License-Zlib-green)
+![SDK badge](https://img.shields.io/badge/SDK-v2025.6.2-green)
+![Build badge](https://img.shields.io/badge/Build-passing-green)
+![Flash badge](https://img.shields.io/badge/Flash-18.67%20KB-blue)
+![RAM badge](https://img.shields.io/badge/RAM-4.61%20KB-blue)
+## Summary ##
 
 This project is part of AN1426. A watchdog provides a way to reset the device in case of a system failure. Series 2 EFM32/EFR32 devices have the WDOG peripheral which functions as the dedicated watchdog peripheral. Although the WDOG is capable of running in EM2/3 and consumes very little power, systems with very strict power requirements may benefit from using the "lean watchdog" alternative.
 
@@ -15,24 +15,23 @@ In EM2/3, peripherals are powered by power domains, and these power domains are 
 
 Peripherals used: WDOG0, BURTC, LFXO, GPIO, SYSRTC
 
-## Gecko SDK version
+## SDK version ##
+- [Simplicity SDK v2025.6.2](https://github.com/SiliconLabs/simplicity_sdk/releases/tag/v2025.6.2)
 
-- v4.4.3
-
-## Hardware Required
+## Hardware Required ##
 
 - [EFR32XG23 868-915 MHz +14 dBm Radio Board](https://www.silabs.com/development-tools/wireless/xg23-rb4204d-efr32xg23-868-915-mhz-14-dbm-radio-board)
 - Wireless Starter Kit Mainboard
 
-## Connections Required
+## Connections Required ##
 
 - Connect the radio board to the WSTK, and connect the WSTK via a micro-USB cable to your PC.
 
-## Setup
+## Setup ##
 
 To test this application, you can either create a project based on an example project or start with an empty example project.
 
-### Create a project based on an example project
+### Create a project based on an example project ###
 
 1. Make sure that this repository is added to [Preferences > Simplicity Studio > External Repos](https://docs.silabs.com/simplicity-studio-5-users-guide/latest/ss-5-users-guide-about-the-launcher/welcome-and-device-tabs).
 
@@ -44,7 +43,7 @@ To test this application, you can either create a project based on an example pr
 
 4. Build and flash this example to the board.
 
-### Start with an empty example project
+### Start with an empty example project ###
 
 1. Create an **Empty C Project** project for your hardware using Simplicity Studio 5.
 
@@ -60,13 +59,13 @@ To test this application, you can either create a project based on an example pr
 
 4. Build and flash the project to your device.
 
-## How It Works
+## How It Works ##
 
 Pressing PB0 toggles the energy mode between EM1 and EM2. When in EM1, the WDOG0 is configured as the system's watchdog. WDOG0 selects the LFXO as its clock source and is configured to reset the system if WDOG0 is not fed within 2 seconds. When in EM2, the BURTC is configured as the system's watchdog. The BURTC selects the LFXO as its clock source and is configured to trigger an interrupt if the BURTC is not fed within 2 seconds. The BURTC's interrupt handler is written to reset the system on a compare match event.
 
 The sleeptimer service uses the SYSRTC to feed the appropriate watchdog every second. Pressing PB1 while the sleeptimer attempts to feed the watchdog will prevent the watchdog from being fed.
 
-## Testing
+## Testing ##
 
 Pressing PB1 for at most 2 seconds prevents the watchdog from being fed and will trigger a watchdog reset. Out of reset, the software checks the reset cause. If the reset was due to the WDOG0, LED0 will turn on, and the software will stall in an infinite while loop. If the reset was due to a system reset request, LED1 will turn on and the software will stall in an infinite while loop.
 

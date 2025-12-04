@@ -20,7 +20,12 @@
 
 #include "types.h"
 
-unsigned int apply_power_settings(int mode_select, sl_beacon_power_level_t power_level, sl_beacon_settings_t *settings);
-sl_beacon_power_level_t decide_power_settings_and_update_buram(sl_harvester_voltages_t *hv, sl_beacon_settings_t * settings);
+unsigned int apply_power_settings(int mode_select,
+                                  sl_beacon_power_level_t power_level,
+                                  sl_beacon_settings_t *settings);
+sl_beacon_power_level_t decide_power_settings_and_update_buram(
+  sl_harvester_voltages_t *hv,
+  sl_beacon_settings_t *settings);
 sl_beacon_power_level_t decide_power_level(sl_harvester_voltages_t *hv);
+
 #endif

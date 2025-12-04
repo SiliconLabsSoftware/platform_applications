@@ -128,16 +128,16 @@ on_periodic_timeout(sl_sleeptimer_timer_handle_t *handle, void *data)
 }
 
 /***************************************************************************//**
-* Disable Unused LCD Segments
-*******************************************************************************/
+ * Disable Unused LCD Segments
+ *******************************************************************************/
 void
 disableUnusedLCDSeg(void)
 {
   /***************************************************************************//**
-  * The LCD driver enables all segments, even those that are not mapped to
-  * segments on the pro kit board. These are disabled below in order to
-  * minimize current consumption.
-  *******************************************************************************/
+   * The LCD driver enables all segments, even those that are not mapped to
+   * segments on the pro kit board. These are disabled below in order to
+   * minimize current consumption.
+   *******************************************************************************/
 #if defined (SL_SEGMENT_LCD_MODULE_CE322_1002)
   LCD_SegmentEnable(9, false);
   LCD_SegmentEnable(11, false);

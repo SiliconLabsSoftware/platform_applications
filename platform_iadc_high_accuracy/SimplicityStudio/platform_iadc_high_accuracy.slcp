@@ -1,0 +1,95 @@
+# Silicon Labs Project Configuration Tools: slcp, v0, Component selection file.
+project_name: platform_iadc_high_accuracy
+label: Platform - IADC High Accuracy Mode (PG23 & PG28)
+description: |
+  Consolidated high accuracy IADC examples for PG23 (single-ended EM2 sampling with oversampling/averaging and PRS pulse) and
+  PG28 (differential high-rate continuous acquisition with LDMA ping-pong buffering and statistics). Demonstrates 20-bit
+  resolution operation, low-energy sampling, and maximum high accuracy throughput.
+
+category: Example|Platform
+package: platform
+quality: experimental
+
+filter:
+- name: Device Type
+  value: [SoC]
+- name: MCU
+  value: [32-bit MCU]
+- name: Project Difficulty
+  value: [Beginner]
+
+readme:
+  - path: ../README.md
+
+source:
+- path: ../src/pg23/app.c
+  condition: [brd2504a]
+- path: ../src/pg23/blink.c
+  condition: [brd2504a]
+- path: ../src/pg23/iadc_single.c
+  condition: [brd2504a]
+- path: ../src/pg28/app.c
+  condition: [brd2506a]
+- path: ../src/pg28/iadc_single.c
+  condition: [brd2506a]
+
+include:
+- path: ../inc/pg23
+  file_list:
+  - path: app.h
+    condition: [brd2504a]
+  - path: blink.h
+    condition: [brd2504a]
+  - path: iadc_single.h
+    condition: [brd2504a]
+
+- path: ../inc/pg28
+  file_list:
+  - path: app.h
+    condition: [brd2506a]
+  - path: iadc_single.h
+    condition: [brd2506a]
+
+component:
+- id: emlib_iadc
+- id: sl_main
+- id: device_init
+- id: emlib_prs
+- id: emlib_ldma
+- id: power_manager
+  condition: [brd2504a]
+- id: power_manager_deepsleep
+  condition: [brd2504a]
+- id: cmsis_dsp
+  condition: [brd2504a]
+- instance: [led0]
+  id: simple_led
+  condition: [brd2504a]
+- id: sleeptimer
+  condition: [brd2504a]
+  
+define:
+- name: DEBUG_EFM
+
+other_file:
+  - path: ../image/pg23_create_example.png
+    directory: "image"
+  - path: ../image/pg23_connection.png
+    directory: "image"
+  - path: ../image/pg23_conversion_result.png
+    directory: "image"
+  - path: ../image/pg23_map_prs_iadc_pb04.png
+    directory: "image"
+  - path: ../image/pg23_observe_expression.png
+    directory: "image"
+  - path: ../image/pg23_pulse_output_pin.png
+    directory: "image"
+  - path: ../image/pg28_add_breakpoint.png
+    directory: "image"
+  - path: ../image/pg28_pulse_on_output_pin.png
+    directory: "image"
+
+ui_hints:
+  highlight:
+    - path: README.md
+      focus: true

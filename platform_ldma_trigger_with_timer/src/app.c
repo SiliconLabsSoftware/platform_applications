@@ -139,23 +139,23 @@ void initTimer(void)
 }
 
 /**************************************************************************//**
-* @brief
-*    Initialize the LDMA module
-*
-* @details
-*    Configure the channel descriptor to use the default memory to
-*    peripheral transfer descriptor. Modify it to not generate an interrupt
-*    upon transfer completion (we don't need it for this example).
-*    Also make the descriptor link to itself so that the descriptor runs
-*    continuously.
-*
-* @note
-*    The descriptor object needs to at least have static scope persistence so
-*    that the reference to the object is valid beyond its first use in
-*    initialization. This is because this code loops back to the same
-*    descriptor after every dma transfer. If the reference isn't valid anymore,
-*    then all dma transfers after the first one will fail.
-******************************************************************************/
+ * @brief
+ *    Initialize the LDMA module
+ *
+ * @details
+ *    Configure the channel descriptor to use the default memory to
+ *    peripheral transfer descriptor. Modify it to not generate an interrupt
+ *    upon transfer completion (we don't need it for this example).
+ *    Also make the descriptor link to itself so that the descriptor runs
+ *    continuously.
+ *
+ * @note
+ *    The descriptor object needs to at least have static scope persistence so
+ *    that the reference to the object is valid beyond its first use in
+ *    initialization. This is because this code loops back to the same
+ *    descriptor after every dma transfer. If the reference isn't valid anymore,
+ *    then all dma transfers after the first one will fail.
+ ******************************************************************************/
 void initLdma(void)
 {
   // Descriptor loops through the sine table and outputs its values to the VDAC

@@ -62,18 +62,25 @@
 
 /**@defgroup BLE_GAP_ADV_FLAGS GAP Advertisement Flags
  * @{ */
-#define BLE_GAP_ADV_FLAG_LE_LIMITED_DISC_MODE         (0x01)   /**< LE Limited Discoverable Mode. */
-#define BLE_GAP_ADV_FLAG_LE_GENERAL_DISC_MODE         (0x02)   /**< LE General Discoverable Mode. */
-#define BLE_GAP_ADV_FLAG_BR_EDR_NOT_SUPPORTED         (0x04)   /**< BR/EDR not supported. */
-#define BLE_GAP_ADV_FLAG_LE_BR_EDR_CONTROLLER         (0x08)   /**< Simultaneous LE and BR/EDR, Controller. */
-#define BLE_GAP_ADV_FLAG_LE_BR_EDR_HOST               (0x10)   /**< Simultaneous LE and BR/EDR, Host. */
-#define BLE_GAP_ADV_FLAGS_LE_ONLY_LIMITED_DISC_MODE   (BLE_GAP_ADV_FLAG_LE_LIMITED_DISC_MODE | BLE_GAP_ADV_FLAG_BR_EDR_NOT_SUPPORTED)   /**< LE Limited Discoverable Mode, BR/EDR not supported. */
-#define BLE_GAP_ADV_FLAGS_LE_ONLY_GENERAL_DISC_MODE   (BLE_GAP_ADV_FLAG_LE_GENERAL_DISC_MODE | BLE_GAP_ADV_FLAG_BR_EDR_NOT_SUPPORTED)   /**< LE General Discoverable Mode, BR/EDR not supported. */
+#define BLE_GAP_ADV_FLAG_LE_LIMITED_DISC_MODE               (0x01) /**< LE Limited Discoverable Mode. */
+#define BLE_GAP_ADV_FLAG_LE_GENERAL_DISC_MODE               (0x02) /**< LE General Discoverable Mode. */
+#define BLE_GAP_ADV_FLAG_BR_EDR_NOT_SUPPORTED               (0x04) /**< BR/EDR not supported. */
+#define BLE_GAP_ADV_FLAG_LE_BR_EDR_CONTROLLER               (0x08) /**< Simultaneous LE and BR/EDR, Controller. */
+#define BLE_GAP_ADV_FLAG_LE_BR_EDR_HOST                     (0x10) /**< Simultaneous LE and BR/EDR, Host. */
+#define BLE_GAP_ADV_FLAGS_LE_ONLY_LIMITED_DISC_MODE         ( \
+    BLE_GAP_ADV_FLAG_LE_LIMITED_DISC_MODE                     \
+    | BLE_GAP_ADV_FLAG_BR_EDR_NOT_SUPPORTED)                                                                                            /**< LE Limited Discoverable Mode, BR/EDR not supported. */
+#define BLE_GAP_ADV_FLAGS_LE_ONLY_GENERAL_DISC_MODE         ( \
+    BLE_GAP_ADV_FLAG_LE_GENERAL_DISC_MODE                     \
+    | BLE_GAP_ADV_FLAG_BR_EDR_NOT_SUPPORTED)                                                                                            /**< LE General Discoverable Mode, BR/EDR not supported. */
 /**@} */
 
 void adv_init(void);
 int adv_push(uint8_t type, const void *data, unsigned int length);
-BtStatus_t adv_patch(unsigned int start, unsigned int offset, const void *data, unsigned int length);
+BtStatus_t adv_patch(unsigned int start,
+                     unsigned int offset,
+                     const void *data,
+                     unsigned int length);
 BtStatus_t adv_send(uint8_t channel);
 
 #endif

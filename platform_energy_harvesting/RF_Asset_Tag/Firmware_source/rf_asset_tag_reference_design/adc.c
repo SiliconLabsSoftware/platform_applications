@@ -24,41 +24,40 @@
 
 #define ADC_SCAN
 
-static void routeABUS(GPIO_Port_TypeDef port, uint8_t pin, uint8_t bus, uint8_t what)
+static void routeABUS(GPIO_Port_TypeDef port,
+                      uint8_t pin,
+                      uint8_t bus,
+                      uint8_t what)
 {
   volatile uint32_t *alloc_rd;
   volatile uint32_t *alloc_set;
 
-  if (port == gpioPortA)
-  {
+  if (port == gpioPortA) {
     alloc_rd = &GPIO->ABUSALLOC;
     alloc_set = &GPIO->ABUSALLOC_SET;
-  }
-  else if (port == gpioPortB)
-  {
+  } else if (port == gpioPortB) {
     alloc_rd = &GPIO->BBUSALLOC;
     alloc_set = &GPIO->BBUSALLOC_SET;
-  }
-  else
-  {
+  } else {
     alloc_rd = &GPIO->CDBUSALLOC;
     alloc_set = &GPIO->CDBUSALLOC_SET;
   }
 
-  if (pin & 1)
-  {
-    uint32_t shift = (bus) ? _GPIO_ABUSALLOC_AODD1_SHIFT : _GPIO_ABUSALLOC_AODD0_SHIFT;
-    uint32_t mask = (bus) ? _GPIO_ABUSALLOC_AODD1_MASK : _GPIO_ABUSALLOC_AODD0_MASK;
+  if (pin & 1) {
+    uint32_t shift =
+      (bus) ? _GPIO_ABUSALLOC_AODD1_SHIFT : _GPIO_ABUSALLOC_AODD0_SHIFT;
+    uint32_t mask =
+      (bus) ? _GPIO_ABUSALLOC_AODD1_MASK : _GPIO_ABUSALLOC_AODD0_MASK;
     uint32_t oddn = (*alloc_rd & mask) >> shift;
 
     // block if ODDn routed to other than TRISTATE or the requested peripheral
     EFM_ASSERT(oddn == _GPIO_ABUSALLOC_AODD0_TRISTATE || oddn == what);
     *alloc_set = (what << shift) & mask;
-  }
-  else
-  {
-    uint32_t shift = (bus) ? _GPIO_ABUSALLOC_AEVEN1_SHIFT : _GPIO_ABUSALLOC_AEVEN0_SHIFT;
-    uint32_t mask = (bus) ? _GPIO_ABUSALLOC_AEVEN1_MASK : _GPIO_ABUSALLOC_AEVEN0_MASK;
+  } else {
+    uint32_t shift =
+      (bus) ? _GPIO_ABUSALLOC_AEVEN1_SHIFT : _GPIO_ABUSALLOC_AEVEN0_SHIFT;
+    uint32_t mask =
+      (bus) ? _GPIO_ABUSALLOC_AEVEN1_MASK : _GPIO_ABUSALLOC_AEVEN0_MASK;
     uint32_t evenn = (*alloc_rd & mask) >> shift;
 
     // block if EVEN0 routed to other than TRISTATE or the requested peripheral
@@ -72,25 +71,17 @@ static void unrouteABUS(GPIO_Port_TypeDef port, uint8_t pin, uint8_t bus)
   volatile uint32_t *alloc_clr;
   uint32_t mask;
 
-  if (port == gpioPortA)
-  {
+  if (port == gpioPortA) {
     alloc_clr = &GPIO->ABUSALLOC_CLR;
-  }
-  else if (port == gpioPortB)
-  {
+  } else if (port == gpioPortB) {
     alloc_clr = &GPIO->BBUSALLOC_CLR;
-  }
-  else
-  {
+  } else {
     alloc_clr = &GPIO->CDBUSALLOC_CLR;
   }
 
-  if (pin & 1)
-  {
+  if (pin & 1) {
     mask = (bus) ? _GPIO_ABUSALLOC_AODD1_MASK : _GPIO_ABUSALLOC_AODD0_MASK;
-  }
-  else
-  {
+  } else {
     mask = (bus) ? _GPIO_ABUSALLOC_AEVEN1_MASK : _GPIO_ABUSALLOC_AEVEN0_MASK;
   }
 
@@ -136,10 +127,10 @@ void measure_voltages(sl_harvester_voltages_t *hv)
 
   // Divides CLK_SRC_ADC to set the CLK_ADC frequency for desired sample rate
   initAllConfigs.configs[0].adcClkPrescale = IADC_calcAdcClkPrescale(IADC0,
-                                                                    CLK_ADC_FREQ / ADC_GAIN,
-                                                                    0,
-                                                                    iadcCfgModeNormal,
-                                                                    init.srcClkPrescale);
+                                                                     CLK_ADC_FREQ / ADC_GAIN,
+                                                                     0,
+                                                                     iadcCfgModeNormal,
+                                                                     init.srcClkPrescale);
 
   initAllConfigs.configs[0].osrHighSpeed = iadcCfgOsrHighSpeed4x;
   initAllConfigs.configs[0].digAvg = iadcDigitalAverage2;
@@ -148,17 +139,21 @@ void measure_voltages(sl_harvester_voltages_t *hv)
   initScan.alignment = iadcAlignRight16;
   initScan.dataValidLevel = iadcFifoCfgDvl2;
 
-  scanTable.entries[0].posInput = IADC_portPinToPosInput(IADC0_SCAN0POS_PORT, IADC0_SCAN0POS_PIN);
+  scanTable.entries[0].posInput = IADC_portPinToPosInput(IADC0_SCAN0POS_PORT,
+                                                         IADC0_SCAN0POS_PIN);
   scanTable.entries[0].includeInScan = true;
 
-  scanTable.entries[1].posInput = IADC_portPinToPosInput(IADC0_SCAN1POS_PORT, IADC0_SCAN1POS_PIN);
+  scanTable.entries[1].posInput = IADC_portPinToPosInput(IADC0_SCAN1POS_PORT,
+                                                         IADC0_SCAN1POS_PIN);
   scanTable.entries[1].includeInScan = true;
 #else
   initSingle.alignment = iadcAlignRight16;
   initSingle.dataValidLevel = iadcFifoCfgDvl1;
 
-  input_Vopv.posInput = IADC_portPinToPosInput(IADC0_SCAN0POS_PORT, IADC0_SCAN0POS_PIN);
-  input_Vsto.posInput = IADC_portPinToPosInput(IADC0_SCAN1POS_PORT, IADC0_SCAN1POS_PIN);
+  input_Vopv.posInput = IADC_portPinToPosInput(IADC0_SCAN0POS_PORT,
+                                               IADC0_SCAN0POS_PIN);
+  input_Vsto.posInput = IADC_portPinToPosInput(IADC0_SCAN1POS_PORT,
+                                               IADC0_SCAN1POS_PIN);
 #endif
 
   CMU_ClockEnable(cmuClock_IADC0, false);
@@ -172,8 +167,14 @@ void measure_voltages(sl_harvester_voltages_t *hv)
   IADC_initScan(IADC0, &initScan, &scanTable);
   IADC_enableInt(IADC0, IADC_IF_SCANTABLEDONE);
 
-  routeABUS(IADC0_SCAN0POS_PORT, IADC0_SCAN0POS_PIN, 0, _GPIO_ABUSALLOC_AODD0_ADC0);
-  routeABUS(IADC0_SCAN1POS_PORT, IADC0_SCAN1POS_PIN, 0, _GPIO_ABUSALLOC_AODD0_ADC0);
+  routeABUS(IADC0_SCAN0POS_PORT,
+            IADC0_SCAN0POS_PIN,
+            0,
+            _GPIO_ABUSALLOC_AODD0_ADC0);
+  routeABUS(IADC0_SCAN1POS_PORT,
+            IADC0_SCAN1POS_PIN,
+            0,
+            _GPIO_ABUSALLOC_AODD0_ADC0);
   GPIO_PinModeSet(ENABLE_VOPV_PORT, ENABLE_VOPV_PIN, gpioModePushPull, 1);
   GPIO_PinModeSet(ENABLE_VSTO_PORT, ENABLE_VSTO_PIN, gpioModePushPull, 1);
   IADC_command(IADC0, iadcCmdStartScan);
@@ -194,12 +195,17 @@ void measure_voltages(sl_harvester_voltages_t *hv)
   unrouteABUS(IADC0_SCAN1POS_PORT, IADC0_SCAN1POS_PIN, 0);
 
   sample = IADC_pullScanFifoResult(IADC0);
-  hv->source_voltage_millivolts = (sample.data * VREF * RESISTOR_DIVIDER) / (65536 * ADC_GAIN);
+  hv->source_voltage_millivolts = (sample.data * VREF * RESISTOR_DIVIDER)
+                                  / (65536 * ADC_GAIN);
 
   sample = IADC_pullScanFifoResult(IADC0);
-  hv->storage_voltage_millivolts = (sample.data * VREF * RESISTOR_DIVIDER) / (65536 * ADC_GAIN);
+  hv->storage_voltage_millivolts = (sample.data * VREF * RESISTOR_DIVIDER)
+                                   / (65536 * ADC_GAIN);
 #else
-  routeABUS(IADC0_SCAN0POS_PORT, IADC0_SCAN0POS_PIN, 0, _GPIO_ABUSALLOC_AODD0_ADC0);
+  routeABUS(IADC0_SCAN0POS_PORT,
+            IADC0_SCAN0POS_PIN,
+            0,
+            _GPIO_ABUSALLOC_AODD0_ADC0);
   GPIO_PinModeSet(ENABLE_VOPV_PORT, ENABLE_VOPV_PIN, gpioModePushPull, 1);
   IADC_initSingle(IADC0, &initSingle, &input_Vopv);
   IADC_clearInt(IADC0, _IADC_IF_MASK);
@@ -220,9 +226,13 @@ void measure_voltages(sl_harvester_voltages_t *hv)
   unrouteABUS(IADC0_SCAN0POS_PORT, IADC0_SCAN0POS_PIN, 0);
 
   sample = IADC_readSingleResult(IADC0);
-  hv->source_voltage_millivolts  = (sample.data * VREF * RESISTOR_DIVIDER) / (65536 * ADC_GAIN);
+  hv->source_voltage_millivolts = (sample.data * VREF * RESISTOR_DIVIDER)
+                                  / (65536 * ADC_GAIN);
 
-  routeABUS(IADC0_SCAN1POS_PORT, IADC0_SCAN1POS_PIN, 0, _GPIO_ABUSALLOC_AODD0_ADC0);
+  routeABUS(IADC0_SCAN1POS_PORT,
+            IADC0_SCAN1POS_PIN,
+            0,
+            _GPIO_ABUSALLOC_AODD0_ADC0);
   GPIO_PinModeSet(ENABLE_VSTO_PORT, ENABLE_VSTO_PIN, gpioModePushPull, 1);
   IADC_updateSingleInput(IADC0, &input_Vsto);
   IADC_command(IADC0, iadcCmdStartSingle);
@@ -241,7 +251,8 @@ void measure_voltages(sl_harvester_voltages_t *hv)
   unrouteABUS(IADC0_SCAN1POS_PORT, IADC0_SCAN1POS_PIN, 0);
 
   sample = IADC_readSingleResult(IADC0);
-  hv->storage_voltage_millivolts = (sample.data * VREF * RESISTOR_DIVIDER) / (65536 * ADC_GAIN);
+  hv->storage_voltage_millivolts = (sample.data * VREF * RESISTOR_DIVIDER)
+                                   / (65536 * ADC_GAIN);
 #endif
 
   IADC_reset(IADC0);

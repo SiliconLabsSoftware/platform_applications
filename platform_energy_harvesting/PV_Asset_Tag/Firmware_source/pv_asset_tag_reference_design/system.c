@@ -77,6 +77,7 @@ enum
 {
   prsTypeDefault = prsTypeSync,
 };
+
 #define PRS_Setup(channel, sync, sourcesignal, port, pin, loc)                  \
   do {                                                                          \
     unsigned int __channel = (channel);                                         \
@@ -95,20 +96,21 @@ enum
 {
   prsTypeDefault = prsTypeAsync,
 };
-#define PRS_Setup(channel, sync, sourcesignal, port, pin, loc)                  \
-  do { \
-    unsigned int __channel = (channel);                                         \
-    unsigned int __sync = (sync);                                               \
-    unsigned int __sourcesignal = (sourcesignal);                               \
-    unsigned int __port = (port);                                               \
-    unsigned int __pin = (pin);                                                 \
-    BUS_RegBitWrite(&GPIO->PRSROUTE[0].ROUTEEN, __channel +                     \
-                    ((__sync == prsTypeAsync) ?                                 \
-                        _GPIO_PRS_ROUTEEN_ASYNCH0PEN_SHIFT :                    \
-                        _GPIO_PRS_ROUTEEN_SYNCH0PEN_SHIFT), 0);                 \
-    GPIO_PinModeSet(__port, __pin, gpioModePushPull, 0);                        \
-    PRS_ConnectSignal(__channel, __sync, __sourcesignal);                       \
-    PRS_PinOutput(__channel, __sync, __port, __pin);                            \
+
+#define PRS_Setup(channel, sync, sourcesignal, port, pin, loc) \
+  do {                                                         \
+    unsigned int __channel = (channel);                        \
+    unsigned int __sync = (sync);                              \
+    unsigned int __sourcesignal = (sourcesignal);              \
+    unsigned int __port = (port);                              \
+    unsigned int __pin = (pin);                                \
+    BUS_RegBitWrite(&GPIO->PRSROUTE[0].ROUTEEN, __channel +    \
+                    ((__sync == prsTypeAsync) ?                \
+                     _GPIO_PRS_ROUTEEN_ASYNCH0PEN_SHIFT :      \
+                     _GPIO_PRS_ROUTEEN_SYNCH0PEN_SHIFT), 0);   \
+    GPIO_PinModeSet(__port, __pin, gpioModePushPull, 0);       \
+    PRS_ConnectSignal(__channel, __sync, __sourcesignal);      \
+    PRS_PinOutput(__channel, __sync, __port, __pin);           \
   } while (0)
 #else
 #error "Please add an implementation for PRS_Setup()"
@@ -237,13 +239,16 @@ void system_init(void)
   // power down the ICACHE
   CMU_ClockEnable(cmuClock_ICACHE, true);
   BUS_RegBitWrite(&ICACHE0->CTRL, _ICACHE_CTRL_CACHEDIS_SHIFT, 1);
-  BUS_RegMaskedWrite(&SYSCFG->ICACHERAMRETNCTRL, _SYSCFG_ICACHERAMRETNCTRL_RAMRETNCTRL_MASK,
-                   SYSCFG_ICACHERAMRETNCTRL_RAMRETNCTRL_ALLOFF);
+  BUS_RegMaskedWrite(&SYSCFG->ICACHERAMRETNCTRL,
+                     _SYSCFG_ICACHERAMRETNCTRL_RAMRETNCTRL_MASK,
+                     SYSCFG_ICACHERAMRETNCTRL_RAMRETNCTRL_ALLOFF);
   CMU_ClockEnable(cmuClock_ICACHE, false);
 #elif defined(TUNE_ICACHE)
   CMU_ClockEnable(cmuClock_ICACHE, true);
   BUS_RegBitWrite(&ICACHE0->CTRL, _ICACHE_CTRL_CACHEDIS_SHIFT, 0);
-  BUS_RegMaskedWrite(&ICACHE0->LPMODE, _ICACHE_LPMODE_LPLEVEL_MASK, ICACHE_LPMODE_LPLEVEL_ADVANCED);
+  BUS_RegMaskedWrite(&ICACHE0->LPMODE,
+                     _ICACHE_LPMODE_LPLEVEL_MASK,
+                     ICACHE_LPMODE_LPLEVEL_ADVANCED);
   CMU_ClockEnable(cmuClock_ICACHE, false);
 #endif
 

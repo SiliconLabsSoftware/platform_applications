@@ -1,0 +1,43 @@
+project_name: platform_eusart_rxto
+package: platform
+label: Platform - EUSART RX Timeout
+description: This project demonstrates RX Timeout feature on EFR32 devices.
+category: Example|Platform
+quality: experimental
+
+filter:
+  - name: Device Type
+    value: [SoC]
+  - name: MCU
+    value: [32-bit MCU]
+  - name: Project Difficulty
+    value: [Advanced]
+
+component:
+- id: device_init
+- id: clock_manager
+- id: sl_main
+
+readme:
+- path: ../README.md
+
+include:
+- path: ../inc
+  file_list:
+    - path: app.h
+    
+source:
+- path: ../src/app.c
+
+other_file:
+- path: ../image/create_example.png
+  directory: "image"
+- path: ../image/rx_timeout.png
+  directory: "image"
+- path: ../image/result.png
+  directory: "image"
+
+ui_hints:
+  highlight:
+    - path: README.md
+      focus: true

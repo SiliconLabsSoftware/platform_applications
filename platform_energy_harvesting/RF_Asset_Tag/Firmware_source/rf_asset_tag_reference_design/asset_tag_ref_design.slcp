@@ -14,20 +14,33 @@ filter:
 package: Flex
 quality: production
 readme:
-- {path: readme.md}
-- {path: readme.md}
+- {path: ../../../README.md}
+
 source:
 - {path: main.c}
-- {path: app_init.c}
-- {path: app_process.c}
+- {path: power.c}
+- {path: sleep.c}
+- {path: system.c}
+- {path: temp.c}
+- {path: adc.c}
+
 include:
 - path: .
   file_list:
-  - {path: app_init.h}
-  - {path: app_process.h}
-sdk: {id: simplicity_sdk, version: 2024.6.0}
-toolchain_settings:
-- {value: debug, option: optimize}
+  - {path: config/pin_config.h}
+  - {path: minible/adv.h}
+  - {path: minible/bt_types.h}
+  - {path: minible/bt_utils.h}
+  - {path: minible/hal.h}
+  - {path: minible/radio.h}
+  - {path: adc.h}
+  - {path: config.h}
+  - {path: power.h}
+  - {path: sleep.h}
+  - {path: system.h}
+  - {path: temp.h}
+  - {path: types.h}
+
 component:
 - {id: EFR32MG22E224F512IM40}
 - {id: brd2710a}
@@ -49,6 +62,9 @@ component:
 - {id: rail_util_pa}
 - {id: tempdrv}
 - {id: toolchain_gcc}
+
+sdk: {id: simplicity_sdk, version: 2024.6.0}
+
 configuration:
 - {name: SL_STACK_SIZE, value: '2048'}
 - {name: configMINIMAL_STACK_SIZE, value: '1024'}
@@ -124,8 +140,21 @@ configuration:
 - condition: [device_sdid_220, hardware_board_default_rf_band_450]
   name: SL_CLOCK_MANAGER_RFFPLL_BAND
   value: '0'
+
+
+library:
+  - path: ../libminible.a
+
+toolchain_settings:
+  - {value: debug, option: optimize}
+
+other_file:
+  - path: "minible/libminible.a"
+    project:
+      transfer_ownership: true
+
 ui_hints:
   highlight:
   - {path: config/rail/radio_settings.radioconf}
-  - {path: readme.md, focus: true}
+  - {path: README.md, focus: true}
 

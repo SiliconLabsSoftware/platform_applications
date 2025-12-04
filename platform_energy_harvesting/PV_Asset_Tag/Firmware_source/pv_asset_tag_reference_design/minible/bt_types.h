@@ -100,7 +100,8 @@ typedef struct GattAttribute {
   AttributeValue_t value;
 } GattAttribute_t;
 typedef struct { GattAttribute_t attribute[1]; } GattServiceInternal_t;
-typedef struct { GattAttribute_t attribute[2]; uint8_t declaration[19]; } GattCharacteristicInternal_t;
+typedef struct { GattAttribute_t attribute[2]; uint8_t declaration[19];
+} GattCharacteristicInternal_t;
 typedef struct { GattAttribute_t attribute[1]; } GattDescriptorInternal_t;
 // end of interal structures
 
@@ -133,6 +134,7 @@ typedef enum {
   attributeValueOpWrite,
 } AttributeValueOp_t;
 
-typedef AttStatus_t (*AttributeValueCallback_t)(AttributeValueOp_t op, AttributeValue_t *params);
+typedef AttStatus_t (*AttributeValueCallback_t)(AttributeValueOp_t op,
+                                                AttributeValue_t *params);
 
 #endif

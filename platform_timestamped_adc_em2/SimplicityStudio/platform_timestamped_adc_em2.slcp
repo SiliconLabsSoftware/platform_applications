@@ -1,0 +1,52 @@
+project_name: platform_timestamped_adc_em2
+label: Platform - Timestamped IADC EM2 Acquisition with Timestamps
+description: >
+  Demonstrates performing timestamped ADC conversions while the device spends most time in EM2.
+  A periodic timer/PRS triggers IADC sampling; results are buffered with associated system tick
+  timestamps for later retrieval or streaming. Supports multiple EFR32xG21 radio boards.
+category: Example|Platform
+package: Platform
+quality: experimental
+
+filter:
+  - name: Device Type
+    value: [SoC]
+  - name: MCU
+    value: [32-bit MCU]
+  - name: Project Difficulty
+    value: [Intermediate]
+
+readme:
+- path: ../README.md
+
+include:
+- path: ../inc
+  file_list:
+  - path: sl_efpdrv_calc.h
+    condition: [brd4179b]
+  - path: app.h
+
+source:
+  - path: ../src/brd4179b/app.c
+    condition: [brd4179b]
+  - path: ../src/brd4180a/app.c
+    condition: [brd4180a]
+  - path: ../src/brd4181a/app.c
+    condition: [brd4181a]
+
+component:
+- {id: clock_manager}
+- {id: device_init}
+- instance: [efp0]
+  id: efp_driver
+  condition: [brd4179b]
+- {id: emlib_iadc}
+- {id: emlib_ldma}
+- {id: emlib_prs}
+- {id: emlib_rtcc}
+- {id: sl_main}
+
+ui_hints:
+  highlight:
+    - path: README.md
+      focus: true

@@ -28,8 +28,8 @@
 #define ALL_SEGMENTS        1 // Set to zero to only enable one segment
 
 /***************************************************************************//**
-* @brief  Initializes the LCD
-*******************************************************************************/
+ * @brief  Initializes the LCD
+ *******************************************************************************/
 void initLCD(void)
 {
   // Enable clocks required for LCD

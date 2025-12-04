@@ -36,8 +36,8 @@
  *********************   LOCAL FUNCTION PROTOTYPES   ***************************
  ******************************************************************************/
 
-static void sleep_cmd(sl_cli_command_arg_t *arguments);
-static void hys_cmd(sl_cli_command_arg_t *arguments);
+static void sleep_cmd(const sl_cli_command_arg_t *arguments);
+static void hys_cmd(const sl_cli_command_arg_t *arguments);
 
 /*******************************************************************************
  ***************************  LOCAL VARIABLES   ********************************
@@ -92,7 +92,7 @@ sl_cli_command_group_t *command_group = &a_group;
  * This function is used as a callback when the hys command is called
  * in the cli. It sets the ACMP hysteresis mode to the provided integer.
  ******************************************************************************/
-static void hys_cmd(sl_cli_command_arg_t *arguments)
+static void hys_cmd(const sl_cli_command_arg_t *arguments)
 {
   static bool started = false;
   if (started) {
@@ -160,7 +160,7 @@ static void hys_cmd(sl_cli_command_arg_t *arguments)
  * This function is used as a callback when the sleep command is called
  * in the cli. It puts the system into deep sleep.
  ******************************************************************************/
-static void sleep_cmd(sl_cli_command_arg_t *arguments)
+static void sleep_cmd(const sl_cli_command_arg_t *arguments)
 {
   (void)arguments;
   printf(

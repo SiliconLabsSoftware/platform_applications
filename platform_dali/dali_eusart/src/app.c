@@ -26,6 +26,8 @@
 #include "em_emu.h"
 #include "dmadrv.h"
 #include "sl_sleeptimer.h"
+#include "sl_gpio.h"
+#include "sl_hal_gpio.h"
 
 // DALI status
 SL_ALIGN(4) DaliStatus_t daliStatus;
@@ -38,6 +40,8 @@ uint16_t fwdAddrData;         // Forward frame address & data
 unsigned int dmaTxChannel;
 unsigned int dmaRxChannel;
 DaliStatus_t state;           // DALI status
+// Let the function assign an interrupt number
+int32_t int_no = SL_GPIO_INTERRUPT_UNAVAILABLE;
 
 #if !defined(DALI_SECONDARY)
 sl_sleeptimer_timer_handle_t te_7_sleeptimer;
@@ -78,22 +82,14 @@ void EUSART1_TX_IRQHandler(void)
 }
 
 #if !defined(DALI_SECONDARY)
-void GPIO_EVEN_IRQHandler(void)
+void gpio_interrupt_callback(uint8_t interrupt_number, void *context)
 {
-  uint32_t flags = GPIO_IntGet();
+  (void)interrupt_number;
+  (void)context;
 
-  // Start bit of backward frame was detected, so stop 22TE timeout timer
-  if (flags & (1 << DALI_RX_PIN)) {
-    sl_sleeptimer_stop_timer(&te_22_sleeptimer);
-
-    GPIO_ExtIntConfig(DALI_RX_PORT, DALI_RX_PIN, DALI_RX_PIN, false, true,
-                      false);
-    NVIC_DisableIRQ(GPIO_EVEN_IRQn);
-
-    setDaliStatus(DALI_BACKWARD_RX_WAIT);
-  }
-
-  GPIO_IntClear(flags);
+  sl_sleeptimer_stop_timer(&te_22_sleeptimer);
+  sl_gpio_disable_interrupts(1 << int_no);
+  setDaliStatus(DALI_BACKWARD_RX_WAIT);
 }
 
 void TE_7_callback(sl_sleeptimer_timer_handle_t *handle, void *data)
@@ -240,15 +236,19 @@ void app_process_action(void)
                               (DMADRV_Callback_t)dmaRxCallback,
                               NULL);
 
+      sl_gpio_t gpio_pin = {
+        .port = DALI_RX_PORT,
+        .pin = DALI_RX_PIN
+      };
+
       // Enable GPIO interrupt on RX pin to detect start bit
-      GPIO_ExtIntConfig(DALI_RX_PORT,
-                        DALI_RX_PIN,
-                        DALI_RX_PIN,
-                        false,
-                        true,
-                        true);
-      NVIC_ClearPendingIRQ(GPIO_EVEN_IRQn);
-      NVIC_EnableIRQ(GPIO_EVEN_IRQn);
+      sl_gpio_configure_external_interrupt(
+        &gpio_pin,                                // GPIO structure with port and pin
+        &int_no,                                  // Pointer to interrupt number (input/output)
+        SL_GPIO_INTERRUPT_FALLING_EDGE,            // Trigger on rising edge
+        gpio_interrupt_callback,                  // Callback function
+        NULL                                      // Context (optional)
+        );
       break;
 
     case DALI_BACKWARD_RX:

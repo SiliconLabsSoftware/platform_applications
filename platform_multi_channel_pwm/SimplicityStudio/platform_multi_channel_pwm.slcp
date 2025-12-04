@@ -41,6 +41,6 @@ other_file:
 
 ui_hints:
   highlight:
-    - path: readme.md
+    - path: README.md
       focus: true
 

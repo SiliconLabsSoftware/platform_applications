@@ -2,7 +2,7 @@
 ![Type badge](https://img.shields.io/badge/Type-Virtual%20Application-green)
 ![Technology badge](https://img.shields.io/badge/Technology-Platform-green)
 ![License badge](https://img.shields.io/badge/License-Zlib-green)
-![SDK badge](https://img.shields.io/badge/SDK-v2025.6.1-green)
+![SDK badge](https://img.shields.io/badge/SDK-v2025.6.2-green)
 ![Build badge](https://img.shields.io/badge/Build-passing-green)
 ![Flash badge](https://img.shields.io/badge/Flash-14.14%20KB-blue)
 ![RAM badge](https://img.shields.io/badge/RAM-16.8%20KB-blue)
@@ -13,7 +13,7 @@ This example demonstrates the implementation of the I2S protocol for interfacing
 
 ## SDK version ##
 
-[SiSDK v2025.6.1](https://github.com/SiliconLabs/simplicity_sdk/releases/tag/v2025.6.1)
+- [Simplicity SDK v2025.6.2](https://github.com/SiliconLabs/simplicity_sdk/releases/tag/v2025.6.2)
 
 ## Software Required ##
 
@@ -91,7 +91,7 @@ The left channel's samples (int16_t) are then converted from a 16-bit signed int
 All of the LDMA transfers use ping-pong buffers in order to effectively process data while continuously sampling it from the microphone.
 
 
-## Test measurement
+## Test measurement ##
 To validate the implementation, a constant 2000 Hz sine wave was applied to the microphone's input.
 
 The expected output frequency on the left channel is half of the input signal's frequency, resulting in a sine wave with a period of 1 / (2 * 2000) = 250 µs.

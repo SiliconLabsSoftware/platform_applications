@@ -1,15 +1,15 @@
-# Platform - SPI FeeRTOS
+# Platform - SPI FreeRTOS #
 
 ![Type badge](https://img.shields.io/badge/Type-Virtual%20Application-green)
 ![Technology badge](https://img.shields.io/badge/Technology-Platform-green)
 ![License badge](https://img.shields.io/badge/License-Zlib-green)
-![SDK badge](https://img.shields.io/badge/SDK-v2025.6.1-green)
+![SDK badge](https://img.shields.io/badge/SDK-v2025.6.2-green)
 ![Build badge](https://img.shields.io/badge/Build-passing-green)
 ![Flash badge](https://img.shields.io/badge/Flash-21.64%20KB-blue)
 ![RAM badge](https://img.shields.io/badge/RAM-6.53%20KB-blue)
 
 
-## Summary
+## Summary ##
 
 This project demonstrates the interrupt-driven operation of the USART peripheral in
 synchronous main mode integrated into a FreeRTOS environment.  
@@ -19,8 +19,7 @@ implies a word size of 8 data bits transmitted and received MSB-first.
 
 ## SDK Version ##
 
-- [SiSDK v2025.6.1](https://github.com/SiliconLabs/simplicity_sdk/tree/v2025.6.1)
-
+- [Simplicity SDK v2025.6.2](https://github.com/SiliconLabs/simplicity_sdk/releases/tag/v2025.6.2)
 
 ## Hardware Required ##
 
@@ -32,7 +31,7 @@ implies a word size of 8 data bits transmitted and received MSB-first.
 
 ## Setup ##
 
-### Project is based on an existing example project
+### Project is based on an existing example project ###
 
 1. From the Launcher Home, add the BRD4180A to My Products, click on it, and click on the **EXAMPLE PROJECTS & DEMOS** tab. Find the example project with the filter "SPI".
 

@@ -23,14 +23,13 @@ include:
   - path: app.h 
 
 source:
-  - path: ../src/main.c
   - path: ../src/brd2506a/app.c
     condition: [brd2506a]
   - path: ../src/brd2600a/app.c
     condition: [brd2600a]
 
 component:
-  - id: sl_system
+  - id: sl_main
   - id: device_init
   - id: emlib_acmp
   - id: emlib_lcd
@@ -51,5 +50,5 @@ other_file:
 
 ui_hints:
   highlight:
-  - path: README.md,
-    focus: true
+    - path: README.md
+      focus: true

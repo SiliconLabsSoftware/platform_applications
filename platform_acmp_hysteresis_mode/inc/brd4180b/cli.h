@@ -37,7 +37,7 @@
 // #define ACMP_NEG_INPUT_TYPE REF1V25
 // #define ACMP_NEG_INPUT_TYPE REF2V5
 
-// #define ACMP_TO_GPIO // ACMP output to GPIO directly
+// #define ACMP_TO_GPIO
 
 /* The following are configured for BRD4180B */
 

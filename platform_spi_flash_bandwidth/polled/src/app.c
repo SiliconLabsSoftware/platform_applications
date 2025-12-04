@@ -180,5 +180,5 @@ void app_init(void)
  ******************************************************************************/
 void app_process_action(void)
 {
-    // Nothing
+  // Nothing
 }

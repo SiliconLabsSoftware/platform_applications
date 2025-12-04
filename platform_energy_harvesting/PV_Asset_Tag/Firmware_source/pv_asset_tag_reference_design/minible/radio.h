@@ -28,7 +28,7 @@
 #define RAIL_TIME_ABSOLUTE          3
 #endif
 
-#define RADIO_COMPANY_ID   0x2ff
+#define RADIO_COMPANY_ID            0x2ff
 
 enum radio_feature {
   BT_FEATURE_LE_DATA_PACKET_LENGTH_EXTENSION = (1 << 5),
@@ -89,6 +89,7 @@ enum radio_event {
   radio_event_timeout,
   radio_event_failure = 0xff,
 };
+
 typedef void (*radio_callback)(enum radio_event, const void *data);
 
 void radio_init(const BtConfig_t *config);
@@ -96,11 +97,14 @@ void radio_selectRfPath(uint8_t antenna);
 void radio_phyInit();
 void radio_configure(RadioConfig_t *config);
 void radio_loadData(const void *data, uint16_t dataLength);
-void radio_tx(const struct radio_parameters *parameters, radio_callback callback);
-void radio_rx(const struct radio_parameters *parameters, radio_callback callback);
+void radio_tx(const struct radio_parameters *parameters,
+              radio_callback callback);
+void radio_rx(const struct radio_parameters *parameters,
+              radio_callback callback);
 uint32_t radio_getRxPacketTimestamp();
 void radio_abort();
 const BtAddress_t *radio_getAddress();
 enum radio_feature radio_getSupportedFeatures();
 void radio_enableStateTraces(bool enable);
+
 #endif

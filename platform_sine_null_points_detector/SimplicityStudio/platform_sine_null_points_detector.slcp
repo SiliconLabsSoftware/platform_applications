@@ -18,7 +18,7 @@ filter:
   value: [Beginner]
 
 readme:
-- path: ../README.md
+  - path: ../README.md
 
 source:
 - path: ../src/app.c
@@ -60,6 +60,6 @@ other_file:
 
 ui_hints:
   highlight:
-  - path: README.md
-    focus: true
+    - path: README.md
+      focus: true
 

@@ -1,21 +1,20 @@
-# Platform - NVM3 Integrity Test
+# Platform - NVM3 Integrity Test #
 
 ![Type badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_nvm3_integrity_test_common.json&label=Type&query=type&color=green)
-![Technology badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_nvm3_integrity_test_common.json&label=Technology&query=technology&color=green)
-![License badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_nvm3_integrity_test_common.json&label=License&query=license&color=green)
-![SDK badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_nvm3_integrity_test_common.json&label=SDK&query=sdk&color=green)
-![Build badge](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_nvm3_integrity_test_build_status.json)
-![Flash badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_nvm3_integrity_test_common.json&label=Flash&query=flash&color=blue)
-![RAM badge](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/SiliconLabs/application_examples_ci/master/platform_applications/platform_nvm3_integrity_test_common.json&label=RAM&query=ram&color=blue)
+![Technology badge](https://img.shields.io/badge/Technology-Platform-green)
+![License badge](https://img.shields.io/badge/License-Zlib-green)
+![SDK badge](https://img.shields.io/badge/SDK-v2025.6.2-green)
+![Build badge](https://img.shields.io/badge/Build-passing-green)
+![Flash badge](https://img.shields.io/badge/Flash-23.05%20KB-blue)
+![RAM badge](https://img.shields.io/badge/RAM-8.08%20KB-blue)
 ## Description ##
 
 This project performs frequent NVM3 writes and checks that there has been no corruption of the NVM3 data, or changes to the CRC of the program flash space.
 
-## Gecko SDK version
+## SDK version ##
+- [Simplicity SDK v2025.6.2](https://github.com/SiliconLabs/simplicity_sdk/releases/tag/v2025.6.2)
 
-GSDK v4.4.3
-
-## Hardware Required
+## Hardware Required ##
 
 [EFR32xG24 Explorer Kit - XG24-EK2703A](https://www.silabs.com/development-tools/wireless/efr32xg24-explorer-kit?tab=overview)
 
@@ -27,15 +26,15 @@ Tested boards for working with this example:
 | BRD2703A | [EFR32xG24 Explorer Kit - XG24-EK2703A](https://www.silabs.com/development-tools/wireless/efr32xg24-explorer-kit?tab=overview)    |
 | BRD2601B | [EFR32xG24 Dev Kit - xG24-DK2601B](https://www.silabs.com/development-tools/wireless/efr32xg24-dev-kit?tab=overview)   |
 
-## Connections Required
+## Connections Required ##
 
 For this project, just connect a supported board to the computer through USB.
 
-## Setup
+## Setup ##
 
 To test this application, you can either create a project based on an example project or start with an "Empty C Project" project based on your hardware.
 
-### Create a project based on an example project
+### Create a project based on an example project ###
 
 1. From the Launcher Home, add BRD2703A to My Products, click on it, and click on the **EXAMPLE PROJECTS & DEMOS** tab. Find the example project with the filter "integrity".
 2. Click the **Create** button on the **Platform - NVM3 Integrity Test** example. Example project creation dialog pops up -> click Create and Finish and Project should be generated.
@@ -43,7 +42,7 @@ To test this application, you can either create a project based on an example pr
 
 3. Build and flash this example to the board.
 
-### Start with an "Empty C Project" project
+### Start with an "Empty C Project" project ###
 
 1. Create an **Empty C Project** project for your device using Simplicity Studio 5.
 
@@ -82,7 +81,7 @@ Errors Code:
 
 5 - NVM3 repack failed
 
-## How It Works
+## How It Works ##
 
 The first time the device runs, the NVM3 is uninitialized. LED0 will flash quickly (~10 Hz). The user must press Button0 to start. The program will initialize NVM3 and write the program space CRC to NVM3.
 
